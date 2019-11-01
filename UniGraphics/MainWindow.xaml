@@ -1,12 +1,91 @@
-﻿<Window x:Class="UniGraphics.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:UniGraphics"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+﻿<Window
+    x:Class="UniGraphics.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:UniGraphics"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="UniGraphics"
+    Width="601"
+    Height="518"
+    mc:Ignorable="d">
+    <Grid Name="mainGrid">
+        <Canvas Name="fractalCanv">
+            <Image
+                Name="fractalImg"
+                Canvas.Left="0"
+                Canvas.Top="0"
+                Width="400"
+                Height="400" />
+            <Slider
+                x:Name="sliderx1"
+                Canvas.Left="427"
+                Canvas.Top="41"
+                Width="114"
+                Height="26"
+                Maximum="10"
+                Minimum="-10"
+                RenderTransformOrigin="0.482,0.442"
+                ValueChanged="slider_ValueChanged" />
+            <Slider
+                x:Name="slidery1"
+                Canvas.Left="427"
+                Canvas.Top="84"
+                Width="114"
+                Height="26"
+                Maximum="10"
+                Minimum="-10"
+                RenderTransformOrigin="0.482,0.442"
+                ValueChanged="slider_ValueChanged" />
+            <Slider
+                x:Name="sliderx2"
+                Canvas.Left="427"
+                Canvas.Top="141"
+                Width="114"
+                Height="26"
+                Maximum="10"
+                Minimum="-10"
+                RenderTransformOrigin="0.482,0.442"
+                ValueChanged="slider_ValueChanged" />
+            <Slider
+                x:Name="slidery2"
+                Canvas.Left="427"
+                Canvas.Top="208"
+                Width="114"
+                Height="26"
+                Maximum="10"
+                Minimum="-10"
+                RenderTransformOrigin="0.482,0.442"
+                ValueChanged="slider_ValueChanged" />
+            <Label
+                x:Name="labelx1"
+                Canvas.Left="546"
+                Canvas.Top="38"
+                Content="Label" />
+            <Label
+                x:Name="labely1"
+                Canvas.Left="546"
+                Canvas.Top="81"
+                Content="Label" />
+            <Label
+                x:Name="labelx2"
+                Canvas.Left="541"
+                Canvas.Top="141"
+                Content="Label" />
+            <Label
+                x:Name="labely2"
+                Canvas.Left="545"
+                Canvas.Top="208"
+                Content="Label" />
+        </Canvas>
+        <Button
+            Name="createFractalBtn"
+            Width="73"
+            Height="45"
+            Margin="0,0,228,31"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Click="createFractalBtn_Click"
+            Content="Create fractal" />
     </Grid>
 </Window>
