@@ -1,27 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Numerics;
 
 namespace UniGraphics
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        private Rect area = new Rect(new Point(-5, 2.5), new Point(0.8, 0.8));
+        private static double fractalScale = 2; //масштабування фрактала
+        private Rect area = new Rect(new Point(-fractalScale, fractalScale), 
+                            new Point(fractalScale, fractalScale * 3)); //межі комплексних чисел
+        private double tolerance = 0.001; //точність пошуку кореня
+        private double power = 3; //степінь n в формулі
+        private Complex constant = -1; //константа c в формулі
 
         public MainWindow()
         {
@@ -30,58 +22,69 @@ namespace UniGraphics
 
         private void createFractalBtn_Click(object sender, RoutedEventArgs e)
         {
-            fractalImg.Source = drawSet(area);
+            fractalImg.Source = drawSet(area); //виклик побудови фрактала
         }
 
-        Int32 startMandelbrot(Complex c)
+        //функція f(z)
+        private Complex f(Complex z)
         {
-            Int32 k = 0;
-            Complex z = Complex.Zero;
-            while(k < 1000 && z.Magnitude < 4)
-            //while(k < 256 * 256 * 256 && z.Magnitude < 4)
+            return Complex.Pow(z, power) + constant;
+        }
+
+        //похідна функції f(z)
+        private Complex df(Complex z)
+        {
+            return power * Complex.Pow(z, power - 1);
+        }
+
+        //функція для знаходження кольору конкретної точки
+        Color startNewtonGeneration(Complex point)
+        {
+            int k = 0; //ітерація
+            Complex z = point, tempZ;
+            while(k < 256)
             {
-                z = z * z + c;
-                ++k;
+                tempZ = z - f(z) / df(z); //власне основний код для фрактала Ньютона
+                if(Complex.Abs(tempZ - z) < tolerance) //умова, при якій зупиняємо ітерації і надаємо точці колір 
+                {
+                    Color color = new Color();
+                    color.B = (byte)(k); //розділяємо k на компоненти RGB
+                    color.G = (byte)(k % 64 * 4);
+                    color.R = (byte)(k % 32 * 8);
+                    color.A = 255;
+                    return color;
+                }
+                ++k; //збільшення лічильника ітерацій
+                z = tempZ;
             }
-            return k;
+            return Colors.Black;
         }
 
-        Color colorMap(Int32 k)
-        {
-            Color color = new Color();
-            color.B = (byte)(k / 100 * 25);
-            k = k % 100;
-            color.G = (byte)(k / 10 * 25);
-            color.R = (byte)(k % 10 * 25);
-            //color.B = (byte)(k / 256);
-            //k = k % 256;
-            //color.G = (byte)(k / 256);
-            //color.R = (byte)(k % 256);
-            color.A = 255;
-            return color;
-        }
-
+        //функція, що повертає зображення, яке містить фрактал
         WriteableBitmap drawSet(Rect area)
         {
             int imgWidth = (int)fractalImg.Width;
             int imgHeight = (int)fractalImg.Height;
             WriteableBitmap btmp = new WriteableBitmap(imgWidth, imgHeight, 96, 96, PixelFormats.Bgra32, null);
             int bytesPerPixel = btmp.Format.BitsPerPixel / 8;
-            byte[] pixels = new byte[imgHeight * imgWidth * bytesPerPixel];
+            byte[] pixels = new byte[imgHeight * imgWidth * bytesPerPixel]; //масив пікселів
             int bytesPerRow = imgWidth * bytesPerPixel;
             int pixelX, pixelY;
+            //числа для переходу з растрових координат в комплексну площину
             double scaleX = (area.Right - area.Left) / imgWidth;
             double scaleY = (area.Top - area.Bottom) / imgHeight;
             double x, y;
             for (int i = 0; i < pixels.Length; i += bytesPerPixel)
             {
+                //шукаємо координати піксела
                 pixelY = i / bytesPerRow;
                 pixelX = i % bytesPerRow / bytesPerPixel;
+                //шукаємо координати в комплексній площині
                 x = area.Left + pixelX * scaleX;
                 y = area.Top + pixelY * scaleY;
-                Complex c = new Complex(x, y);
-                Int32 k = startMandelbrot(c);
-                Color pixelColor = colorMap(k);
+                Complex z = new Complex(x, y);
+                //запускаємо ітерації метода Ньютона
+                Color pixelColor = startNewtonGeneration(z);
                 pixels[i] = pixelColor.B;
                 pixels[i + 1] = pixelColor.G;
                 pixels[i + 2] = pixelColor.R;
@@ -89,16 +92,6 @@ namespace UniGraphics
             }
             btmp.WritePixels(new Int32Rect(0, 0, imgWidth, imgHeight), pixels, bytesPerRow, 0);
             return btmp;
-        }
-
-        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            area = new Rect(new Point(sliderx1.Value, slidery1.Value), new Point(sliderx2.Value, slidery2.Value));
-            labelx1.Content = sliderx1.Value;
-            labelx2.Content = sliderx2.Value;
-            labely1.Content = slidery1.Value;
-            labely2.Content = slidery2.Value;
-            //fractalImg.Source = drawSet(area);
         }
     }
 }

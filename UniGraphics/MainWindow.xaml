@@ -10,79 +10,19 @@
     Height="518"
     mc:Ignorable="d">
     <Grid Name="mainGrid">
-        <Canvas Name="fractalCanv">
+        <Canvas Name="fractalCnv">
             <Image
                 Name="fractalImg"
                 Canvas.Left="0"
                 Canvas.Top="0"
                 Width="400"
                 Height="400" />
-            <Slider
-                x:Name="sliderx1"
-                Canvas.Left="427"
-                Canvas.Top="41"
-                Width="114"
-                Height="26"
-                Maximum="10"
-                Minimum="-10"
-                RenderTransformOrigin="0.482,0.442"
-                ValueChanged="slider_ValueChanged" />
-            <Slider
-                x:Name="slidery1"
-                Canvas.Left="427"
-                Canvas.Top="84"
-                Width="114"
-                Height="26"
-                Maximum="10"
-                Minimum="-10"
-                RenderTransformOrigin="0.482,0.442"
-                ValueChanged="slider_ValueChanged" />
-            <Slider
-                x:Name="sliderx2"
-                Canvas.Left="427"
-                Canvas.Top="141"
-                Width="114"
-                Height="26"
-                Maximum="10"
-                Minimum="-10"
-                RenderTransformOrigin="0.482,0.442"
-                ValueChanged="slider_ValueChanged" />
-            <Slider
-                x:Name="slidery2"
-                Canvas.Left="427"
-                Canvas.Top="208"
-                Width="114"
-                Height="26"
-                Maximum="10"
-                Minimum="-10"
-                RenderTransformOrigin="0.482,0.442"
-                ValueChanged="slider_ValueChanged" />
-            <Label
-                x:Name="labelx1"
-                Canvas.Left="546"
-                Canvas.Top="38"
-                Content="Label" />
-            <Label
-                x:Name="labely1"
-                Canvas.Left="546"
-                Canvas.Top="81"
-                Content="Label" />
-            <Label
-                x:Name="labelx2"
-                Canvas.Left="541"
-                Canvas.Top="141"
-                Content="Label" />
-            <Label
-                x:Name="labely2"
-                Canvas.Left="545"
-                Canvas.Top="208"
-                Content="Label" />
         </Canvas>
         <Button
             Name="createFractalBtn"
             Width="73"
             Height="45"
-            Margin="0,0,228,31"
+            Margin="0,0,108,31"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
             Click="createFractalBtn_Click"
