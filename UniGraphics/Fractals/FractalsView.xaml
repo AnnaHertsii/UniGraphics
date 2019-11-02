@@ -17,12 +17,13 @@
             Text="Hello, world! Make fractals in this page, please!" />
         <Canvas
             Name="fractalCnv"
-            Width="400"
-            Height="400">
+            Width="410"
+            Height="410">
             <Image
                 Name="fractalImg"
                 Width="400"
-                Height="400" />
+                Height="400"
+                RenderOptions.BitmapScalingMode="NearestNeighbor" />
         </Canvas>
         <Button
             Name="createFractalBtn"
