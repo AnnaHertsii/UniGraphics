@@ -8,7 +8,7 @@ namespace UniGraphics.Fractals
     public class NewtonFractalGenerator
     {
         public double FractalScale { get; set; } = 1; //масштабування фрактала
-        public double Power { get; set; } = 3; //степінь n в формулі
+        public double Power { get; set; } = 4; //степінь n в формулі
         public Complex Constant { get; set; } = -1; //константа c в формулі
         private Rect area; //межі комплексних чисел
         private double tolerance = 0.001; //точність пошуку кореня
@@ -27,7 +27,6 @@ namespace UniGraphics.Fractals
                 Candy,
                 Zebra,
                 BlackRed
-                
             };
         }
 
@@ -82,11 +81,11 @@ namespace UniGraphics.Fractals
             int bytesPerPixel = Image.Format.BitsPerPixel / 8;
             byte[] pixels = new byte[imgHeight * imgWidth * bytesPerPixel]; //масив пікселів
             int bytesPerRow = imgWidth * bytesPerPixel;
-            int pixelX, pixelY;
+            int pixelX, pixelY; //координати пікселя
+            double x, y; //координати в комплексній площині
             //числа для переходу з растрових координат в комплексну площину
             double scaleX = (area.Right - area.Left) / imgWidth;
             double scaleY = (area.Top - area.Bottom) / imgHeight;
-            double x, y;
             for (int i = 0; i < pixels.Length; i += bytesPerPixel)
             {
                 //шукаємо координати піксела

@@ -12,15 +12,11 @@
     mc:Ignorable="d">
 
     <Grid>
-        <TextBlock
-            Margin="10,10,-10,-10"
-            Foreground="Red"
-            Text="Hello, world! Make fractals in this page, please!" />
         <Canvas
             Name="fractalCnv"
             Width="410"
             Height="410"
-            Margin="10,35,10,55">
+            Margin="79,23,11,67">
             <Image
                 Name="fractalImg"
                 Width="400"
@@ -31,9 +27,10 @@
             Name="createFractalBtn"
             Width="100"
             Height="45"
-            Margin="0,0,0,10"
+            Margin="16,0,384,10"
             VerticalAlignment="Bottom"
             Click="generateFractal"
             Content="Create fractal" />
+        <Button Content="Save as a picture" HorizontalAlignment="Left" Height="45" Margin="127,445,0,0" VerticalAlignment="Top" Width="121" Click="SavePicture"/>
     </Grid>
 </Page>
