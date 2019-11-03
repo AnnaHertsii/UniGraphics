@@ -39,5 +39,10 @@ namespace UniGraphics.Fractals
                     encoder.Save(stream);
             }             
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
