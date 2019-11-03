@@ -8,28 +8,30 @@
     Title="FractalsView"
     d:DesignHeight="500"
     d:DesignWidth="500"
+    Background="White"
     mc:Ignorable="d">
 
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid>
         <TextBlock
-            Margin="-33,-175,33,175"
+            Margin="10,10,-10,-10"
             Foreground="Red"
             Text="Hello, world! Make fractals in this page, please!" />
         <Canvas
             Name="fractalCnv"
-            Width="400"
-            Height="400">
+            Width="410"
+            Height="410"
+            Margin="10,35,10,55">
             <Image
                 Name="fractalImg"
                 Width="400"
-                Height="400" />
+                Height="400"
+                RenderOptions.BitmapScalingMode="NearestNeighbor" />
         </Canvas>
         <Button
             Name="createFractalBtn"
-            Width="94"
+            Width="100"
             Height="45"
-            Margin="0,0,102,-73"
-            HorizontalAlignment="Right"
+            Margin="0,0,0,10"
             VerticalAlignment="Bottom"
             Click="generateFractal"
             Content="Create fractal" />
