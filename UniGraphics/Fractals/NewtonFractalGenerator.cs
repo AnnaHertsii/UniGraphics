@@ -23,10 +23,11 @@ namespace UniGraphics.Fractals
             colorModels = new ColorModel[]
             {
                 Standard,
-                //Gold,
-               // Candy,
-                //Zebra,
-                HZ
+                Gold,
+                Candy,
+                Zebra,
+                BlackRed
+                
             };
         }
 
@@ -116,7 +117,7 @@ namespace UniGraphics.Fractals
             return color;
         }
 
-       /* public static Color Candy(int k)
+        public static Color Candy(int k)
         {
             Color color = new Color();
             color.B = (byte)((k & 7) << 5);
@@ -145,14 +146,14 @@ namespace UniGraphics.Fractals
             color.R = (byte)(k);
             color.A = 255;
             return color;
-        }*/
+        }
 
-        public static Color HZ(int k)
+        public static Color BlackRed(int k)
         {
             Color color = new Color();
-            color.B = (byte)((k & 255));
-            color.G = (byte)((k & 2) << 2);
-            color.R = (byte)((k & 3) << 3);
+            color.B = (byte)(k & 255);
+            color.G = (byte)((k & 80) << 10);
+            color.R = (byte)((k & 1) << 7);
             color.A = 255;
             return color;
         }
