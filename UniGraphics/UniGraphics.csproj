@@ -95,6 +95,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -106,16 +107,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\UnicornHat.png" />
+    <Resource Include="Resources\Unicorn\UnicornHat.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\UnicornCloud.png" />
+    <Resource Include="Resources\Unicorn\UnicornCloud.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\UnicornCry.png" />
+    <Resource Include="Resources\Unicorn\UnicornCry.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\logo.png" />
+    <Resource Include="Resources\Unicorn\logo.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\BuildFractal.png" />
