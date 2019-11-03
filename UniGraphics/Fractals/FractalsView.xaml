@@ -13,7 +13,6 @@
 
     <Grid
         Width="900"
-        Margin="0,50,0,0"
         HorizontalAlignment="Left">
         <Grid.RowDefinitions>
             <RowDefinition Height="310" />
@@ -222,10 +221,8 @@
         <Image
             Grid.Row="2"
             Width="111"
-            Height="105"
-            Margin="0,10,10,0"
+            Margin="0,0,10,10"
             HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            Source="/UniGraphics;component/Resources/Unicorn/UnicornHat.png" />
+            Source="/UniGraphics;component/Resources/Unicorn/UnicornHat.png" Height="105" VerticalAlignment="Bottom" />
     </Grid>
 </Page>
