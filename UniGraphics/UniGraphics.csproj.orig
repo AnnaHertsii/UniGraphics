@@ -127,7 +127,13 @@
   <ItemGroup>
     <None Include="Resources\save.png" />
   </ItemGroup>
+<<<<<<< HEAD
+  <ItemGroup>
+    <None Include="icon.png" />
+  </ItemGroup>
+=======
   <ItemGroup />
+>>>>>>> viewmodel_magic
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

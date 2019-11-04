@@ -305,6 +305,8 @@
                 Width="630"
                 Height="574"
                 RenderOptions.BitmapScalingMode="NearestNeighbor" />
+                RenderOptions.BitmapScalingMode="NearestNeighbor"
+                Source="{Binding Path=Image}" />
             <TextBox 
                 Height="28" 
                 Grid.Row="1"
@@ -378,6 +380,7 @@
             Content="i"
             FontSize="18" />
         <TextBox
+            Name="ConstantRealText"
             Grid.Row="1"
             Grid.Column="0"
             Foreground="#8787ed"
@@ -387,9 +390,11 @@
             Margin="32,118,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            TextChanged="TextBox_TextChanged"
+            SpellCheck.IsEnabled="True"
+            Text="{Binding Path=ConstantReal, Mode=TwoWay}"
             TextWrapping="Wrap" />
         <TextBox
+            Name="ConstantImaginaryText"
             Grid.Row="1"
             Grid.Column="0"
             Foreground="#8787ed"
@@ -399,7 +404,7 @@
             Margin="141,118,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            TextChanged="TextBox_TextChanged"
+            Text="{Binding Path=ConstantImaginary, Mode=TwoWay}"
             TextWrapping="Wrap" />
         <Label
             Grid.Row="1"
@@ -414,6 +419,7 @@
             Content="k:"
              />
         <RadioButton
+            Name="FractalPower3Radio"
             Grid.Row="1"
             Grid.Column="0"
             Foreground="White"
@@ -422,8 +428,10 @@
             Margin="42,164,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="3" />
+            Content="3"
+            IsChecked="True" />
         <RadioButton
+            Name="FractalPower4Radio"
             Grid.Row="1"
             Grid.Column="0"
             Foreground="White"
@@ -434,6 +442,8 @@
             VerticalAlignment="Top"
             Content="4" />
         <Slider
+            Value="{Binding Path=FractalScale}"
+            Name="ScaleSlider"
             Grid.Row="1"
             Grid.Column="0"
             Width="194"
@@ -441,7 +451,9 @@
             Margin="10,220,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top" Style="{DynamicResource SliderStyle1}">
-        </Slider>
+            Maximum="1"
+            Minimum="0.001"
+            SmallChange="0.001" LargeChange="0.1" IsMoveToPointEnabled="True" />
         <Label
             Grid.Row="1"
             Grid.Column="0"
@@ -508,5 +520,15 @@
             Grid.Row="2"
             Grid.Column="0"/>
 
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Width="100"
+            Height="30"
+            Margin="159,185,10,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Content="{Binding Path=FractalScale}"
+            FontSize="18" />
     </Grid>
 </Page>

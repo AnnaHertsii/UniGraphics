@@ -131,3 +131,9 @@ $RECYCLE.BIN/
 .DS_Store
 
 _NCrunch*
+UniGraphics/UniGraphics_BACKUP_1589.csproj
+UniGraphics/UniGraphics_BASE_1589.csproj
+UniGraphics/UniGraphics_LOCAL_1589.csproj
+UniGraphics/UniGraphics_REMOTE_1589.csproj
+UniGraphics/Fractals/FractalsView.xaml.orig
+UniGraphics/Fractals/FractalsView.xaml.cs.orig
