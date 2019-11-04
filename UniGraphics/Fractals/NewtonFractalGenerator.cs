@@ -7,7 +7,17 @@ namespace UniGraphics.Fractals
 {
     public class NewtonFractalGenerator
     {
-        public double FractalScale { get; set; } = 1; //масштабування фрактала
+        private double _fractalScale = 1; //масштабування фрактала
+        public double FractalScale
+        {
+            get { return _fractalScale; }
+            set
+            {
+                _fractalScale = value;
+                area = new Rect(new Point(-_fractalScale, _fractalScale),
+                            new Point(_fractalScale, _fractalScale * 3));
+            }
+        }
         public double Power { get; set; } = 4; //степінь n в формулі
         public int Width { get; set; }
         public int Height { get; set; }
@@ -34,8 +44,8 @@ namespace UniGraphics.Fractals
 
         public NewtonFractalGenerator()
         {
-            area = new Rect(new Point(-FractalScale, FractalScale),
-                            new Point(FractalScale, FractalScale * 3));
+            area = new Rect(new Point(-_fractalScale, _fractalScale),
+                            new Point(_fractalScale, _fractalScale * 3));
             currentColorModel = colorModels[0];
         }
 
@@ -44,8 +54,8 @@ namespace UniGraphics.Fractals
             Power = power;
             Constant = constant;
             currentColorModel = model;
-            area = new Rect(new Point(-FractalScale, FractalScale),
-                            new Point(FractalScale, FractalScale * 3));
+            area = new Rect(new Point(-_fractalScale, _fractalScale),
+                            new Point(_fractalScale, _fractalScale * 3));
         }
 
         //функція f(z)

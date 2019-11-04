@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,9 +8,6 @@ namespace UniGraphics.Fractals
 {
     public partial class FractalsView : Page
     {
-        NewtonFractalGenerator generator = new NewtonFractalGenerator();
-        Random rand = new Random();
-
         public FractalsView()
         {
             InitializeComponent();
@@ -27,7 +23,7 @@ namespace UniGraphics.Fractals
                 encoder.Frames.Add(BitmapFrame.Create((BitmapSource)fractalImg.Source));
                 using (FileStream stream = new FileStream(dialog.FileName, FileMode.Create))
                     encoder.Save(stream);
-            }             
+            }
         }
     }
 }
