@@ -305,20 +305,6 @@
                 Width="630"
                 Height="574"
                 RenderOptions.BitmapScalingMode="NearestNeighbor" />
-            <TextBox 
-                Height="28" 
-                Grid.Row="1"
-                Grid.Column ="0"
-                Foreground="#8787ed"
-                FontSize="18"
-                TextAlignment="Center"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Canvas.Left="-260" 
-                TextWrapping="Wrap"
-                Text="f(z) = zk + c" 
-                Canvas.Top="73" 
-                Width="251"/>
 
         </Canvas>
         <Label
@@ -497,16 +483,40 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
             Source="/UniGraphics;component/Resources/Unicorn/UnicornHat.png" Margin="0,0,0,5" />
-        <TextBox 
+        <TextBlock 
             HorizontalAlignment="Center" 
             VerticalAlignment="Bottom" 
-            IsReadOnly="True"
+            Background="White"
             Height="80" 
             Margin="18,0,109,16" 
             TextWrapping="Wrap" 
             Width="142" 
             Grid.Row="2"
             Grid.Column="0"/>
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Foreground="White"
+            Width="41"
+            Height="30"
+            Margin="204,211,24,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Content=""
+            FontSize="18" />
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Foreground="#8787ed"
+            Background="White"
+            FontSize="18"
+            TextAlignment="Center"
+            Margin="10,49,0,0" 
+            Grid.Row="1" 
+            Grid.Column ="0"
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" Width="249"><Run Text="f(z) = z"/><InlineUIContainer>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" Text="k" FontSize="15" Height="18" RenderTransformOrigin="0.429,0.492"/>
+            </InlineUIContainer><Run Text=" "/><Run Text="+ c"/></TextBlock>
 
     </Grid>
 </Page>
