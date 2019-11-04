@@ -649,12 +649,15 @@
             Margin="0,253,10,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Foreground="#8787ed">
+            Foreground="#8787ed"
+            SelectedIndex="{Binding Path=CurrentColorModel}">
+
             <TextBlock>Standard</TextBlock>
-            <TextBlock>Candy</TextBlock>
             <TextBlock>Gold</TextBlock>
+            <TextBlock>Candy</TextBlock>
             <TextBlock>Zebra</TextBlock>
             <TextBlock>BlackRed</TextBlock>
+            <!--  ItemsSource="{Binding Source={x:Static local:NewtonFractalGenerator.colorModels}, Mode=OneWay}">  -->
         </ComboBox>
         <Image
             Grid.Row="2"

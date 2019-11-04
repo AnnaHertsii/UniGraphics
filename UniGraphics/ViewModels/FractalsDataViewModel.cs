@@ -90,7 +90,6 @@ namespace UniGraphics.ViewModels
 
         public FractalsDataViewModel()
         {
-            _image = null;
             _constantReal = -1.0;
             _constantImaginary = 0.0;
             _currentColorModel = 0;
@@ -104,6 +103,9 @@ namespace UniGraphics.ViewModels
                 Height = 400,
                 FractalScale = _fractalScale
             };
+            Generator.generate();
+            _image = Generator.Image;
+
         }
     }
 }
