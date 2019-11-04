@@ -17,16 +17,6 @@ namespace UniGraphics.Fractals
             InitializeComponent();
         }
 
-        void generateFractal(object sender, RoutedEventArgs e)
-        {
-            //тут можна замість рандому вибрати собі номер кольорової моделі
-            NewtonFractalGenerator.ColorModel randomModel =
-                NewtonFractalGenerator.colorModels[rand.Next(NewtonFractalGenerator.colorModels.Length)];
-            generator.currentColorModel = randomModel;
-            generator.generate((int)fractalImg.Width, (int)fractalImg.Height);//виклик побудови фрактала
-            fractalImg.Source = generator.Image; //встановлюємо зображення
-        }
-
         private void SavePicture(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
@@ -38,11 +28,6 @@ namespace UniGraphics.Fractals
                 using (FileStream stream = new FileStream(dialog.FileName, FileMode.Create))
                     encoder.Save(stream);
             }             
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

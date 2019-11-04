@@ -12,7 +12,8 @@
     <Grid Name="mainGrid">
         <Frame
             Name="MainFrame"
-            NavigationUIVisibility="Hidden"
-            Source="Fractals/FractalsView.xaml" />
+            DataContextChanged="MainFrame_DataContextChanged"
+            LoadCompleted="MainFrame_LoadCompleted"
+            NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>

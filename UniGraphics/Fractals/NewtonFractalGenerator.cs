@@ -9,7 +9,9 @@ namespace UniGraphics.Fractals
     {
         public double FractalScale { get; set; } = 1; //масштабування фрактала
         public double Power { get; set; } = 4; //степінь n в формулі
-        public Complex Constant { get; set; } = -1; //константа c в формулі
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public Complex Constant { get; set; } = 1; //константа c в формулі
         private Rect area; //межі комплексних чисел
         private double tolerance = 0.001; //точність пошуку кореня
         private int maxIterations = 512; //максимальна кількість ітерацій
@@ -75,17 +77,17 @@ namespace UniGraphics.Fractals
         }
 
         //функція, що повертає зображення, яке містить фрактал
-        public void generate(int imgWidth, int imgHeight)
+        public void generate()
         {
-            Image = new WriteableBitmap(imgWidth, imgHeight, 96, 96, PixelFormats.Bgra32, null);
+            Image = new WriteableBitmap(Width, Height, 96, 96, PixelFormats.Bgra32, null);
             int bytesPerPixel = Image.Format.BitsPerPixel / 8;
-            byte[] pixels = new byte[imgHeight * imgWidth * bytesPerPixel]; //масив пікселів
-            int bytesPerRow = imgWidth * bytesPerPixel;
+            byte[] pixels = new byte[Height * Width * bytesPerPixel]; //масив пікселів
+            int bytesPerRow = Width * bytesPerPixel;
             int pixelX, pixelY; //координати пікселя
             double x, y; //координати в комплексній площині
             //числа для переходу з растрових координат в комплексну площину
-            double scaleX = (area.Right - area.Left) / imgWidth;
-            double scaleY = (area.Top - area.Bottom) / imgHeight;
+            double scaleX = (area.Right - area.Left) / Width;
+            double scaleY = (area.Top - area.Bottom) / Height;
             for (int i = 0; i < pixels.Length; i += bytesPerPixel)
             {
                 //шукаємо координати піксела
@@ -102,7 +104,7 @@ namespace UniGraphics.Fractals
                 pixels[i + 2] = pixelColor.R;
                 pixels[i + 3] = pixelColor.A;
             }
-            Image.WritePixels(new Int32Rect(0, 0, imgWidth, imgHeight), pixels, bytesPerRow, 0);
+            Image.WritePixels(new Int32Rect(0, 0, Width, Height), pixels, bytesPerRow, 0);
         }
 
         public static Color Standard(int k)

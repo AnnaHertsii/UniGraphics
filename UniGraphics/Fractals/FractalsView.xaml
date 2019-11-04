@@ -23,17 +23,18 @@
         </Grid.ColumnDefinitions>
         <Canvas
             Name="fractalCnv"
-            Grid.RowSpan="2"
+            Grid.RowSpan="3"
             Grid.Column="1"
-            Margin="1,0,615,0">
+            Margin="10">
             <Image
                 Name="fractalImg"
                 Grid.Column="1"
                 Canvas.Left="10"
                 Canvas.Top="10"
-                Width="622"
-                Height="540"
-                RenderOptions.BitmapScalingMode="NearestNeighbor" />
+                Width="591"
+                Height="560"
+                RenderOptions.BitmapScalingMode="NearestNeighbor"
+                Source="{Binding Path=Image}" />
         </Canvas>
         <Button
             Name="saveFractalBtn"
@@ -117,6 +118,7 @@
             Content="i"
             FontSize="18" />
         <TextBox
+            Name="ConstantRealText"
             Grid.Row="0"
             Grid.Column="0"
             Width="73"
@@ -124,9 +126,11 @@
             Margin="37,131,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            TextChanged="TextBox_TextChanged"
+            SpellCheck.IsEnabled="True"
+            Text="{Binding Path=ConstantReal, Mode=TwoWay}"
             TextWrapping="Wrap" />
         <TextBox
+            Name="ConstantImaginaryText"
             Grid.Row="0"
             Grid.Column="0"
             Width="73"
@@ -134,7 +138,7 @@
             Margin="141,131,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            TextChanged="TextBox_TextChanged"
+            Text="{Binding Path=ConstantImaginary, Mode=TwoWay}"
             TextWrapping="Wrap" />
         <Label
             Grid.Row="0"
@@ -147,6 +151,7 @@
             Content="k:"
             FontSize="18" />
         <RadioButton
+            Name="FractalPower3Radio"
             Grid.Row="0"
             Grid.Column="0"
             Width="25"
@@ -154,8 +159,10 @@
             Margin="42,185,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="3" />
+            Content="3"
+            IsChecked="True" />
         <RadioButton
+            Name="FractalPower4Radio"
             Grid.Row="0"
             Grid.Column="0"
             Width="25"
