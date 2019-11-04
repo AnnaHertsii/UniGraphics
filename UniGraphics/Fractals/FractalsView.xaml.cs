@@ -37,7 +37,7 @@ namespace UniGraphics.Fractals
                 encoder.Frames.Add(BitmapFrame.Create((BitmapSource)fractalImg.Source));
                 using (FileStream stream = new FileStream(dialog.FileName, FileMode.Create))
                     encoder.Save(stream);
-            }             
+            }  
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
