@@ -267,227 +267,221 @@
 
     <Grid Width="900" HorizontalAlignment="Left">
         <Grid.RowDefinitions>
-            <RowDefinition Height="418" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="352" />
             <RowDefinition MinHeight="120" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="269" />
-            <ColumnDefinition />
+            <ColumnDefinition Width="8*" />
+            <ColumnDefinition Width="623*"/>
         </Grid.ColumnDefinitions>
         <Border Background="#BCC3FF" />
-        <Border Grid.Column="0"  Grid.Row="0" Background="#BCC3FF" />
+        <Border Grid.Column="0"  Grid.Row="0" Background="#BCC3FF" >
+            <Menu Background="#99A2F1" Foreground="White" Margin="0,0,-631,0">
+                <MenuItem Header="Файл" Foreground="White" FontSize="16">
+                    <MenuItem Header="Зберегти" Foreground ="#99A2F1" Click="SavePicture"/>
+                    <MenuItem Header="Зберегти як..." Foreground ="#99A2F1"  Click="SavePictureAs"/>
+                    <MenuItem Header="Вийти" Foreground ="#99A2F1" />
+                </MenuItem>
+                <MenuItem Header="Довідка" Foreground="White" FontSize="16">
+                    <MenuItem Header="Довідка" Foreground ="#99A2F1" />
+                    <MenuItem Header="Навчальні матеріали" Foreground ="#99A2F1" />
+                    <MenuItem Header="Кредити" Foreground ="#99A2F1" />
+                </MenuItem>
+            </Menu>
+        </Border>
         <Border Grid.Column="0"  Grid.Row="1" Background="#BCC3FF" />
+        <Border Grid.Column="0"  Grid.Row="2" Background="#BCC3FF" />
         <Canvas
             Name="fractalCnv"
             Grid.RowSpan="2"
             Grid.Column="1"
-            Margin="1,0,10,0">
+            Margin="1,0,0,0" Grid.ColumnSpan="2">
             <Image
                 Name="fractalImg"
                 Grid.Column="1"
-                Canvas.Left="10"
-                Canvas.Top="10"
-                Width="622"
-                Height="590"
+                Canvas.Top="26"
+                Width="630"
+                Height="574"
                 RenderOptions.BitmapScalingMode="NearestNeighbor" />
             <TextBox 
                 Height="28" 
-                Grid.Row="0"
+                Grid.Row="1"
                 Grid.Column ="0"
                 Foreground="#8787ed"
                 FontSize="18"
                 TextAlignment="Center"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
-                Canvas.Left="-258" 
+                Canvas.Left="-260" 
                 TextWrapping="Wrap"
                 Text="f(z) = zk + c" 
-                Canvas.Top="66" 
+                Canvas.Top="73" 
                 Width="251"/>
 
         </Canvas>
-        <Button
-            Name="saveFractalBtn"
-            Grid.Row="0"
-            Width="162"
-            Margin="42,323,65,53"
-            HorizontalAlignment="Center"
-            Click="SavePicture">
-            <Grid>
-                <Image
-                    Grid.Column="0"
-                    Width="25"
-                    Margin="-25,0,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Stretch"
-                    Source="pack://siteoforigin:,,,/Resources/save.png" />
-                <Label
-                    Margin="0,0,-21,0"
-                    HorizontalAlignment="Center"
-                    Content="Зберегти" />
-            </Grid>
-        </Button>
         <Label
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             Foreground="White"
             Width="134"
             Height="49"
-            Margin="70,19,65,0"
+            Margin="70,0,65,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Content="Фрактали"
             FontSize="25" />
 
         <Label
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             Foreground="White"
             Width="191"
             Height="36"
-            Margin="42,98,36,0"
+            Margin="42,77,36,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Content="Введіть коефіцієнти:"
             FontSize="18" />
         <Label
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             Foreground="White"
             Width="26"
             Height="30"
-            Margin="6,131,237,0"
+            Margin="6,110,237,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Content="c:"
             FontSize="18" />
         <Label
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             Foreground="White"
             Width="26"
             Height="30"
-            Margin="110,131,133,0"
+            Margin="110,110,133,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Content="+"
             FontSize="18" />
         <Label
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             Foreground="White"
             Width="26"
             Height="30"
-            Margin="219,131,24,0"
+            Margin="219,110,24,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Content="i"
             FontSize="18" />
         <TextBox
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             Foreground="#8787ed"
             FontSize="14"
             Width="73"
             Height="22"
-            Margin="32,139,0,0"
+            Margin="32,118,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             TextChanged="TextBox_TextChanged"
             TextWrapping="Wrap" />
         <TextBox
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             Foreground="#8787ed"
             FontSize="14"
             Width="73"
             Height="22"
-            Margin="141,139,0,0"
+            Margin="141,118,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             TextChanged="TextBox_TextChanged"
             TextWrapping="Wrap" />
         <Label
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             FontSize="18"
             Foreground="White"
             Width="26"
             Height="30"
-            Margin="5,173,238,0"
+            Margin="5,152,238,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Content="k:"
              />
         <RadioButton
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             Foreground="White"
             Width="37"
             Height="27"
-            Margin="42,185,0,0"
+            Margin="42,164,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="3" />
         <RadioButton
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             Foreground="White"
             Width="25"
             Height="20"
-            Margin="84,185,0,0"
+            Margin="84,164,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="4" />
         <Slider
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
-            Width="203"
+            Width="194"
             Height="18"
-            Margin="10,235,0,0"
+            Margin="10,220,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top" Style="{DynamicResource SliderStyle1}">
         </Slider>
         <Label
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             Foreground="White"
             Width="88"
             Height="36"
-            Margin="84,205,97,0"
+            Margin="84,184,97,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Content="Масштаб:"
             FontSize="18" />
         <Label
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             Foreground="White"
             Width="26"
             Height="30"
-            Margin="239,229,4,0"
+            Margin="239,211,4,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Content="%"
             FontSize="18" />
         <Label
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             Foreground="White"
             Width="148"
             Height="36"
-            Margin="5,267,116,0"
+            Margin="5,246,116,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Content="Колірна модель:"
             FontSize="18" />
         <ComboBox
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.Column="0"
             Foreground="#8787ed"
-            Width="114"
+            Width="101"
             Height="22"
-            Margin="0,274,7,0"
+            Margin="0,253,10,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top">
             <TextBlock>Standard</TextBlock>
@@ -497,21 +491,21 @@
             <TextBlock>BlackRed</TextBlock>
         </ComboBox>
         <Image
-            Grid.Row="1"
+            Grid.Row="2"
             Width="118"
             Height="114"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
-            Source="/UniGraphics;component/Resources/Unicorn/UnicornHat.png" />
+            Source="/UniGraphics;component/Resources/Unicorn/UnicornHat.png" Margin="0,0,0,5" />
         <TextBox 
             HorizontalAlignment="Center" 
             VerticalAlignment="Bottom" 
             IsReadOnly="True"
-            Height="78" 
-            Margin="23,0,104,18" 
+            Height="80" 
+            Margin="18,0,109,16" 
             TextWrapping="Wrap" 
             Width="142" 
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="0"/>
 
     </Grid>
