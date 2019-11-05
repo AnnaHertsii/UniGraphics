@@ -12,10 +12,10 @@ namespace UniGraphics
 
         public MainWindow()
         {
-            fractalsViewModel = new FractalsDataViewModel();
             InitializeComponent();
-            MainFrame.DataContext = fractalsViewModel;
             fractalsView = new FractalsView();
+            fractalsViewModel = new FractalsDataViewModel(400, 400);
+            MainFrame.DataContext = fractalsViewModel;
             fractalsView.FractalPower3Radio.Checked += FractalPowerChanged;
             fractalsView.FractalPower4Radio.Checked += FractalPowerChanged;
             MainFrame.Content = fractalsView;
@@ -45,6 +45,12 @@ namespace UniGraphics
                 fractalsViewModel.FractalPower = 3;
             else
                 fractalsViewModel.FractalPower = 4;
+        }
+
+        private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            fractalsViewModel.respondToWindowSizeChange((int)fractalsView.fractalImg.ActualWidth,
+                                                        (int)fractalsView.fractalImg.ActualHeight);
         }
     }
 }

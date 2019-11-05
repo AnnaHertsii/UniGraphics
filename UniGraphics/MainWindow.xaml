@@ -9,6 +9,7 @@
     Width="917"
     Height="640"
     Icon="/UniGraphics;component/Resources/Unicorn/logo.png"
+    SizeChanged="WindowSizeChanged"
     mc:Ignorable="d">
     <Grid Name="mainGrid">
         <Frame

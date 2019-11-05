@@ -682,10 +682,9 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="1"
-            Width="630"
-            Height="574"
             RenderOptions.BitmapScalingMode="NearestNeighbor"
-            Source="{Binding Path=Image}" />
+            Source="{Binding Path=Image}"
+            Stretch="Fill" />
         <Image
             Grid.Row="2"
             Width="118"

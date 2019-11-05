@@ -135,7 +135,16 @@ namespace UniGraphics.ViewModels
         }
         private NewtonFractalGenerator Generator { get; set; }
 
-        public FractalsDataViewModel()
+        public void respondToWindowSizeChange(int width, int height)
+        {
+            if (width == 0 || height == 0)
+                return;
+            Generator.Width = width;
+            Generator.Height = height;
+            startGeneration();
+        }
+
+        public FractalsDataViewModel(int width, int height)
         {
             _generatingProgress = 0.0;
             _progressVisibility = Visibility.Collapsed;
@@ -149,8 +158,8 @@ namespace UniGraphics.ViewModels
                                                    new Complex(_constantReal, _constantImaginary),
                                                    NewtonFractalGenerator.colorModels[_currentColorModel])
             {
-                Width = 400,
-                Height = 400,
+                Width = width,
+                Height = height,
                 FractalScale = _fractalScale
             };
             Generator.generate(null, setProgressAction);
