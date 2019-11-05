@@ -2,6 +2,7 @@
     x:Class="UniGraphics.Fractals.FractalsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cnvrt="clr-namespace:UniGraphics.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:UniGraphics.Fractals"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -11,6 +12,7 @@
     Background="White"
     mc:Ignorable="d">
     <Page.Resources>
+        <cnvrt:ScaleConverter x:Key="ScaleConverter" />
         <SolidColorBrush x:Key="SliderThumb.Static.Foreground" Color="#FFE5E5E5" />
         <SolidColorBrush x:Key="SliderThumb.MouseOver.Background" Color="#FFDCECFC" />
         <SolidColorBrush x:Key="SliderThumb.MouseOver.Border" Color="#FF7Eb4EA" />
@@ -423,18 +425,37 @@
                 Foreground="White"
                 Header="Файл">
                 <MenuItem
+                    Padding="-20,0,0,0"
+                    Background="#F2F2F2"
                     Click="SavePictureAs"
                     Foreground="#99A2F1"
                     Header="Зберегти як..." />
-                <MenuItem Foreground="#99A2F1" Header="Вийти" />
+                <MenuItem
+                    Padding="-20,0,0,0"
+                    Background="#F2F2F2"
+                    Click="ExitClicked"
+                    Foreground="#99A2F1"
+                    Header="Вийти" />
             </MenuItem>
             <MenuItem
                 FontSize="16"
                 Foreground="White"
                 Header="Довідка">
-                <MenuItem Foreground="#99A2F1" Header="Довідка" />
-                <MenuItem Foreground="#99A2F1" Header="Навчальні матеріали" />
-                <MenuItem Foreground="#99A2F1" Header="Кредити" />
+                <MenuItem
+                    Padding="-20,0,0,0"
+                    Background="#F2F2F2"
+                    Foreground="#99A2F1"
+                    Header="Довідка" />
+                <MenuItem
+                    Padding="-20,0,0,0"
+                    Background="#F2F2F2"
+                    Foreground="#99A2F1"
+                    Header="Навчальні матеріали" />
+                <MenuItem
+                    Padding="-20,0,0,0"
+                    Background="#F2F2F2"
+                    Foreground="#99A2F1"
+                    Header="Кредити" />
             </MenuItem>
         </Menu>
         <Border
@@ -509,6 +530,8 @@
                     Margin="32,118,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
                     BorderThickness="0"
                     FontSize="14"
                     Foreground="#8787ed"
@@ -524,17 +547,18 @@
                     Margin="141,118,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
                     BorderThickness="0"
                     FontSize="14"
                     Foreground="#8787ed"
                     Text="{Binding Path=ConstantImaginary, Mode=TwoWay}"
                     TextWrapping="Wrap" />
                 <Label
-                    Grid.Row="1"
                     Grid.Column="0"
                     Width="26"
                     Height="30"
-                    Margin="5,152,238,0"
+                    Margin="5,151,238,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Content="k:"
@@ -542,40 +566,51 @@
                     Foreground="White" />
                 <RadioButton
                     Name="FractalPower3Radio"
-                    Grid.Row="1"
                     Grid.Column="0"
-                    Width="37"
-                    Height="27"
-                    Margin="42,164,0,0"
+                    Width="12"
+                    Height="12"
+                    Margin="40,164,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Content="3"
-                    Foreground="White"
+                    BorderThickness="0"
                     IsChecked="True" />
+                <TextBlock
+                    Grid.Column="0"
+                    Margin="60,158,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="16"
+                    Foreground="White"
+                    Text="3" />
                 <RadioButton
                     Name="FractalPower4Radio"
-                    Grid.Row="1"
                     Grid.Column="0"
-                    Width="25"
-                    Height="20"
-                    Margin="84,164,0,0"
+                    Width="12"
+                    Height="12"
+                    Margin="80,164,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Content="4"
-                    Foreground="White" />
+                    BorderThickness="0" />
+                <TextBlock
+                    Grid.Column="0"
+                    Margin="100,158,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="16"
+                    Foreground="White"
+                    Text="4" />
                 <Slider
                     Name="ScaleSlider"
-                    Grid.Row="1"
                     Grid.Column="0"
-                    Width="194"
+                    Width="168"
                     Height="18"
                     Margin="10,220,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     IsMoveToPointEnabled="True"
                     LargeChange="0.1"
-                    Maximum="1"
-                    Minimum="0.001"
+                    Maximum="5"
+                    Minimum="0.1"
                     SmallChange="0.001"
                     Style="{DynamicResource SliderStyle1}"
                     Value="{Binding Path=FractalScale}" />
@@ -589,17 +624,6 @@
                     VerticalAlignment="Top"
                     HorizontalContentAlignment="Center"
                     Content="Масштаб:"
-                    FontSize="18"
-                    Foreground="White" />
-                <Label
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Width="26"
-                    Height="30"
-                    Margin="239,211,4,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Content="%"
                     FontSize="18"
                     Foreground="White" />
                 <Label
@@ -627,7 +651,7 @@
                     <TextBlock>Gold</TextBlock>
                     <TextBlock>Candy</TextBlock>
                     <TextBlock>Zebra</TextBlock>
-                    <TextBlock>BlackRed</TextBlock>
+                    <TextBlock>Black&amp;Red</TextBlock>
                 </ComboBox>
                 <Label
                     Grid.Column="0"
@@ -689,13 +713,11 @@
         <Label
             Grid.Row="1"
             Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Width="66"
-            Height="30"
-            Margin="204,180,630,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Content="{Binding Path=FractalScale, StringFormat={}{0:P}}"
+            Width="81"
+            Margin="0,214,10,108"
+            HorizontalAlignment="Right"
+            HorizontalContentAlignment="Center"
+            Content="{Binding Path=FractalScale, Converter={StaticResource ScaleConverter}}"
             FontSize="18"
             Foreground="White" />
         <TextBlock
@@ -709,15 +731,13 @@
             FontSize="18"
             Foreground="#8787ed"
             TextAlignment="Center"
-            TextWrapping="Wrap"><Run Text="f(z) = z" />
-            <InlineUIContainer>
-                <TextBlock
-                    Height="18"
-                    VerticalAlignment="Top"
-                    FontSize="15"
-                    RenderTransformOrigin="0.429,0.492"
-                    Text="k"
-                    TextWrapping="Wrap" />
-            </InlineUIContainer><Run Text=" " /><Run Text="+ c" /></TextBlock>
+            TextWrapping="Wrap">
+            <Run Text="f(z) = z" />
+            <Run
+                BaselineAlignment="Top"
+                FontSize="12"
+                Text="k" />
+            <Run Text="+ c" />
+        </TextBlock>
     </Grid>
 </Page>

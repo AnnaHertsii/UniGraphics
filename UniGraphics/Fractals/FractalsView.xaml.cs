@@ -13,19 +13,6 @@ namespace UniGraphics.Fractals
             InitializeComponent();
         }
 
-        private void SavePicture(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "JPG Image (.jpg)|*.jpg";
-            if (dialog.ShowDialog() == true)
-            {
-                var encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create((BitmapSource)fractalImg.Source));
-                using (FileStream stream = new FileStream(dialog.FileName, FileMode.Create))
-                    encoder.Save(stream);
-            }
-        }
-
         private void SavePictureAs(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
@@ -37,6 +24,11 @@ namespace UniGraphics.Fractals
                 using (FileStream stream = new FileStream(dialog.FileName, FileMode.Create))
                     encoder.Save(stream);
             } 
+        }
+
+        private void ExitClicked(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
