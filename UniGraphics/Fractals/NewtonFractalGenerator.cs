@@ -1,4 +1,6 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
+using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -87,11 +89,12 @@ namespace UniGraphics.Fractals
         }
 
         //функція, що повертає зображення, яке містить фрактал
-        public void generate()
+        public bool generate(CancellationToken? token, Action<double> progress)
         {
-            Image = new WriteableBitmap(Width, Height, 96, 96, PixelFormats.Bgra32, null);
-            int bytesPerPixel = Image.Format.BitsPerPixel / 8;
-            byte[] pixels = new byte[Height * Width * bytesPerPixel]; //масив пікселів
+            var tempImage = new WriteableBitmap(Width, Height, 96, 96, PixelFormats.Bgra32, null);
+            int bytesPerPixel = tempImage.Format.BitsPerPixel / 8;
+            int bytesAmount = Height * Width * bytesPerPixel;
+            byte[] pixels = new byte[bytesAmount]; //масив пікселів
             int bytesPerRow = Width * bytesPerPixel;
             int pixelX, pixelY; //координати пікселя
             double x, y; //координати в комплексній площині
@@ -100,6 +103,10 @@ namespace UniGraphics.Fractals
             double scaleY = (area.Top - area.Bottom) / Height;
             for (int i = 0; i < pixels.Length; i += bytesPerPixel)
             {
+                if(token != null && token.Value.IsCancellationRequested)
+                    return false;
+                //записуємо прогрес від 0 до 1 в спеціальну змінну
+                progress(i / (double)bytesAmount);
                 //шукаємо координати піксела
                 pixelY = i / bytesPerRow;
                 pixelX = i % bytesPerRow / bytesPerPixel;
@@ -114,7 +121,14 @@ namespace UniGraphics.Fractals
                 pixels[i + 2] = pixelColor.R;
                 pixels[i + 3] = pixelColor.A;
             }
-            Image.WritePixels(new Int32Rect(0, 0, Width, Height), pixels, bytesPerRow, 0);
+            if (token != null && token.Value.IsCancellationRequested)
+                return false;
+            tempImage.WritePixels(new Int32Rect(0, 0, Width, Height), pixels, bytesPerRow, 0);
+            if (token != null && token.Value.IsCancellationRequested)
+                return false;
+            Image = tempImage;
+            progress(1);
+            return true;
         }
 
         public static Color Standard(int k)
