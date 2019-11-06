@@ -437,7 +437,13 @@
                         Click="SavePictureAs"
                         Foreground="#99A2F1"
                         Header="Зберегти як..." />
-                    <MenuItem Foreground="#99A2F1" Header="Вийти" />
+                    <MenuItem Foreground="#99A2F1" Header="Вийти" >
+                        <MenuItem.Icon>
+                            <Image Source="/UniGraphics;component/Resources/Icons/exit.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+
                 </MenuItem>
                 <MenuItem
                     FontSize="16"

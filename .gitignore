@@ -137,3 +137,7 @@ UniGraphics/UniGraphics_LOCAL_1589.csproj
 UniGraphics/UniGraphics_REMOTE_1589.csproj
 UniGraphics/Fractals/FractalsView.xaml.orig
 UniGraphics/Fractals/FractalsView.xaml.cs.orig
+.vs/UniGraphics/v15/Server/sqlite3/db.lock
+.vs/UniGraphics/v15/Server/sqlite3/storage.ide
+.vs/UniGraphics/v15/Server/sqlite3/storage.ide-shm
+.vs/UniGraphics/v15/Server/sqlite3/storage.ide-wal
