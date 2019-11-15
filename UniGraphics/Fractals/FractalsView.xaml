@@ -12,6 +12,29 @@
     Background="White"
     mc:Ignorable="d">
     <Page.Resources>
+        <Style x:Key="BlueButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="Background" Value="#99A2F1" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#8189cc" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid Background="Transparent">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <cnvrt:ScaleConverter x:Key="ScaleConverter" />
         <SolidColorBrush x:Key="SliderThumb.Static.Foreground" Color="#FFE5E5E5" />
         <SolidColorBrush x:Key="SliderThumb.MouseOver.Background" Color="#FFDCECFC" />
@@ -409,7 +432,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
-            <RowDefinition Height="352" />
+            <RowDefinition Height="396" />
             <RowDefinition MinHeight="120" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -653,11 +676,24 @@
                     <TextBlock>Zebra</TextBlock>
                     <TextBlock>Black&amp;Red</TextBlock>
                 </ComboBox>
+                <Button
+                    Name="VisualizeButton"
+                    Grid.Row="1"
+                    Width="249"
+                    Height="40"
+                    Margin="0,290,0,0"
+                    VerticalAlignment="Top"
+                    BorderThickness="0"
+                    Command="{Binding Visualize}"
+                    Content="Візуалізувати"
+                    Foreground="White"
+                    Style="{StaticResource BlueButtonStyle}" />
                 <Label
+                    Grid.Row="1"
                     Grid.Column="0"
                     Width="191"
                     Height="36"
-                    Margin="39,287,39,0"
+                    Margin="40,327,38,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     HorizontalContentAlignment="Center"
@@ -666,9 +702,10 @@
                     Foreground="White"
                     Visibility="{Binding Path=ProgressVisibility}" />
                 <ProgressBar
+                    Grid.Row="1"
                     Width="249"
                     Height="25"
-                    Margin="10,323,10,0"
+                    Margin="11,363,9,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Foreground="#FF1A35B3"
@@ -723,6 +760,7 @@
             Grid.Row="1"
             Grid.Column="0"
             Width="249"
+            Height="24"
             Margin="10,49,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"

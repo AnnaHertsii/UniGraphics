@@ -3,6 +3,7 @@ using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using UniGraphics.Fractals;
@@ -11,6 +12,22 @@ namespace UniGraphics.ViewModels
 {
     public class FractalsDataViewModel : ViewModelBase
     {
+        public FractalsDataViewModel()
+        {
+            Visualize = new Command(StartVisualization);
+        }
+
+        public ICommand Visualize { get; set; }
+
+        private void StartVisualization(object args)
+        {
+            Generator.FractalScale = _fractalScale;
+            Generator.Power = _fractalPower;
+            Generator.Constant = new Complex(_constantReal, _constantImaginary);
+            Generator.currentColorModel = NewtonFractalGenerator.colorModels[_currentColorModel];
+            startGeneration();
+        }
+
         private Task currentRunningTask = null;
         private CancellationTokenSource tokenSource;
         private Action<double> setProgressAction;
@@ -43,8 +60,6 @@ namespace UniGraphics.ViewModels
             {
                 _fractalScale = value;
                 OnPropertyChanged("FractalScale");
-                Generator.FractalScale = value;
-                startGeneration();
             }
         }
 
@@ -56,8 +71,6 @@ namespace UniGraphics.ViewModels
             {
                 _fractalPower = value;
                 OnPropertyChanged("FractalPower");
-                Generator.Power = value;
-                startGeneration();
             }
         }
 
@@ -69,8 +82,6 @@ namespace UniGraphics.ViewModels
             {
                 _constantReal = value;
                 OnPropertyChanged("ConstantReal");
-                Generator.Constant = new Complex(value, _constantImaginary);
-                startGeneration();
             }
         }
 
@@ -82,8 +93,6 @@ namespace UniGraphics.ViewModels
             {
                 _constantImaginary = value;
                 OnPropertyChanged("ConstantImaginary");
-                Generator.Constant = new Complex(_constantReal, value);
-                startGeneration();
             }
         }
 
@@ -118,8 +127,6 @@ namespace UniGraphics.ViewModels
             {
                 _currentColorModel = value;
                 OnPropertyChanged("CurrentColorModel");
-                Generator.currentColorModel = NewtonFractalGenerator.colorModels[value];
-                startGeneration();
             }
         }
 
@@ -141,10 +148,9 @@ namespace UniGraphics.ViewModels
                 return;
             Generator.Width = width;
             Generator.Height = height;
-            startGeneration();
         }
 
-        public FractalsDataViewModel(int width, int height)
+        public FractalsDataViewModel(int width, int height) : this()
         {
             _generatingProgress = 0.0;
             _progressVisibility = Visibility.Collapsed;
