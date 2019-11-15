@@ -660,6 +660,15 @@
                     Content="Колірна модель:"
                     FontSize="18"
                     Foreground="White" />
+                <Label
+                    Grid.Column="0"
+                    Width="81"
+                    Margin="0,214,10,327"
+                    HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Center"
+                    Content="{Binding Path=FractalScale, Converter={StaticResource ScaleConverter}}"
+                    FontSize="18"
+                    Foreground="White" />
                 <ComboBox
                     Grid.Row="1"
                     Grid.Column="0"
@@ -746,16 +755,6 @@
                 TextAlignment="Center"
                 TextWrapping="Wrap" />
         </Border>
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            Width="81"
-            Margin="0,214,10,108"
-            HorizontalAlignment="Right"
-            HorizontalContentAlignment="Center"
-            Content="{Binding Path=FractalScale, Converter={StaticResource ScaleConverter}}"
-            FontSize="18"
-            Foreground="White" />
         <TextBlock
             Grid.Row="1"
             Grid.Column="0"

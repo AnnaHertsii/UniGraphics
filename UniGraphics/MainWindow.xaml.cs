@@ -8,17 +8,20 @@ namespace UniGraphics
     public partial class MainWindow : Window
     {
         FractalsView fractalsView;
+        ColorModelsView colorModelsView;
         FractalsDataViewModel fractalsViewModel;
 
         public MainWindow()
         {
             InitializeComponent();
-            fractalsView = new FractalsView();
-            fractalsViewModel = new FractalsDataViewModel(400, 400);
-            MainFrame.DataContext = fractalsViewModel;
-            fractalsView.FractalPower3Radio.Checked += FractalPowerChanged;
-            fractalsView.FractalPower4Radio.Checked += FractalPowerChanged;
-            MainFrame.Content = fractalsView;
+            colorModelsView = new ColorModelsView();
+            MainFrame.Content = colorModelsView;
+            //fractalsView = new FractalsView();
+            //fractalsViewModel = new FractalsDataViewModel(400, 400);
+            //MainFrame.DataContext = fractalsViewModel;
+            //fractalsView.FractalPower3Radio.Checked += FractalPowerChanged;
+            //fractalsView.FractalPower4Radio.Checked += FractalPowerChanged;
+            //MainFrame.Content = fractalsView;
         }
 
         private void MainFrame_LoadCompleted(object sender, NavigationEventArgs e)
@@ -49,6 +52,7 @@ namespace UniGraphics
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
+            return;//TODO remove this later
             fractalsViewModel.respondToWindowSizeChange((int)fractalsView.fractalImg.ActualWidth,
                                                         (int)fractalsView.fractalImg.ActualHeight);
         }
