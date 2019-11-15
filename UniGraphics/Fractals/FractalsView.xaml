@@ -604,7 +604,6 @@
                     VerticalAlignment="Top"
                     FontSize="16"
                     Foreground="White"
-<<<<<<< HEAD
                     Text="3" />
                 <RadioButton
                     Name="FractalPower4Radio"
@@ -620,26 +619,6 @@
                     Margin="100,158,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-=======
-                    Header="Файл">
-                    <MenuItem
-                        Click="SavePicture"
-                        Foreground="#99A2F1"
-                        Header="Зберегти" />
-                    <MenuItem
-                        Click="SavePictureAs"
-                        Foreground="#99A2F1"
-                        Header="Зберегти як..." />
-                    <MenuItem Foreground="#99A2F1" Header="Вийти" >
-                        <MenuItem.Icon>
-                            <Image Source="/UniGraphics;component/Resources/Icons/exit.png"></Image>
-                        </MenuItem.Icon>
-                    </MenuItem>
-
-
-                </MenuItem>
-                <MenuItem
->>>>>>> origin/icons
                     FontSize="16"
                     Foreground="White"
                     Text="4" />
