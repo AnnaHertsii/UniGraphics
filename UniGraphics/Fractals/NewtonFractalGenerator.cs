@@ -1,4 +1,6 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
+using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -7,9 +9,21 @@ namespace UniGraphics.Fractals
 {
     public class NewtonFractalGenerator
     {
-        public double FractalScale { get; set; } = 1; //масштабування фрактала
-        public double Power { get; set; } = 3; //степінь n в формулі
-        public Complex Constant { get; set; } = -1; //константа c в формулі
+        private double _fractalScale = 1; //масштабування фрактала
+        public double FractalScale
+        {
+            get { return _fractalScale; }
+            set
+            {
+                _fractalScale = value;
+                area = new Rect(new Point(-_fractalScale, _fractalScale),
+                            new Point(_fractalScale, _fractalScale * 3));
+            }
+        }
+        public double Power { get; set; } = 4; //степінь n в формулі
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public Complex Constant { get; set; } = 1; //константа c в формулі
         private Rect area; //межі комплексних чисел
         private double tolerance = 0.001; //точність пошуку кореня
         private int maxIterations = 512; //максимальна кількість ітерацій
@@ -25,14 +39,15 @@ namespace UniGraphics.Fractals
                 Standard,
                 Gold,
                 Candy,
-                Zebra
+                Zebra,
+                BlackRed
             };
         }
 
         public NewtonFractalGenerator()
         {
-            area = new Rect(new Point(-FractalScale, FractalScale),
-                            new Point(FractalScale, FractalScale * 3));
+            area = new Rect(new Point(-_fractalScale, _fractalScale),
+                            new Point(_fractalScale, _fractalScale * 3));
             currentColorModel = colorModels[0];
         }
 
@@ -41,8 +56,8 @@ namespace UniGraphics.Fractals
             Power = power;
             Constant = constant;
             currentColorModel = model;
-            area = new Rect(new Point(-FractalScale, FractalScale),
-                            new Point(FractalScale, FractalScale * 3));
+            area = new Rect(new Point(-_fractalScale, _fractalScale),
+                            new Point(_fractalScale, _fractalScale * 3));
         }
 
         //функція f(z)
@@ -74,19 +89,24 @@ namespace UniGraphics.Fractals
         }
 
         //функція, що повертає зображення, яке містить фрактал
-        public void generate(int imgWidth, int imgHeight)
+        public bool generate(CancellationToken? token, Action<double> progress)
         {
-            Image = new WriteableBitmap(imgWidth, imgHeight, 96, 96, PixelFormats.Bgra32, null);
-            int bytesPerPixel = Image.Format.BitsPerPixel / 8;
-            byte[] pixels = new byte[imgHeight * imgWidth * bytesPerPixel]; //масив пікселів
-            int bytesPerRow = imgWidth * bytesPerPixel;
-            int pixelX, pixelY;
+            var tempImage = new WriteableBitmap(Width, Height, 96, 96, PixelFormats.Bgra32, null);
+            int bytesPerPixel = tempImage.Format.BitsPerPixel / 8;
+            int bytesAmount = Height * Width * bytesPerPixel;
+            byte[] pixels = new byte[bytesAmount]; //масив пікселів
+            int bytesPerRow = Width * bytesPerPixel;
+            int pixelX, pixelY; //координати пікселя
+            double x, y; //координати в комплексній площині
             //числа для переходу з растрових координат в комплексну площину
-            double scaleX = (area.Right - area.Left) / imgWidth;
-            double scaleY = (area.Top - area.Bottom) / imgHeight;
-            double x, y;
+            double scaleX = (area.Right - area.Left) / Width;
+            double scaleY = (area.Top - area.Bottom) / Height;
             for (int i = 0; i < pixels.Length; i += bytesPerPixel)
             {
+                if(token != null && token.Value.IsCancellationRequested)
+                    return false;
+                //записуємо прогрес від 0 до 1 в спеціальну змінну
+                progress(i / (double)bytesAmount);
                 //шукаємо координати піксела
                 pixelY = i / bytesPerRow;
                 pixelX = i % bytesPerRow / bytesPerPixel;
@@ -101,7 +121,14 @@ namespace UniGraphics.Fractals
                 pixels[i + 2] = pixelColor.R;
                 pixels[i + 3] = pixelColor.A;
             }
-            Image.WritePixels(new Int32Rect(0, 0, imgWidth, imgHeight), pixels, bytesPerRow, 0);
+            if (token != null && token.Value.IsCancellationRequested)
+                return false;
+            tempImage.WritePixels(new Int32Rect(0, 0, Width, Height), pixels, bytesPerRow, 0);
+            if (token != null && token.Value.IsCancellationRequested)
+                return false;
+            Image = tempImage;
+            progress(1);
+            return true;
         }
 
         public static Color Standard(int k)
@@ -142,6 +169,16 @@ namespace UniGraphics.Fractals
             color.B = (byte)(k);
             color.G = (byte)(k);
             color.R = (byte)(k);
+            color.A = 255;
+            return color;
+        }
+
+        public static Color BlackRed(int k)
+        {
+            Color color = new Color();
+            color.B = (byte)(k & 255);
+            color.G = (byte)((k & 80) << 10);
+            color.R = (byte)((k & 1) << 7);
             color.A = 255;
             return color;
         }

@@ -6,13 +6,16 @@
     xmlns:local="clr-namespace:UniGraphics"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="UniGraphics"
-    Width="1300"
-    Height="700"
+    Width="917"
+    Height="640"
+    Icon="/UniGraphics;component/Resources/Unicorn/logo.png"
+    SizeChanged="WindowSizeChanged"
     mc:Ignorable="d">
     <Grid Name="mainGrid">
         <Frame
             Name="MainFrame"
-            NavigationUIVisibility="Hidden"
-            Source="Fractals/FractalsView.xaml" />
+            DataContextChanged="MainFrame_DataContextChanged"
+            LoadCompleted="MainFrame_LoadCompleted"
+            NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>

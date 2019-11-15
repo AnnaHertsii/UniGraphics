@@ -57,8 +57,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converters\ScaleConverter.cs" />
-    <Compile Include="ViewModels\Command.cs" />
     <Compile Include="ViewModels\DataViewModel.cs" />
     <Compile Include="ViewModels\FractalsDataViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -129,10 +127,13 @@
   <ItemGroup>
     <None Include="Resources\save.png" />
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup>
-    <Resource Include="Resources\Icons\exit.png" />
+    <None Include="icon.png" />
   </ItemGroup>
+=======
   <ItemGroup />
+>>>>>>> viewmodel_magic
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
