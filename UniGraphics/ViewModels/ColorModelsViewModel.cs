@@ -70,6 +70,16 @@ namespace UniGraphics.ViewModels
             currentRunningTask.Start();
         }
 
+        public void handleLeftImageMousePosition(int x, int y)
+        {
+            var rgb = CConverter.getRGB(x, y);
+            if (rgb != null)
+                RGBText = $"({rgb.Value.R}, {rgb.Value.G}, {rgb.Value.B})";
+            var hsl = CConverter.getHSL(x, y);
+            if (hsl != null)
+                HSLText = $"({hsl.H}°, {hsl.S}%, {hsl.L}%)";
+        }
+
         static private System.Drawing.Bitmap BitmapFromWriteableBitmap(WriteableBitmap wrtBmp)
         {
             System.Drawing.Bitmap bmp = null;

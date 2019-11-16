@@ -9,7 +9,28 @@ namespace UniGraphics.ColorModels
     public class ColorConverter
     {
         public WriteableBitmap Image { get; private set; } = null; //вихідне зображення
-        public HSLColor[,] HSLPixels { get; private set; } = null; //масив з пікселями в моделі HSL
+        private object lockHSL = new object();
+        private object lockRGB = new object();
+        private HSLColor[,] HSLPixels = null; //масив з пікселями в моделі HSL
+        private Color[,] RGBPixels = null; //масив з пікселями в моделі RGB
+        public HSLColor getHSL(int x, int y)
+        {
+            if (HSLPixels == null)
+                return null;
+            lock (lockHSL)
+            {
+                return HSLPixels[x, y];
+            }
+        }
+        public Color? getRGB(int x, int y)
+        {
+            if (RGBPixels == null)
+                return null;
+            lock (lockRGB)
+            {
+                return RGBPixels[x, y];
+            }
+        }
 
         private byte toRGB(float p, float q, float t)
         {
@@ -30,7 +51,14 @@ namespace UniGraphics.ColorModels
         {
             int width = InputImage.Width;
             int height = InputImage.Height;
-            HSLPixels = new HSLColor[width, height];
+            HSLColor[,] tempHSLPixels = new HSLColor[width, height];
+            lock(lockRGB)
+            {
+                RGBPixels = new Color[width, height];
+                for (int x = 0; x < width; ++x)
+                    for (int y = 0; y < height; ++y)
+                        RGBPixels[x, y] = InputImage.GetPixel(x, y);
+            }
             var tempImage = new WriteableBitmap(width, height, 
                 InputImage.HorizontalResolution, InputImage.VerticalResolution, 
                 System.Windows.Media.PixelFormats.Bgra32, null);
@@ -75,7 +103,7 @@ namespace UniGraphics.ColorModels
                     hslColor.S = (byte) (delta / (1 - Math.Abs(1 - (cMax + cMin))) * 100);
                     //рахуємо Lightness у відсотках
                     hslColor.L = (byte)((cMax + cMin) * 50); //те саме, що ((cMax + cMin) / 2 * 100)
-                    HSLPixels[x, y] = hslColor; //записуємо колір в масив
+                    tempHSLPixels[x, y] = hslColor; //записуємо колір в масив
                     //конвертація назад в RGB
                     float h = hslColor.H / 360.0f;
                     float s = hslColor.S / 100.0f;
@@ -97,6 +125,10 @@ namespace UniGraphics.ColorModels
                 }
             if (token != null && token.Value.IsCancellationRequested)
                 return false;
+            lock(lockHSL)
+            {
+                HSLPixels = tempHSLPixels;
+            }
             tempImage.WritePixels(new Int32Rect(0, 0, width, height), pixels, bytesPerRow, 0);
             if (token != null && token.Value.IsCancellationRequested)
                 return false;

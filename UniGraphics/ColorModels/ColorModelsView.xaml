@@ -124,12 +124,14 @@
             Grid.Column="1"
             Grid.RowSpan="2">
             <Image
+                MouseMove="LeftImageMouseMove"
                 Margin="100, 0, 0, 0"
                 Name="colorModelsImageLeft"
                 Stretch="Uniform"
                 Width="{Binding Source.PixelWidth, RelativeSource={RelativeSource Self}}"
                 Height="{Binding Source.PixelHeight, RelativeSource={RelativeSource Self}}"
-                Source="{Binding Path=ImageLeft}"/>
+                Source="{Binding Path=ImageLeft}">
+            </Image>
         </Grid>
         <Grid
             ClipToBounds="True"
