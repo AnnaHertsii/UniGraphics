@@ -2,6 +2,7 @@
 using UniGraphics.Fractals;
 using System.Windows.Navigation;
 using UniGraphics.ViewModels;
+using UniGraphics.ColorModels;
 
 namespace UniGraphics
 {

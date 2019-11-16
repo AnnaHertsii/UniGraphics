@@ -58,14 +58,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\ScaleConverter.cs" />
-    <Compile Include="Fractals\ColorModelsView.xaml.cs">
+    <Compile Include="ColorModels\ColorModelsView.xaml.cs">
       <DependentUpon>ColorModelsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Command.cs" />
     <Compile Include="ViewModels\DataViewModel.cs" />
     <Compile Include="ViewModels\FractalsDataViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Page Include="Fractals\ColorModelsView.xaml">
+    <Page Include="ColorModels\ColorModelsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
