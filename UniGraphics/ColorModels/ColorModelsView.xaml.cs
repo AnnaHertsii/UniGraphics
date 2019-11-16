@@ -16,10 +16,16 @@ namespace UniGraphics.ColorModels
             InitializeComponent();
         }
 
-        private void LeftImageMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        private void ImageMouseMove(object sender, MouseEventArgs e)
         {
             var point = e.GetPosition((IInputElement)sender);
             ((ColorModelsViewModel)DataContext).handleLeftImageMousePosition((int)point.X, (int)point.Y);
+        }
+
+        private void ImageMouseLeave(object sender, MouseEventArgs e)
+        {
+            ((ColorModelsViewModel)DataContext).RGBText = "";
+            ((ColorModelsViewModel)DataContext).HSLText = "";
         }
     }
 }

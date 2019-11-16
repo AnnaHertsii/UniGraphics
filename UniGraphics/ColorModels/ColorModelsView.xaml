@@ -103,10 +103,10 @@
                     FontSize="18"
                     Foreground="White" />
                 <Slider x:Name="lightnessSlider" Margin="31,167,39,0" VerticalAlignment="Top" Grid.Row="1"/>
-                <Label Content="RGB:" Margin="39,218,180,0" VerticalAlignment="Top" Grid.Row="1"/>
-                <Label Content="HSL:" Margin="39,250,180,0" VerticalAlignment="Top" Grid.Row="1"/>
-                <Label Name="rgbLabel" Content="{Binding RGBText}" Margin="89,218,67,0" VerticalAlignment="Top" Grid.Row="1"/>
-                <Label Name="hslLabel" Content="{Binding HSLText}" Margin="89,250,67,0" VerticalAlignment="Top" Grid.Row="1"/>
+                <Label Visibility="{Binding RGBValuesVisibility}" Content="RGB:" Margin="39,218,180,0" VerticalAlignment="Top" Grid.Row="1"/>
+                <Label Visibility="{Binding HSLValuesVisibility}" Content="HSL:" Margin="39,250,180,0" VerticalAlignment="Top" Grid.Row="1"/>
+                <Label Visibility="{Binding RGBValuesVisibility}" Name="rgbLabel" Content="{Binding RGBText}" Margin="89,218,67,0" VerticalAlignment="Top" Grid.Row="1"/>
+                <Label Visibility="{Binding HSLValuesVisibility}" Name="hslLabel" Content="{Binding HSLText}" Margin="89,250,67,0" VerticalAlignment="Top" Grid.Row="1"/>
                 <Border 
                     Name="selectedHue" 
                     BorderThickness="2" 
@@ -124,7 +124,8 @@
             Grid.Column="1"
             Grid.RowSpan="2">
             <Image
-                MouseMove="LeftImageMouseMove"
+                MouseMove="ImageMouseMove"
+                MouseLeave="ImageMouseLeave"
                 Margin="100, 0, 0, 0"
                 Name="colorModelsImageLeft"
                 Stretch="Uniform"
@@ -139,6 +140,8 @@
             Grid.RowSpan="2"
             Grid.Column="3">
             <Image
+                MouseMove="ImageMouseMove"
+                MouseLeave="ImageMouseLeave"
                 Margin="100, 0, 0, 0"
                 Name="colorModelsImageRight"
                 Stretch="Uniform"

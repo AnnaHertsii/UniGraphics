@@ -73,10 +73,15 @@ namespace UniGraphics.ViewModels
         public void handleLeftImageMousePosition(int x, int y)
         {
             var rgb = CConverter.getRGB(x, y);
-            if (rgb != null)
+            if (rgb == null)
+                RGBText = "";
+            else
                 RGBText = $"({rgb.Value.R}, {rgb.Value.G}, {rgb.Value.B})";
+
             var hsl = CConverter.getHSL(x, y);
-            if (hsl != null)
+            if (hsl == null)
+                HSLText = "";
+            else
                 HSLText = $"({hsl.H}°, {hsl.S}%, {hsl.L}%)";
         }
 
@@ -125,6 +130,10 @@ namespace UniGraphics.ViewModels
             set
             {
                 _RGBText = value;
+                if (value.Length == 0)
+                    RGBValuesVisibility = Visibility.Collapsed;
+                else
+                    RGBValuesVisibility = Visibility.Visible;
                 OnPropertyChanged("RGBText");
             }
         }
@@ -136,6 +145,10 @@ namespace UniGraphics.ViewModels
             set
             {
                 _HSLText = value;
+                if (value.Length == 0)
+                    HSLValuesVisibility = Visibility.Collapsed;
+                else
+                    HSLValuesVisibility = Visibility.Visible;
                 OnPropertyChanged("HSLText");
             }
         }
@@ -165,18 +178,33 @@ namespace UniGraphics.ViewModels
 
         private ColorConverter CConverter { get; set; }
 
-        public void respondToWindowSizeChange(int width, int height)
+        private Visibility _RGBValuesVisibility;
+        public Visibility RGBValuesVisibility
         {
-            if (width == 0 || height == 0)
-                return;
-            //Generator.Width = width;
-            //Generator.Height = height;
-            //TODO
+            get { return _RGBValuesVisibility; }
+            set
+            {
+                _RGBValuesVisibility = value;
+                OnPropertyChanged("RGBValuesVisibility");
+            }
+        }
+
+        private Visibility _HSLValuesVisibility;
+        public Visibility HSLValuesVisibility
+        {
+            get { return _HSLValuesVisibility; }
+            set
+            {
+                _HSLValuesVisibility = value;
+                OnPropertyChanged("HSLValuesVisibility");
+            }
         }
 
         public ColorModelsViewModel()
         {
-            _RGBText = "hey";
+            _RGBValuesVisibility = Visibility.Collapsed;
+            _HSLValuesVisibility = Visibility.Collapsed;
+            _RGBText = "";
             _HSLText = "";
             _Lightness = 0.0;
             _HueNumber = 60;
