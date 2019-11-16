@@ -57,10 +57,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ColorModels\HSLColor.cs" />
+    <Compile Include="ColorModels\ColorConverter.cs" />
     <Compile Include="Converters\ScaleConverter.cs" />
     <Compile Include="ColorModels\ColorModelsView.xaml.cs">
       <DependentUpon>ColorModelsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ColorModelsViewModel.cs" />
     <Compile Include="ViewModels\Command.cs" />
     <Compile Include="ViewModels\DataViewModel.cs" />
     <Compile Include="ViewModels\FractalsDataViewModel.cs" />

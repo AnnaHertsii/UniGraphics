@@ -11,11 +11,14 @@ namespace UniGraphics
         FractalsView fractalsView;
         ColorModelsView colorModelsView;
         FractalsDataViewModel fractalsViewModel;
+        ColorModelsViewModel colorModelsViewModel;
 
         public MainWindow()
         {
             InitializeComponent();
             colorModelsView = new ColorModelsView();
+            colorModelsViewModel = new ColorModelsViewModel();
+            MainFrame.DataContext = colorModelsViewModel;
             MainFrame.Content = colorModelsView;
             //fractalsView = new FractalsView();
             //fractalsViewModel = new FractalsDataViewModel(400, 400);
