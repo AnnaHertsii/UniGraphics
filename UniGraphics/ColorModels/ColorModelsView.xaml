@@ -193,6 +193,10 @@
                 Height="{Binding Source.PixelHeight, RelativeSource={RelativeSource Self}}"
                 Source="{Binding Path=ImageLeft}">
             </Image>
+            <TextBlock
+                HorizontalAlignment="Left" 
+                Margin="-257,482,0,0" 
+                VerticalAlignment="Top" Width="147" Height="78"/>
         </Grid>
         <Grid
             ClipToBounds="True"
@@ -229,7 +233,9 @@
             CornerRadius="15">
             <TextBlock
                 Padding="5"
-                Text=""
+                Foreground="#4278cf"
+                FontSize="14"
+                Text="Досліджуйте колірні моделі RGB та HSL разом з Unigraphics! :)"
                 TextAlignment="Center"
                 TextWrapping="Wrap" />
         </Border>
