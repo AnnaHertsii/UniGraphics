@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UniGraphics.Help"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       Background="White"
       d:DesignHeight="450" d:DesignWidth="500"
       Title="FractalsHelp">
@@ -82,7 +82,7 @@
                     <Run Text="ви можете бачити знизу біля кнопки 'Візуалізувати'. Для уникнення зависання програми бажано"/>
                     <Run Text="зачекати поки не з'явиться зображення фракталу."/><LineBreak/>
                 </TextBlock>
-
+<!--hnkdmcxbfjk-->
             </StackPanel>
         </ScrollViewer>
     </Grid>
