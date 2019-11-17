@@ -167,6 +167,8 @@ namespace UniGraphics.ColorModels
         //функція для редагування яскравості по певному тону
         public bool AdjustLightness(int hue, int lightness, CancellationToken? token)
         {
+            if (Image == null)
+                return false;
             lock(lockHSL)
             {
                 for (int x = 0; x < width; ++x)

@@ -55,9 +55,11 @@ namespace UniGraphics.ViewModels
 
         private Task currentRunningTask = null;
         private CancellationTokenSource tokenSource;
+        private bool isLoadingImage = false;
 
         private void StartConverting()
         {
+            isLoadingImage = true;
             if (currentRunningTask != null && !currentRunningTask.IsCanceled)
                 tokenSource.Cancel();
             tokenSource = new CancellationTokenSource();
@@ -67,8 +69,12 @@ namespace UniGraphics.ViewModels
                 if (CConverter.Convert(BitmapFromWriteableBitmap(ImageLeft), token))
                 {
                     CConverter.Image.Freeze();
-                    Dispatcher.CurrentDispatcher.Invoke(() => ImageRight = CConverter.Image);
                     currentRunningTask = null;
+                    isLoadingImage = false;
+                    if (_Lightness == 0) //якщо немає змін в яскравості
+                        Dispatcher.CurrentDispatcher.Invoke(() => ImageRight = CConverter.Image); //просто встановити зображення
+                    else //якщо ж є
+                        Lightness = Lightness; //то викликаємо зміни яскравості ще раз, щоб виконалась функція StartAdjusting
                 }
             }, token);
             currentRunningTask.Start();
@@ -142,7 +148,8 @@ namespace UniGraphics.ViewModels
             {
                 _Lightness = value;
                 OnPropertyChanged("Lightness");
-                StartAdjusting();
+                if(!isLoadingImage)
+                    StartAdjusting();
             }
         }
 
