@@ -29,5 +29,11 @@ namespace UniGraphics.ColorModels
             HelpWindow helpWindow = new HelpWindow();
             helpWindow.ShowDialog();
         }
+
+        private void CreditsClicked(object sender, RoutedEventArgs e)
+        {
+            CreditsWindow creditWindow = new CreditsWindow();
+            creditWindow.ShowDialog();
+        }
     }
 }

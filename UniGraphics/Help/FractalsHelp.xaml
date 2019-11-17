@@ -10,7 +10,7 @@
       Title="FractalsHelp">
     <Grid>
         <ScrollViewer>
-            <StackPanel>
+            <StackPanel Margin="10,0,10,0">
                 <Label 
                 FontStyle ="Italic" 
                 Foreground="#99A2F1" 
@@ -22,7 +22,7 @@
                 Width="192" 
                 RenderTransformOrigin="0.5,0.516"/>
                 <TextBlock
-                    Foreground="#99A2F1"
+                    Foreground="Black"
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify">
@@ -45,23 +45,23 @@
                 </TextBlock>
 
                 <TextBlock
-                    Foreground="#99A2F1" 
+                    Foreground="Black" 
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify">
-                    <Run FontStyle ="Italic" FontWeight="Bold" Text="Масштабування"/><LineBreak/>
-                    <Run Text="Ви можете масштабувати зображення фракталу використовуючи"/><LineBreak/>
-                    <Run Text="для цього повзунок. Масштабування автоматично відбувається"/><LineBreak/>
+                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Масштабування"/><LineBreak/>
+                    <Run Text="Ви можете масштабувати зображення фракталу використовуючи"/>
+                    <Run Text="для цього повзунок. Масштабування автоматично відбувається"/>
                     <Run Text="по центру. Рухаючи повзунок управо ви збільшуєте зображення фракталу"/>
                     <Run Text="вліво - зменшуєте. З правого боку у відсотках відображається заданий вами масштаб."/><LineBreak/>
                 </TextBlock>
 
                 <TextBlock
-                    Foreground="#99A2F1" 
+                    Foreground="Black" 
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify">
-                    <Run FontStyle ="Italic" FontWeight="Bold" Text="Колірна модель"/><LineBreak/>
+                    <Run FontStyle ="Italic" Foreground="#99A2F1"  FontWeight="Bold" Text="Колірна модель"/><LineBreak/>
                     <Run Text="На вибір для візуалізації фракталу представлено 5 колірних моделей: "/><LineBreak/>
                     <Run Text="Standart - виконана у червоних тонах;"/><LineBreak/>
                     <Run Text="Candy - суміш тонів переважно зеленого, рожевого та коричневого;"/>
@@ -71,11 +71,11 @@
                 </TextBlock>
 
                 <TextBlock
-                    Foreground="#99A2F1" 
+                    Foreground="Black" 
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify" Height="294">
-                    <Run FontStyle ="Italic" FontWeight="Bold" Text="Можливі проблемні ситуації"/><LineBreak/>
+                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Можливі проблемні ситуації"/><LineBreak/>
                     <Run Text="Розмір зображення фракталу змінюється відповідно до розміру вікна."/>
                     <Run Text="Тому для отримання більш чіткого зображення фракталу задайте зручний вам розмір вікна."/><LineBreak/>
                     <Run Text="Для візуалізації необхідно зачекати деякий час. Прогрес процесу промальовки "/>

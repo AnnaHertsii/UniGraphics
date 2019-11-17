@@ -59,25 +59,25 @@
             Foreground="White"
             FontSize="18" Width="203" Height="37"/>
         <Image
-            Width="82"
+            Width="72"
             Grid.Column="0"
-            Height="84"
+            Height="74"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Source="/UniGraphics;component/Resources/Unicorn/UnicornCloud.png" 
-            Margin="137,0,5,0" />
+            Margin="152,0,0,10" />
         <Border
             Grid.Column="0"
-            Width="122"
-            Height="68"
-            Margin="10,0,0,10"
+            Width="139"
+            Height="74"
+            Margin="5,0,0,10"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Background="White"
             CornerRadius="15">
             <TextBlock
                 Padding="5"
-                FontSize="9"
+                FontSize="10"
                 Foreground="#4278cf"
                 Text="Привіт! Це довідка. Тут ви можете знайти все про користування даною програмою. Оберіть тему у лівому куті і читайте! :)"
                 TextAlignment="Center"

@@ -63,6 +63,9 @@
     <Compile Include="ColorModels\ColorModelsView.xaml.cs">
       <DependentUpon>ColorModelsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CreditsWindow.xaml.cs">
+      <DependentUpon>CreditsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
@@ -81,6 +84,10 @@
     <Compile Include="ViewModels\FractalsDataViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="ColorModels\ColorModelsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreditsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
