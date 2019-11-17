@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <Frame
             NavigationUIVisibility="Hidden"
-            Source="Help/FractalsHelp.xaml"
+            Source="Help/ColorModelsHelp.xaml"
             Name="HelpFrame" 
             Margin="10" Grid.Column="1"/>
 
