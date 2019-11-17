@@ -6,10 +6,84 @@
       xmlns:local="clr-namespace:UniGraphics.Help"
       mc:Ignorable="d" 
       Background="White"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="500"
       Title="FractalsHelp">
-
     <Grid>
-        <Label Content="ФРАКТАЛИ ДОПОМОГА!"></Label>
+        <ScrollViewer>
+            <StackPanel>
+                <Label 
+                FontStyle ="Italic" 
+                Foreground="#99A2F1" 
+                FontWeight="Bold"
+                Content="Фрактал Ньютона" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top"
+                FontSize="18"
+                Width="192" 
+                RenderTransformOrigin="0.5,0.516"/>
+                <TextBlock
+                    Foreground="#99A2F1"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify">
+                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Вхідні дані"/><LineBreak/>
+                        <Run Text="Щоб візуалізувати фрактал Ньютона необхідно надати такі вхідні дані, як: "/><LineBreak/>
+                        <Run Text="c - константне число, яке складається з дійсної та уявної частини."/>
+                        <Run Text=" "/><Run Text="Протягом всього процесу "/>
+                        <Run Text="побудови фрактала с є незмінним."/>
+                        <Run Text="Заборонено вводити будь-які інші дані, крім безпосередньо чисел - "/>
+                        <Run Text="тобто символи, літери і т.д."/>
+                        <Run Text="Приклад допустимих данних:"/><LineBreak/>
+                        <Run Text="с: 25 + 130i"/><LineBreak/>
+                        <Run Text="c: 200 + 10i;"/><LineBreak/>
+                        <Run Text="Приклад недопустимих даних:"/><LineBreak/>
+                        <Run Text="c: asd + $%*i;"/><LineBreak/>
+                        <Run Text="c: &lt;&gt; + s45gh6i;"/><LineBreak/>
+                        <Run Text="k - степінь у формулі. Оберіть одне з двох значень для степеня: 3 або 4."/><LineBreak/>
+                        <Run Text="Також для побудови фракталу потрібно задати масштабування та обрати одну з колірних моделей (читайте нижче). Після того як"/>
+                        <Run Text="усі вхідні дані вказані - натисніть кнопку візуалізувати."/><LineBreak/>
+                </TextBlock>
+
+                <TextBlock
+                    Foreground="#99A2F1" 
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify">
+                    <Run FontStyle ="Italic" FontWeight="Bold" Text="Масштабування"/><LineBreak/>
+                    <Run Text="Ви можете масштабувати зображення фракталу використовуючи"/><LineBreak/>
+                    <Run Text="для цього повзунок. Масштабування автоматично відбувається"/><LineBreak/>
+                    <Run Text="по центру. Рухаючи повзунок управо ви збільшуєте зображення фракталу"/>
+                    <Run Text="вліво - зменшуєте. З правого боку у відсотках відображається заданий вами масштаб."/><LineBreak/>
+                </TextBlock>
+
+                <TextBlock
+                    Foreground="#99A2F1" 
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify">
+                    <Run FontStyle ="Italic" FontWeight="Bold" Text="Колірна модель"/><LineBreak/>
+                    <Run Text="На вибір для візуалізації фракталу представлено 5 колірних моделей: "/><LineBreak/>
+                    <Run Text="Standart - виконана у червоних тонах;"/><LineBreak/>
+                    <Run Text="Candy - суміш тонів переважно зеленого, рожевого та коричневого;"/>
+                    <Run Text="Gold - виконана у коричневих, білих та жовтих тонах;"/><LineBreak/>
+                    <Run Text="Zebra - чорно-біла колірна модель;"/><LineBreak/>
+                    <Run Text="BlackRed - чорно-червона колірна модель;"/><LineBreak/>
+                </TextBlock>
+
+                <TextBlock
+                    Foreground="#99A2F1" 
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify" Height="294">
+                    <Run FontStyle ="Italic" FontWeight="Bold" Text="Можливі проблемні ситуації"/><LineBreak/>
+                    <Run Text="Розмір зображення фракталу змінюється відповідно до розміру вікна."/>
+                    <Run Text="Тому для отримання більш чіткого зображення фракталу задайте зручний вам розмір вікна."/><LineBreak/>
+                    <Run Text="Для візуалізації необхідно зачекати деякий час. Прогрес процесу промальовки "/>
+                    <Run Text="ви можете бачити знизу біля кнопки 'Візуалізувати'. Для уникнення зависання програми бажано"/>
+                    <Run Text="зачекати поки не з'явиться зображення фракталу."/><LineBreak/>
+                </TextBlock>
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
