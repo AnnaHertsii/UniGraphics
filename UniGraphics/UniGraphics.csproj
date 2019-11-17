@@ -66,15 +66,16 @@
     <Compile Include="HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Help\Credits.xaml.cs">
-      <DependentUpon>Credits.xaml</DependentUpon>
+    <Compile Include="Help\AnimationsHelp.xaml.cs">
+      <DependentUpon>AnimationsHelp.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Help\HelpPage.xaml.cs">
-      <DependentUpon>HelpPage.xaml</DependentUpon>
+    <Compile Include="Help\ColorModelsHelp.xaml.cs">
+      <DependentUpon>ColorModelsHelp.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Help\StudyMaterials.xaml.cs">
-      <DependentUpon>StudyMaterials.xaml</DependentUpon>
+    <Compile Include="Help\FractalsHelp.xaml.cs">
+      <DependentUpon>FractalsHelp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ColorModelsViewModel.cs" />
     <Compile Include="ViewModels\Command.cs" />
     <Compile Include="ViewModels\DataViewModel.cs" />
     <Compile Include="ViewModels\FractalsDataViewModel.cs" />
@@ -91,15 +92,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Help\Credits.xaml">
+    <Page Include="Help\AnimationsHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Help\HelpPage.xaml">
+    <Page Include="Help\ColorModelsHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Help\StudyMaterials.xaml">
+    <Page Include="Help\FractalsHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,7 +170,9 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\exit.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="StudyMaterials\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

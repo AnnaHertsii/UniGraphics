@@ -23,5 +23,11 @@ namespace UniGraphics.ColorModels
             ((ColorModelsViewModel)DataContext).RGBText = "";
             ((ColorModelsViewModel)DataContext).HSLText = "";
         }
+
+        private void HelpClicked(object sender, RoutedEventArgs e)
+        {
+            HelpWindow helpWindow = new HelpWindow();
+            helpWindow.ShowDialog();
+        }
     }
 }

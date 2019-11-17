@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace UniGraphics.Help
 {
     /// <summary>
-    /// Логика взаимодействия для StudyMaterials.xaml
+    /// Interaction logic for FractalsHelp.xaml
     /// </summary>
-    public partial class StudyMaterials : Page
+    public partial class FractalsHelp : Page
     {
-        public StudyMaterials()
+        public FractalsHelp()
         {
             InitializeComponent();
         }

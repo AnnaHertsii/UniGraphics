@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace UniGraphics.Help
 {
     /// <summary>
-    /// Логика взаимодействия для HelpPage.xaml
+    /// Interaction logic for AnimationsHelp.xaml
     /// </summary>
-    public partial class HelpPage : Page
+    public partial class AnimationsHelp : Page
     {
-        public HelpPage()
+        public AnimationsHelp()
         {
             InitializeComponent();
         }

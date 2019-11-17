@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace UniGraphics.Help
 {
     /// <summary>
-    /// Логика взаимодействия для Credits.xaml
+    /// Interaction logic for ColorModelsHelp.xaml
     /// </summary>
-    public partial class Credits : Page
+    public partial class ColorModelsHelp : Page
     {
-        public Credits()
+        public ColorModelsHelp()
         {
             InitializeComponent();
         }
