@@ -8,12 +8,15 @@ namespace UniGraphics.ColorModels
 {
     public class ColorConverter
     {
+        private HSLColor[,] originalHSLPixels = null;
         public WriteableBitmap Image { get; private set; } = null; //вихідне зображення
-        private object lockHSL = new object();
-        private object lockRGB = new object();
         private HSLColor[,] HSLPixels = null; //масив з пікселями в моделі HSL
         private Color[,] RGBPixels = null; //масив з пікселями в моделі RGB
-        public HSLColor getHSL(int x, int y)
+        private int width;
+        private int height;
+        private readonly object lockHSL = new object();
+        private readonly object lockRGB = new object();
+        public HSLColor GetHSL(int x, int y)
         {
             if (HSLPixels == null)
                 return null;
@@ -22,7 +25,7 @@ namespace UniGraphics.ColorModels
                 return HSLPixels[x, y];
             }
         }
-        public Color? getRGB(int x, int y)
+        public Color? GetRGB(int x, int y)
         {
             if (RGBPixels == null)
                 return null;
@@ -32,7 +35,8 @@ namespace UniGraphics.ColorModels
             }
         }
 
-        private byte toRGB(float p, float q, float t)
+        //робить певні перетворення для кожної з компонент майбутнього RGB-кольору
+        private byte ComponentToRGB(float p, float q, float t)
         {
             if (t < 0.0f)
                 t += 1.0f;
@@ -47,10 +51,28 @@ namespace UniGraphics.ColorModels
             return (byte) (255 * p);
         }
 
+        //перетворює HSL-колір в RGB
+        private Color HSLtoRGB(HSLColor hslColor)
+        {
+            float h = hslColor.H / 360.0f;
+            float s = hslColor.S / 100.0f;
+            float l = hslColor.L / 100.0f;
+            float q;
+            if (l < 0.5f)
+                q = l * (1.0f + s);
+            else
+                q = l + s - l * s;
+            float p = 2 * l - q;
+            float tR = h + 1.0f / 3;
+            float tG = h;
+            float tB = h - 1.0f / 3;
+            return Color.FromArgb(ComponentToRGB(p, q, tR), ComponentToRGB(p, q, tG), ComponentToRGB(p, q, tB));
+        }
+
         public bool Convert(Bitmap InputImage, CancellationToken? token)
         {
-            int width = InputImage.Width;
-            int height = InputImage.Height;
+            width = InputImage.Width;
+            height = InputImage.Height;
             HSLColor[,] tempHSLPixels = new HSLColor[width, height];
             lock(lockRGB)
             {
@@ -105,22 +127,11 @@ namespace UniGraphics.ColorModels
                     hslColor.L = (byte)((cMax + cMin) * 50); //те саме, що ((cMax + cMin) / 2 * 100)
                     tempHSLPixels[x, y] = hslColor; //записуємо колір в масив
                     //конвертація назад в RGB
-                    float h = hslColor.H / 360.0f;
-                    float s = hslColor.S / 100.0f;
-                    float l = hslColor.L / 100.0f;
-                    float q;
-                    if (l < 0.5f)
-                        q = l * (1.0f + s);
-                    else
-                        q = l + s - l * s;
-                    float p = 2 * l - q;
-                    float tR = h + 1.0f / 3;
-                    float tG = h;
-                    float tB = h - 1.0f / 3;
                     int pixelOffset = (y * width + x) * 4;
-                    pixels[pixelOffset] = toRGB(p, q, tB);
-                    pixels[pixelOffset + 1] = toRGB(p, q, tG);
-                    pixels[pixelOffset + 2] = toRGB(p, q, tR);
+                    Color newRgbColor = HSLtoRGB(hslColor);
+                    pixels[pixelOffset] = newRgbColor.B; //записуємо результат конвертації в масив
+                    pixels[pixelOffset + 1] = newRgbColor.G;
+                    pixels[pixelOffset + 2] = newRgbColor.R;
                     pixels[pixelOffset + 3] = 255;
                 }
             if (token != null && token.Value.IsCancellationRequested)
@@ -133,6 +144,82 @@ namespace UniGraphics.ColorModels
             if (token != null && token.Value.IsCancellationRequested)
                 return false;
             Image = tempImage;
+            //робимо копію кольорів в масив original (пригодиться під час редагування яскравості)
+            originalHSLPixels = new HSLColor[width, height];
+            for (int x = 0; x < width; ++x)
+                for (int y = 0; y < height; ++y)
+                    originalHSLPixels[x, y] = HSLPixels[x, y].DeepCopy();
+            return true;
+        }
+
+        //перевіряє чи даний Hue є достатньо приближений (визначається за 
+        //допомогою tolerance) до  бажаного (target)
+        private bool IsHueAdjacent(short hue, int target, int tolerance)
+        {
+            //пошук відстані на градусному колі між двома Hue
+            int diff = (target - hue + 180) % 360 - 180;
+            if (diff < -180)
+                diff += 360;
+            //вважатимемо Hue наближеним, якщо відстань від бажаного <= tolerance
+            return Math.Abs(diff) <= tolerance;
+        }
+
+        //функція для редагування яскравості по певному тону
+        public bool AdjustLightness(int hue, int lightness, CancellationToken? token)
+        {
+            lock(lockHSL)
+            {
+                for (int x = 0; x < width; ++x)
+                    for (int y = 0; y < height; ++y)
+                    {
+                        //беремо значення яскравості з незміненого зображення
+                        HSLColor pixelColor = originalHSLPixels[x, y];
+                        if (IsHueAdjacent(pixelColor.H, hue, 10))
+                        {
+                            //збільшення яскравості
+                            int newLightness = lightness + (int)pixelColor.L;
+                            //перевірки для того, щоб значення L завжди було в межах [0;100]
+                            if (newLightness < 0)
+                                newLightness = 0;
+                            else if (newLightness > 100)
+                                newLightness = 100;
+                            //записуємо змінене зображення в масив HSL-пікселів
+                            HSLPixels[x, y].L = (byte)newLightness;
+                        }
+                    }
+            }
+            if (token != null && token.Value.IsCancellationRequested)
+                return false;
+            lock (lockRGB)
+            {
+                //робимо зміни також в масиві RGB-пікселів
+                for (int x = 0; x < width; ++x)
+                    for (int y = 0; y < height; ++y)
+                        RGBPixels[x, y] = HSLtoRGB(HSLPixels[x, y]);
+            }
+            if (token != null && token.Value.IsCancellationRequested)
+                return false;
+            //і застосовуємо масив пікселів власне до зображення
+            int bytesPerPixel = Image.Format.BitsPerPixel / 8;
+            int bytesAmount = width * height * bytesPerPixel;
+            int bytesPerRow = width * bytesPerPixel;
+            byte[] pixels = new byte[bytesAmount];
+            for (int x = 0; x < width; ++x)
+                for (int y = 0; y < height; ++y)
+                {
+                    Color rgbColor = RGBPixels[x, y];
+                    int pixelOffset = (y * width + x) * 4;
+                    pixels[pixelOffset] = rgbColor.B; //записуємо результат конвертації в масив
+                    pixels[pixelOffset + 1] = rgbColor.G;
+                    pixels[pixelOffset + 2] = rgbColor.R;
+                    pixels[pixelOffset + 3] = 255;
+                }
+            if (token != null && token.Value.IsCancellationRequested)
+                return false;
+            //і записуємо масив RGB-пікселів в зображення
+            Image = new WriteableBitmap(width, height, 
+                Image.DpiX, Image.DpiY, System.Windows.Media.PixelFormats.Bgra32, null);
+            Image.WritePixels(new Int32Rect(0, 0, width, height), pixels, bytesPerRow, 0);
             return true;
         }
     }

@@ -15,12 +15,14 @@ namespace UniGraphics.ViewModels
     {
         private void openFile(object args)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.CheckFileExists = true;
-            dialog.CheckPathExists = true;
-            dialog.DefaultExt = "png";
-            dialog.Filter = "Зображення (.jpeg, .jpg, .png, .tiff, .bmp, .wmf) | *.jpeg; *.jpg; *.png; *.tiff; *.bmp; *.wmf";
-            dialog.RestoreDirectory = true;
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = "png",
+                Filter = "Зображення (.jpeg, .jpg, .png, .tiff, .bmp, .wmf) | *.jpeg; *.jpg; *.png; *.tiff; *.bmp; *.wmf",
+                RestoreDirectory = true
+            };
             if (dialog.ShowDialog() == true)
                 ImageLeft = new WriteableBitmap(new BitmapImage(new Uri(dialog.FileName, UriKind.Absolute)));
         }
@@ -32,9 +34,11 @@ namespace UniGraphics.ViewModels
 
         private void saveFile(object args)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "JPEG Image (.jpeg)|*.jpeg |JPG Image (.jpg)|*.jpg |Png Image (.png)|*.png |Tiff Image (.tiff)|*.tiff |Bitmap Image (.bmp)|*.bmp|Wmf Image (.wmf)|*.wmf";
-            dialog.DefaultExt = "png";
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Filter = "JPEG Image (.jpeg)|*.jpeg |JPG Image (.jpg)|*.jpg |Png Image (.png)|*.png |Tiff Image (.tiff)|*.tiff |Bitmap Image (.bmp)|*.bmp|Wmf Image (.wmf)|*.wmf",
+                DefaultExt = "png"
+            };
             if (dialog.ShowDialog() == true)
             {
                 var encoder = new PngBitmapEncoder();
@@ -52,7 +56,7 @@ namespace UniGraphics.ViewModels
         private Task currentRunningTask = null;
         private CancellationTokenSource tokenSource;
 
-        private void startConverting()
+        private void StartConverting()
         {
             if (currentRunningTask != null && !currentRunningTask.IsCanceled)
                 tokenSource.Cancel();
@@ -70,15 +74,33 @@ namespace UniGraphics.ViewModels
             currentRunningTask.Start();
         }
 
-        public void handleLeftImageMousePosition(int x, int y)
+        private void StartAdjusting()
         {
-            var rgb = CConverter.getRGB(x, y);
+            if (currentRunningTask != null && !currentRunningTask.IsCanceled)
+                tokenSource.Cancel();
+            tokenSource = new CancellationTokenSource();
+            CancellationToken token = tokenSource.Token;
+            currentRunningTask = new Task(() =>
+            {
+                if (CConverter.AdjustLightness(HueNumber, Lightness, token))
+                {
+                    CConverter.Image.Freeze();
+                    Dispatcher.CurrentDispatcher.Invoke(() => ImageRight = CConverter.Image);
+                    currentRunningTask = null;
+                }
+            }, token);
+            currentRunningTask.Start();
+        }
+
+        public void HandleLeftImageMousePosition(int x, int y)
+        {
+            var rgb = CConverter.GetRGB(x, y);
             if (rgb == null)
                 RGBText = "";
             else
                 RGBText = $"({rgb.Value.R}, {rgb.Value.G}, {rgb.Value.B})";
 
-            var hsl = CConverter.getHSL(x, y);
+            var hsl = CConverter.GetHSL(x, y);
             if (hsl == null)
                 HSLText = "";
             else
@@ -112,14 +134,15 @@ namespace UniGraphics.ViewModels
             }
         }
 
-        private double _Lightness;
-        public double Lightness
+        private int _Lightness;
+        public int Lightness
         {
             get { return _Lightness; }
             set
             {
                 _Lightness = value;
                 OnPropertyChanged("Lightness");
+                StartAdjusting();
             }
         }
 
@@ -161,7 +184,7 @@ namespace UniGraphics.ViewModels
             {
                 _ImageLeft = value;
                 OnPropertyChanged("ImageLeft");
-                startConverting();
+                StartConverting();
             }
         }
 
@@ -206,7 +229,7 @@ namespace UniGraphics.ViewModels
             _HSLValuesVisibility = Visibility.Collapsed;
             _RGBText = "";
             _HSLText = "";
-            _Lightness = 0.0;
+            _Lightness = 0;
             _HueNumber = 60;
             _ImageLeft = null;
             _ImageRight = null;
