@@ -145,3 +145,5 @@ UniGraphics/Fractals/FractalsView.xaml.cs.orig
 .vs/UniGraphics/v16/Server/sqlite3/storage.ide
 .vs/UniGraphics/v16/Server/sqlite3/storage.ide-shm
 .vs/UniGraphics/v16/Server/sqlite3/storage.ide-wal
+UniGraphics/ColorModels/ColorModelsView.xaml.orig
+UniGraphics/UniGraphics.csproj.orig

@@ -11,6 +11,21 @@
     d:DesignWidth="900"
     Background="White"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Color x:Key="CurrentColor">#00FF00</Color>
+
+        <LinearGradientBrush x:Key="HueBrush" StartPoint="0,0" EndPoint="1,0">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Color="#FF0000" Offset="0" />
+                <GradientStop Color="#FFFF00" Offset="0.167" />
+                <GradientStop Color="#00FF00" Offset="0.333" />
+                <GradientStop Color="#00FFFF" Offset="0.5" />
+                <GradientStop Color="#0000FF" Offset="0.667" />
+                <GradientStop Color="#FF00FF" Offset="0.833" />
+                <GradientStop Color="#FF0000" Offset="1" />
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
@@ -68,7 +83,7 @@
                     Padding="-20,0,0,0"
                     Background="#F2F2F2"
                     Foreground="#99A2F1"
-                    Header="Кредити" />
+                    Header="Про програму" />
             </MenuItem>
         </Menu>
         <TextBlock Text="RGB" Foreground="White" FontSize="16" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
@@ -80,10 +95,9 @@
             Background="#BCC3FF">
             <Grid>
                 <Label
-                    Grid.Row="1"
                     Grid.Column="0"
                     Height="49"
-                    Margin="10,0,10,0"
+                    Margin="51,10,39,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     HorizontalContentAlignment="Center"
@@ -91,18 +105,17 @@
                     FontSize="25"
                     Foreground="White" />
                 <Label
-                    Grid.Row="1"
                     Grid.Column="0"
                     Width="191"
                     Height="36"
-                    Margin="10,49,10,0"
+                    Margin="39,59,39,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     HorizontalContentAlignment="Center"
                     Content="Оберіть тон:"
                     FontSize="18"
                     Foreground="White" />
-                <Slider 
+				<Slider 
                     x:Name="lightnessSlider" 
                     Margin="31,167,39,0" 
                     VerticalAlignment="Top" 
@@ -111,22 +124,56 @@
                     SmallChange="1" 
                     LargeChange="10"
                     Maximum="100"
-                    IsMoveToPointEnabled="True" Minimum="-100"/>
-                <Label Visibility="{Binding RGBValuesVisibility}" Content="RGB:" Margin="39,218,180,0" VerticalAlignment="Top" Grid.Row="1"/>
-                <Label Visibility="{Binding HSLValuesVisibility}" Content="HSL:" Margin="39,250,180,0" VerticalAlignment="Top" Grid.Row="1"/>
-                <Label Visibility="{Binding RGBValuesVisibility}" Name="rgbLabel" Content="{Binding RGBText}" Margin="89,218,67,0" VerticalAlignment="Top" Grid.Row="1"/>
-                <Label Visibility="{Binding HSLValuesVisibility}" Name="hslLabel" Content="{Binding HSLText}" Margin="89,250,67,0" VerticalAlignment="Top" Grid.Row="1"/>
-                <Border 
-                    Name="selectedHue" 
-                    BorderThickness="2" 
-                    BorderBrush="#99A2F1" 
-                    Height="27" 
-                    Margin="203,90,39,0" 
-                    Width="27" 
-                    VerticalAlignment="Top"/>
-                <Label Content="+100%" HorizontalAlignment="Left" Margin="203,185,0,0" VerticalAlignment="Top"/>
-                <Label Content="-100%" HorizontalAlignment="Left" Margin="10,187,0,0" VerticalAlignment="Top"/>
-                <Label Content="{Binding Lightness}" HorizontalAlignment="Left" Margin="127,187,0,0" VerticalAlignment="Top"/>
+                    IsMoveToPointEnabled="True" 
+					Minimum="-100"/>				<Label Visibility="{Binding RGBValuesVisibility}" Content="RGB:" Margin="10,214,209,329" VerticalAlignment="Top" Grid.Row="1" Foreground="White" FontSize="16"/>
+                <Label Visibility="{Binding HSLValuesVisibility}" Content="HSL:" Margin="10,242,209,297" VerticalAlignment="Top" Grid.Row="1" Foreground="White" FontSize="16"/>
+                <Label Visibility="{Binding RGBValuesVisibility}" Name="rgbLabel" Content="{Binding RGBText}" Margin="60,214,96,333" VerticalAlignment="Top" Grid.Row="1" Foreground="White" FontSize="16"/>
+                <Label Visibility="{Binding HSLValuesVisibility}" Name="hslLabel" Content="{Binding HSLText}" Margin="60,242,67,297" VerticalAlignment="Top" Grid.Row="1" Foreground="White" FontSize="16"/>				<Label
+                    Grid.Column="0"
+                    Width="191"
+                    Height="36"
+                    Margin="39,136,39,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    Content="Змініть яскравість:"
+                    FontSize="18"
+                    Foreground="White" />
+
+
+                <Label
+                    Grid.Column="0"
+                    Width="31"
+                    Height="31"
+                    Margin="120,182,118,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    Content="0"
+                    FontSize="16"
+                    Foreground="White" />
+                <Label
+                    Grid.Column="0"
+                    Width="31"
+                    Height="31"
+                    Margin="228,182,10,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    Content="+"
+                    FontSize="16"
+                    Foreground="White" />
+                <Label
+                    Grid.Column="0"
+                    Width="31"
+                    Height="31"
+                    Margin="10,182,228,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    Content="-"
+                    FontSize="16"
+                    Foreground="White" />
             </Grid>
         </Border>
         <Border Background="#BCC3FF" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2"></Border>
@@ -185,5 +232,7 @@
                 TextAlignment="Center"
                 TextWrapping="Wrap" />
         </Border>
+        <Rectangle Fill="{StaticResource HueBrush}" HorizontalAlignment="Left" Width="210" Height="27" Margin="10,99,0,0" Grid.Row="1" VerticalAlignment="Top" Stroke =" #99A2F1" SnapsToDevicePixels="True"/>
+        <Rectangle Fill="LightGreen" HorizontalAlignment="Left" Width="27" Height="27" Margin="232,99,0,0" Grid.Row="1" VerticalAlignment="Top" Stroke =" #99A2F1" SnapsToDevicePixels="True"/>
     </Grid>
 </Page>

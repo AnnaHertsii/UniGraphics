@@ -63,7 +63,18 @@
     <Compile Include="ColorModels\ColorModelsView.xaml.cs">
       <DependentUpon>ColorModelsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ColorModelsViewModel.cs" />
+    <Compile Include="HelpWindow.xaml.cs">
+      <DependentUpon>HelpWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Help\Credits.xaml.cs">
+      <DependentUpon>Credits.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Help\HelpPage.xaml.cs">
+      <DependentUpon>HelpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Help\StudyMaterials.xaml.cs">
+      <DependentUpon>StudyMaterials.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Command.cs" />
     <Compile Include="ViewModels\DataViewModel.cs" />
     <Compile Include="ViewModels\FractalsDataViewModel.cs" />
@@ -73,6 +84,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Fractals\FractalsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HelpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Help\Credits.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Help\HelpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Help\StudyMaterials.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
