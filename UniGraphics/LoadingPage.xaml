@@ -5,23 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UniGraphics"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="640" d:DesignWidth="917"
       Title="LoadingPage">
 
     <Grid>
         <Border Background="#BCC3FF">
             <Image
-            Width="232"
-            Height="245"
+            Width="271"
+            Height="274"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Source="/UniGraphics;component/Resources/Unicorn/logo.png" 
-            Margin="280,0,288,154" />
+            Margin="308,0,338,235" />
         </Border>
         <ProgressBar
                     Width="279"
                     Height="29"
-                    Margin="260,310,261,0"
+                    Margin="318,414,320,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Foreground="#BFA1FE"
@@ -32,16 +32,16 @@
             FontSize="18"
             Content="Підказка дня:" 
             HorizontalAlignment="Left" 
-            Margin="260,339,0,0" 
+            Margin="318,443,0,0" 
             VerticalAlignment="Top" 
-            Width="125"/>
+            Width="126"/>
         <Label 
             Foreground="#2d0a4c"
             FontStyle="Italic"
             FontSize="18"
             Content="почни вчити колірні моделі!" 
             HorizontalAlignment="Left" 
-            Margin="376,339,0,0" 
+            Margin="444,443,0,0" 
             VerticalAlignment="Top" 
             Width="321"/>
     </Grid>

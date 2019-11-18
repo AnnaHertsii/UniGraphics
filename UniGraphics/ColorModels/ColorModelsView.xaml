@@ -95,6 +95,16 @@
             Grid.Column="0"
             Background="#BCC3FF">
             <Grid>
+                <Button
+                    Name="BackButton"
+                    Height="29"
+                    Margin="10,19,229,0"
+                    VerticalAlignment="Top"
+                    BorderThickness="0"
+                    Background="#99A2F1"
+                    Grid.Column="0" >
+                    <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/Unicorn/logo.png" Stretch="Uniform" Height="28" Width="25"/>
+                </Button>
                 <Label
                     Grid.Column="0"
                     Height="49"
@@ -235,7 +245,7 @@
                 Padding="5"
                 Foreground="#4278cf"
                 FontSize="14"
-                Text="Досліджуйте колірні моделі RGB та HSL разом з Unigraphics! :)"
+                Text="Щоб почати роботу з колірними моделями RGB та HSL натисніть Файл->Відкрити :)"
                 TextAlignment="Center"
                 TextWrapping="Wrap" />
         </Border>

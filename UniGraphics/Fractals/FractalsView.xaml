@@ -491,6 +491,16 @@
                     <ColumnDefinition Width="94*"/>
                     <ColumnDefinition Width="175*"/>
                 </Grid.ColumnDefinitions>
+                <Button
+                    Name="BackButton"
+                    Height="28"
+                    Margin="11,10,54,0"
+                    VerticalAlignment="Top"
+                    BorderThickness="0"
+                    Background="#99A2F1"
+                    Grid.Column="0" >
+                    <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/Unicorn/logo.png" Stretch="Uniform" Height="28" Width="25"/>
+                </Button>
                 <Label
                     Grid.Column="0"
                     Width="134"
@@ -742,7 +752,9 @@
             CornerRadius="15">
             <TextBlock
                 Padding="5"
-                Text=""
+                FontSize="13"
+                Foreground="#4278cf"
+                Text="Це секція фракталів. Тут ви можете візуалізувати фрактал Ньютона!"
                 TextAlignment="Center"
                 TextWrapping="Wrap" />
         </Border>
