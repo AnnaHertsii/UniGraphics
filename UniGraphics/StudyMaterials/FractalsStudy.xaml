@@ -1,0 +1,58 @@
+﻿<Page x:Class="UniGraphics.StudyMaterials.FractalsStudy"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:UniGraphics.StudyMaterials"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="500"
+      Title="FractalsStudy">
+
+    <Grid>
+        <ScrollViewer>
+            <StackPanel Margin="10,0,10,0">
+                <Label 
+                FontStyle ="Italic" 
+                Foreground="#99A2F1" 
+                FontWeight="Bold"
+                Content="Фрактали Ньютона" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top"
+                FontSize="18"
+                Width="204" 
+                RenderTransformOrigin="0.5,0.516"/>
+                <TextBlock
+                    Foreground="Black"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"
+                    Margin="10,0,0,10">
+                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Загальні відомості"/><LineBreak/>
+                        <Run Text="Фрактали Ньютона - різновид алгебраїчних фракталів."/><LineBreak/>
+                        <Run Text="Візуалізація фракталу забезпечується наближеним знаходженням коренів нелінійного рівняння алгоритмом Ньютона на комплексній площині."/>
+                        <Run Text="Метод Ньютона також називають методом дотичних. Загальна формула алгоритму фракталу: z(n+1) = z(n) – f(z(n))/f'(z(n))."/>
+                        <Run Text=""/>
+                </TextBlock>
+                <TextBlock
+                    Foreground="Black"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"
+                    Margin="10,0,0,10">
+                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Алгоритм побудови"/><LineBreak/>
+                        <Run Text="Вхідні дані: максимальна кількість ітерацій; точність обрахунку; масив розміром n з нулями функції f; масив розміром n з кольорами; розміри зображення."/><LineBreak/>
+                        <Run Text="1) Знаходження похідної df(z) для функції f(z)."/><LineBreak/>
+                        <Run Text="2) Цикл по усіх пікселах зображення:"/><LineBreak/>
+                        <Run Text="3) Перехід в комплексну площину: від координат x, y піксела в комплексні числа – число z."/><LineBreak/>
+                        <Run Text="4) Цикл по ітераціям - до задного числа максимальних ітерацій"/><LineBreak/>
+                        <Run Text="5) Виконання z = z – f(z) / df(z)"/><LineBreak/>
+                        <Run Text="6) Перевірка наближення для кожного кореня і встановлення кольору для піксела. Перехід до наступного піксела."/><LineBreak/>
+                        <Run Text=""/><LineBreak/>
+                        <Run Text=""/>
+                        <Run Text=""/><LineBreak/>
+                </TextBlock>
+                <!--hnkdmcxbfjk-->
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

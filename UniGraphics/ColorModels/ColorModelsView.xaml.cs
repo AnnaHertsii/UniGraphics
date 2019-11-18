@@ -35,5 +35,11 @@ namespace UniGraphics.ColorModels
             CreditsWindow creditWindow = new CreditsWindow();
             creditWindow.ShowDialog();
         }
+
+        private void StudyMaterialsClicked(object sender, RoutedEventArgs e)
+        {
+            StudyWindow studyWindow = new StudyWindow();
+            studyWindow.ShowDialog();
+        }
     }
 }
