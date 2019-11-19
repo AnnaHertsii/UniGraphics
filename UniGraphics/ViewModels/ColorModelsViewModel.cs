@@ -8,12 +8,15 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using UniGraphics.ColorModels;
+using MColor = System.Windows.Media.Color;
+using DColor = System.Drawing.Color;
+using MBrush = System.Windows.Media.SolidColorBrush;
 
 namespace UniGraphics.ViewModels
 {
     public class ColorModelsViewModel : ViewModelBase
     {
-        private void openFile(object args)
+        private void PerformOpenFile(object args)
         {
             OpenFileDialog dialog = new OpenFileDialog
             {
@@ -24,15 +27,23 @@ namespace UniGraphics.ViewModels
                 RestoreDirectory = true
             };
             if (dialog.ShowDialog() == true)
+            {
                 ImageLeft = new WriteableBitmap(new BitmapImage(new Uri(dialog.FileName, UriKind.Absolute)));
+                CConverter = new ColorConverter()
+                {
+                    InputImage = CConverter.InputImage = BitmapFromWriteableBitmap(ImageLeft)
+                };
+                ImageRight = null;
+                ConvertButtonVisibility = Visibility.Visible;
+            }
         }
 
-        private void performExit(object args)
+        private void PerformExit(object args)
         {
             Application.Current.Shutdown();
         }
 
-        private void saveFile(object args)
+        private void PerformSaveFile(object args)
         {
             SaveFileDialog dialog = new SaveFileDialog
             {
@@ -48,9 +59,15 @@ namespace UniGraphics.ViewModels
             }
         }
 
+        private void PerformConverting(object args)
+        {
+            StartConverting();
+        }
+
         public ICommand OpenFile { get; set; }
-        public ICommand PerformExit { get; set; }
+        public ICommand Exit { get; set; }
         public ICommand SaveFile { get; set; }
+        public ICommand Convert { get; set; }
 
 
         private Task currentRunningTask = null;
@@ -66,11 +83,12 @@ namespace UniGraphics.ViewModels
             CancellationToken token = tokenSource.Token;
             currentRunningTask = new Task(() =>
             {
-                if (CConverter.Convert(BitmapFromWriteableBitmap(ImageLeft), token))
+                if (CConverter.Convert(token))
                 {
                     CConverter.Image.Freeze();
                     currentRunningTask = null;
                     isLoadingImage = false;
+                    ConvertButtonVisibility = Visibility.Collapsed;
                     if (_Lightness == 0) //якщо немає змін в яскравості
                         Dispatcher.CurrentDispatcher.Invoke(() => ImageRight = CConverter.Image); //просто встановити зображення
                     else //якщо ж є
@@ -98,7 +116,7 @@ namespace UniGraphics.ViewModels
             currentRunningTask.Start();
         }
 
-        public void HandleLeftImageMousePosition(int x, int y)
+        public void HandleMouseMove(int x, int y)
         {
             var rgb = CConverter.GetRGB(x, y);
             if (rgb == null)
@@ -111,6 +129,11 @@ namespace UniGraphics.ViewModels
                 HSLText = "";
             else
                 HSLText = $"({hsl.H}°, {hsl.S}%, {hsl.L}%)";
+        }
+
+        public void HandleHuePicked(int x, int width)
+        {
+            HueNumber = (int) ((x / (double)width) * 360);
         }
 
         static private System.Drawing.Bitmap BitmapFromWriteableBitmap(WriteableBitmap wrtBmp)
@@ -129,14 +152,22 @@ namespace UniGraphics.ViewModels
             return bmp;
         }
 
+        private static MColor ToMediaColor(DColor color)
+        {
+            return MColor.FromArgb(color.A, color.R, color.G, color.B);
+        }
+
         private int _HueNumber;
         public int HueNumber
         {
             get { return _HueNumber; }
             set
             {
-                HueNumber = value;
+                _HueNumber = value;
                 OnPropertyChanged("HueNumber");
+                HueColor = new MBrush(ToMediaColor(ColorConverter.HSLtoRGB(new HSLColor((short)value, 100, 50))));
+                if (!isLoadingImage)
+                    StartAdjusting();
             }
         }
 
@@ -191,7 +222,6 @@ namespace UniGraphics.ViewModels
             {
                 _ImageLeft = value;
                 OnPropertyChanged("ImageLeft");
-                StartConverting();
             }
         }
 
@@ -230,20 +260,45 @@ namespace UniGraphics.ViewModels
             }
         }
 
+        private Visibility _ConvertButtonVisibility;
+        public Visibility ConvertButtonVisibility
+        {
+            get { return _ConvertButtonVisibility; }
+            set
+            {
+                _ConvertButtonVisibility = value;
+                OnPropertyChanged("ConvertButtonVisibility");
+            }
+        }
+
+        private MBrush _HueColor;
+        public MBrush HueColor
+        {
+            get { return _HueColor; }
+            set
+            {
+                _HueColor = value;
+                OnPropertyChanged("HueColor");
+            }
+        }
+
         public ColorModelsViewModel()
         {
+            _HueColor = new MBrush(MColor.FromRgb(255, 0, 0));
             _RGBValuesVisibility = Visibility.Collapsed;
             _HSLValuesVisibility = Visibility.Collapsed;
+            _ConvertButtonVisibility = Visibility.Collapsed;
             _RGBText = "";
             _HSLText = "";
             _Lightness = 0;
-            _HueNumber = 60;
+            _HueNumber = 0;
             _ImageLeft = null;
             _ImageRight = null;
             CConverter = new ColorConverter();
-            OpenFile = new Command(openFile);
-            PerformExit = new Command(performExit);
-            SaveFile = new Command(saveFile);
+            OpenFile = new Command(PerformOpenFile);
+            Exit = new Command(PerformExit);
+            SaveFile = new Command(PerformSaveFile);
+            Convert = new Command(PerformConverting);
         }
     }
 }

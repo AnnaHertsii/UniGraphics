@@ -29,7 +29,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
-            <RowDefinition Height="396" />
+            <RowDefinition Height="325" />
             <RowDefinition MinHeight="120" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -62,7 +62,7 @@
                     Padding="-20,0,0,0"
                     Background="#F2F2F2"
                     Foreground="#99A2F1"
-                    Command="{Binding PerformExit}"
+                    Command="{Binding Exit}"
                     Header="Вийти" />
             </MenuItem>
             <MenuItem
@@ -87,8 +87,8 @@
                     Header="Про програму" Click="CreditsClicked" />
             </MenuItem>
         </Menu>
-        <TextBlock Text="RGB" Foreground="White" FontSize="16" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="HSL" Foreground="White" FontSize="16" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Text="RGB" Foreground="White" FontSize="16" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="21" Margin="143,2" Width="28"></TextBlock>
+        <TextBlock Text="HSL" Foreground="White" FontSize="16" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="21" Margin="144,2" Width="26"></TextBlock>
         <Border
             Grid.Row="1"
             Grid.RowSpan="2"
@@ -137,10 +137,10 @@
                     Maximum="100"
                     IsMoveToPointEnabled="True" 
 					Minimum="-100"/>
-                <Label Visibility="{Binding RGBValuesVisibility}" Content="RGB:" Margin="10,214,209,329" VerticalAlignment="Top" Grid.Row="1" Foreground="White" FontSize="16"/>
-                <Label Visibility="{Binding HSLValuesVisibility}" Content="HSL:" Margin="10,242,209,297" VerticalAlignment="Top" Grid.Row="1" Foreground="White" FontSize="16"/>
-                <Label Visibility="{Binding RGBValuesVisibility}" Name="rgbLabel" Content="{Binding RGBText}" Margin="60,214,96,333" VerticalAlignment="Top" Grid.Row="1" Foreground="White" FontSize="16"/>
-                <Label Visibility="{Binding HSLValuesVisibility}" Name="hslLabel" Content="{Binding HSLText}" Margin="60,242,67,297" VerticalAlignment="Top" Grid.Row="1" Foreground="White" FontSize="16"/>
+                <Label Visibility="{Binding RGBValuesVisibility}" Content="RGB:" Margin="10,263,209,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+                <Label Visibility="{Binding HSLValuesVisibility}" Content="HSL:" Margin="10,291,209,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+                <Label Visibility="{Binding RGBValuesVisibility}" Name="rgbLabel" Content="{Binding RGBText}" Margin="60,263,96,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+                <Label Visibility="{Binding HSLValuesVisibility}" Name="hslLabel" Content="{Binding HSLText}" Margin="60,291,67,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
                 <Label
                     Grid.Column="0"
                     Width="191"
@@ -186,15 +186,18 @@
                     FontSize="16"
                     Foreground="White" />
                 <Button
+                    Cursor="Hand"
+                    Visibility="{Binding ConvertButtonVisibility}"
                     Name="Convert" 
                     FontSize="18"
                     Foreground="White"
                     Content="Конвертувати"
                     Height="38"
-                    Margin="10,278,10,0"
+                    Margin="10,218,10,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
                     Background="#99A2F1"
+                    Command="{Binding Convert}"
                     Grid.Column="0" >
                 </Button>
             </Grid>
@@ -208,7 +211,6 @@
             <Image
                 MouseMove="ImageMouseMove"
                 MouseLeave="ImageMouseLeave"
-                Margin="100, 0, 0, 0"
                 Name="colorModelsImageLeft"
                 Stretch="Uniform"
                 Width="{Binding Source.PixelWidth, RelativeSource={RelativeSource Self}}"
@@ -228,7 +230,6 @@
             <Image
                 MouseMove="ImageMouseMove"
                 MouseLeave="ImageMouseLeave"
-                Margin="100, 0, 0, 0"
                 Name="colorModelsImageRight"
                 Stretch="Uniform"
                 Width="{Binding Source.PixelWidth, RelativeSource={RelativeSource Self}}"
@@ -239,7 +240,7 @@
             Grid.Row="2"
             Width="118"
             Height="114"
-            Margin="0,0,0,5"
+            Margin="0,0,10,10"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
             Source="/UniGraphics;component/Resources/Unicorn/UnicornHat.png" />
@@ -261,8 +262,9 @@
                 TextAlignment="Center"
                 TextWrapping="Wrap" Margin="0,4,0,0" />
         </Border>
-        <Rectangle 
+        <Rectangle
             Fill="{StaticResource HueBrush}" 
+            StrokeThickness="2"
             HorizontalAlignment="Left"
             Width="210" 
             Height="27" 
@@ -270,9 +272,12 @@
             Grid.Row="1" 
             VerticalAlignment="Top" 
             Stroke =" #99A2F1" 
+            MouseDown="HuePicked"
+            MouseMove="HueMouseMove"
             SnapsToDevicePixels="True"/>
         <Rectangle 
-            Fill="LightGreen" 
+            StrokeThickness="2"
+            Fill="{Binding HueColor}" 
             HorizontalAlignment="Left" 
             Width="27" 
             Height="27" 

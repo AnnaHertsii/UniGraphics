@@ -9,6 +9,26 @@ namespace UniGraphics.ColorModels
     public class ColorConverter
     {
         private HSLColor[,] originalHSLPixels = null;
+        public Bitmap _inputImage = null;//вхідне зображення
+        public Bitmap InputImage
+        {
+            get { return _inputImage; }
+            set
+            {
+                _inputImage = value;
+                width = value.Width;
+                height = value.Height;
+                lock(lockRGB)
+                {
+                    RGBPixels = new Color[width, height];
+                    for (int x = 0; x < width; ++x)
+                        for (int y = 0; y < height; ++y)
+                        {
+                            RGBPixels[x, y] = value.GetPixel(x, y);
+                        }
+                }
+            }
+        }
         public WriteableBitmap Image { get; private set; } = null; //вихідне зображення
         private HSLColor[,] HSLPixels = null; //масив з пікселями в моделі HSL
         private Color[,] RGBPixels = null; //масив з пікселями в моделі RGB
@@ -16,6 +36,7 @@ namespace UniGraphics.ColorModels
         private int height;
         private readonly object lockHSL = new object();
         private readonly object lockRGB = new object();
+
         public HSLColor GetHSL(int x, int y)
         {
             if (HSLPixels == null)
@@ -36,7 +57,7 @@ namespace UniGraphics.ColorModels
         }
 
         //робить певні перетворення для кожної з компонент майбутнього RGB-кольору
-        private byte ComponentToRGB(float p, float q, float t)
+        private static byte ComponentToRGB(float p, float q, float t)
         {
             if (t < 0.0f)
                 t += 1.0f;
@@ -52,7 +73,7 @@ namespace UniGraphics.ColorModels
         }
 
         //перетворює HSL-колір в RGB
-        private Color HSLtoRGB(HSLColor hslColor)
+        public static Color HSLtoRGB(HSLColor hslColor)
         {
             float h = hslColor.H / 360.0f;
             float s = hslColor.S / 100.0f;
@@ -69,7 +90,7 @@ namespace UniGraphics.ColorModels
             return Color.FromArgb(ComponentToRGB(p, q, tR), ComponentToRGB(p, q, tG), ComponentToRGB(p, q, tB));
         }
 
-        public bool Convert(Bitmap InputImage, CancellationToken? token)
+        public bool Convert(CancellationToken? token)
         {
             width = InputImage.Width;
             height = InputImage.Height;
@@ -188,6 +209,8 @@ namespace UniGraphics.ColorModels
                             //записуємо змінене зображення в масив HSL-пікселів
                             HSLPixels[x, y].L = (byte)newLightness;
                         }
+                        else
+                            HSLPixels[x, y].L = pixelColor.L;
                     }
             }
             if (token != null && token.Value.IsCancellationRequested)

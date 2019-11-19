@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Shapes;
 using UniGraphics.ViewModels;
 
 namespace UniGraphics.ColorModels
@@ -15,7 +16,7 @@ namespace UniGraphics.ColorModels
         private void ImageMouseMove(object sender, MouseEventArgs e)
         {
             var point = e.GetPosition((IInputElement)sender);
-            ((ColorModelsViewModel)DataContext).HandleLeftImageMousePosition((int)point.X, (int)point.Y);
+            ((ColorModelsViewModel)DataContext).HandleMouseMove((int)point.X, (int)point.Y);
         }
 
         private void ImageMouseLeave(object sender, MouseEventArgs e)
@@ -47,6 +48,23 @@ namespace UniGraphics.ColorModels
             /*MainWindow main = new MainWindow();
             main.MainFrame.Content = new MainPage();
             main.ShowDialog();*/
+        }
+
+        private void HuePicked(object sender, MouseButtonEventArgs e)
+        {
+            var x = e.GetPosition((IInputElement)sender).X;
+            var width = ((Rectangle)sender).Width;
+            ((ColorModelsViewModel)DataContext).HandleHuePicked((int)x, (int)width);
+        }
+
+        private void HueMouseMove(object sender, MouseEventArgs e)
+        {
+            if(e.LeftButton == MouseButtonState.Pressed)
+            {
+                var x = e.GetPosition((IInputElement)sender).X;
+                var width = ((Rectangle)sender).Width;
+                ((ColorModelsViewModel)DataContext).HandleHuePicked((int)x, (int)width);
+            }
         }
     }
 }
