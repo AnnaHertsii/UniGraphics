@@ -42,5 +42,11 @@ namespace UniGraphics.ColorModels
             studyWindow.ShowDialog();
         }
 
+        private void BackClicked(object sender, RoutedEventArgs e)
+        {
+            /*MainWindow main = new MainWindow();
+            main.MainFrame.Content = new MainPage();
+            main.ShowDialog();*/
+        }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UniGraphics.Help;
 
 namespace UniGraphics
 {
@@ -22,6 +23,16 @@ namespace UniGraphics
         public HelpWindow()
         {
             InitializeComponent();
+        }
+
+        private void FractalHelpClicked(object sender, MouseButtonEventArgs e)
+        {
+            HelpFrame.Content = new FractalsHelp();
+        }
+
+        private void ColorModelHelpClicked(object sender, MouseButtonEventArgs e)
+        {
+            HelpFrame.Content = new ColorModelsHelp();
         }
     }
 }

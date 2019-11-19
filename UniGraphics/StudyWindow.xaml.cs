@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UniGraphics.StudyMaterials;
 
 namespace UniGraphics
 {
@@ -22,6 +23,16 @@ namespace UniGraphics
         public StudyWindow()
         {
             InitializeComponent();
+        }
+
+        private void FractalStudyClicked(object sender, MouseButtonEventArgs e)
+        {
+            StudyFrame.Content = new FractalsStudy();
+        }
+
+        private void ColorModelsStudyClicked(object sender, MouseButtonEventArgs e)
+        {
+            StudyFrame.Content = new ColorModelsStudy();
         }
     }
 }

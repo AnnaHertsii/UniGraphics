@@ -102,7 +102,7 @@
                     VerticalAlignment="Top"
                     BorderThickness="0"
                     Background="#99A2F1"
-                    Grid.Column="0" >
+                    Grid.Column="0" Click="BackClicked" >
                     <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/back.png" Stretch="Uniform" Height="28" Width="25"/>
                 </Button>
                 <Label
