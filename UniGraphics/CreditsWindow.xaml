@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:UniGraphics"
         mc:Ignorable="d"
         Icon="/UniGraphics;component/Resources/Unicorn/logo.png"
-        Title="CreditsWindow" Height="550" Width="600">
+        Title="Про програму" Height="550" Width="610">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="233" />
@@ -20,7 +20,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Source="/UniGraphics;component/Resources/Unicorn/logo.png" />
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel  Margin="10, 10, 10, 10" >
                 <TextBlock
                 Foreground="Black" 

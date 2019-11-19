@@ -14,10 +14,9 @@
         </Grid.ColumnDefinitions>
         <Frame
             NavigationUIVisibility="Hidden"
-            Source="Help/ColorModelsHelp.xaml"
+            Source="Help/FractalsHelp.xaml"
             Name="HelpFrame" 
             Margin="10" Grid.Column="1"/>
-
         <Border
             Grid.Column="0"
             Background="#BCC3FF">
@@ -33,6 +32,9 @@
                 Foreground="White" />
         </Border>
         <Label 
+            FontWeight="Bold"
+            Name="FractalsSection"
+            Cursor="Hand"
             Content="Фрактали" 
             HorizontalAlignment="Left" 
             Margin="10,36,0,0" 
@@ -41,16 +43,24 @@
             Foreground="White"
             FontSize="18" 
             Width="118" 
-            Height="32" MouseLeftButtonUp="FractalHelpClicked"/>
+            Height="32"
+            MouseLeftButtonUp="FractalHelpClicked"/>
         <Label 
+            Name="ColorModelsSection"
+            Cursor="Hand"
             Content="Колірні моделі" 
             HorizontalAlignment="Left" 
             Margin="10,68,0,0" 
             VerticalAlignment="Top"
             Grid.Column="0"
             Foreground="White"
-            FontSize="18" Width="145" Height="31" MouseLeftButtonUp="ColorModelHelpClicked"/>
+            FontSize="18" 
+            Width="145" 
+            Height="31"
+            MouseLeftButtonUp="ColorModelHelpClicked"/>
         <Label 
+            Name="AnimationsSection"
+            Cursor="Hand"
             Content="Афінні перетворення" 
             HorizontalAlignment="Left" 
             Margin="10,99,0,0" 

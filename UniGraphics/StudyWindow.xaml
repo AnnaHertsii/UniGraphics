@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <Frame
             NavigationUIVisibility="Hidden"
-            Source="StudyMaterials/ColorModelsStudy.xaml"
+            Source="StudyMaterials/FractalsStudy.xaml"
             Name="StudyFrame" 
             Margin="10" Grid.Column="1"/>
 
@@ -33,6 +33,9 @@
                 Foreground="White" />
         </Border>
         <Label 
+            FontWeight="Bold"
+            Name="FractalsSection"
+            Cursor="Hand"
             Content="Фрактали" 
             HorizontalAlignment="Left" 
             Margin="10,36,0,0" 
@@ -43,6 +46,8 @@
             Width="118" 
             Height="32" MouseLeftButtonUp="FractalStudyClicked"/>
         <Label 
+            Name="ColorModelsSection"
+            Cursor="Hand"
             Content="Колірні моделі" 
             HorizontalAlignment="Left" 
             Margin="10,68,0,0" 
@@ -51,6 +56,8 @@
             Foreground="White"
             FontSize="18" Width="145" Height="31" MouseLeftButtonUp="ColorModelsStudyClicked"/>
         <Label 
+            Name="AnimationsSection"
+            Cursor="Hand"
             Content="Афінні перетворення" 
             HorizontalAlignment="Left" 
             Margin="10,99,0,0" 

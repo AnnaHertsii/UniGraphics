@@ -125,11 +125,10 @@
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
                     Margin="10,0,0,10" Height="61">
-                    <Hyperlink NavigateUri="http://zonakoda.ru/padenie-v-bassejny-nyutona.html">
+                    <Hyperlink NavigateUri="http://zonakoda.ru/padenie-v-bassejny-nyutona.html" RequestNavigate="LinkRequested">
                         <Run Text="http://zonakoda.ru/padenie-v-bassejny-nyutona.html"/>
                     </Hyperlink>
                 </TextBlock>
-                <!--hnkdmcxbfjk-->
             </StackPanel>
         </ScrollViewer>
     </Grid>

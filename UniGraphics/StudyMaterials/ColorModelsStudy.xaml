@@ -9,7 +9,7 @@
       Title="ColorModelsStudy">
 
     <Grid>
-        <ScrollViewer Height="450" VerticalAlignment="Top">
+        <ScrollViewer>
             <StackPanel Margin="10,0,10,0">
                 <Label 
                 FontStyle ="Italic" 
@@ -119,7 +119,7 @@
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
                     Margin="10,0,0,10" Height="113">
-                    <Hyperlink NavigateUri=" http://ciframagazine.com/post.php?id=117">
+                    <Hyperlink NavigateUri=" http://ciframagazine.com/post.php?id=117" RequestNavigate="LinkRequested">
                         <Run Text=" http://ciframagazine.com/post.php?id=117"/>
                     </Hyperlink>
                 </TextBlock>
