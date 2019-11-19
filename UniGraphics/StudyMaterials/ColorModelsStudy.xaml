@@ -109,8 +109,19 @@
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
-                    Margin="10,0,0,10" Height="106">
-                    <Run Text="Більш детально ознайомитись з колірними моделями ви можете за посиланням: http://ciframagazine.com/post.php?id=117"></Run>
+                    Margin="10,0,0,10" Height="52">
+                    <Run Text="Більш детально ознайомитись з колірними моделями ви можете за посиланням:"></Run>
+                </TextBlock>
+                <TextBlock
+                    Foreground="Black"
+                    FontStyle="Italic"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"
+                    Margin="10,0,0,10" Height="113">
+                    <Hyperlink NavigateUri=" http://ciframagazine.com/post.php?id=117">
+                        <Run Text=" http://ciframagazine.com/post.php?id=117"/>
+                    </Hyperlink>
                 </TextBlock>
                 <!--hnkdmcxbfjk-->
             </StackPanel>
