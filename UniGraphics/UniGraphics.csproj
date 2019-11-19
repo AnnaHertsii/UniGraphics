@@ -219,7 +219,21 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\exit.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Fractal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Fractal1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Fractal2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Fractal3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Fractal4.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

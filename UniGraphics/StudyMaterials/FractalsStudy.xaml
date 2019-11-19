@@ -28,10 +28,11 @@
                     TextAlignment="Justify"
                     Margin="10,0,0,10">
                         <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Загальні відомості"/><LineBreak/>
-                        <Run Text="Фрактали Ньютона - різновид алгебраїчних фракталів."/><LineBreak/>
-                        <Run Text="Візуалізація фракталу забезпечується наближеним знаходженням коренів нелінійного рівняння алгоритмом Ньютона на комплексній площині."/>
-                        <Run Text="Метод Ньютона також називають методом дотичних. Загальна формула алгоритму фракталу: z(n+1) = z(n) – f(z(n))/f'(z(n))."/>
-                        <Run Text=""/>
+                        <Run Text="Фрактали Ньютона - різновид алгебраїчних фракталів."/>
+                        <Run Text="Візуалізація фракталу забезпечується наближеним знаходженням коренів нелінійного рівняння за допомогою алгоритму Ньютона на комплексній площині."/>
+                        <Run Text="Метод Ньютона також називають методом дотичних. Застосовується метод Ньютона для"/>
+                        <Run Text="знаходження нуля функції комплексної змінної, використовуючи процедуру:  
+                             z(n+1) = z(n) – f(z(n))/f'(z(n))."/>
                 </TextBlock>
                 <TextBlock
                     Foreground="Black"
@@ -39,18 +40,73 @@
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
                     Margin="10,0,0,10">
-                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Алгоритм побудови"/><LineBreak/>
-                        <Run Text="Вхідні дані: максимальна кількість ітерацій; точність обрахунку; масив розміром n з нулями функції f; масив розміром n з кольорами; розміри зображення."/><LineBreak/>
-                        <Run Text="1) Знаходження похідної df(z) для функції f(z)."/><LineBreak/>
-                        <Run Text="2) Цикл по усіх пікселах зображення:"/><LineBreak/>
-                        <Run Text="3) Перехід в комплексну площину: від координат x, y піксела в комплексні числа – число z."/><LineBreak/>
-                        <Run Text="4) Цикл по ітераціям - до задного числа максимальних ітерацій"/><LineBreak/>
-                        <Run Text="5) Виконання z = z – f(z) / df(z)"/><LineBreak/>
-                        <Run Text="6) Перевірка наближення для кожного кореня і встановлення кольору для піксела. Перехід до наступного піксела."/><LineBreak/>
-                        <Run Text=""/><LineBreak/>
-                        <Run Text=""/>
-                        <Run Text=""/><LineBreak/>
+                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Історія"/><LineBreak/>
+                     <Run Text="Вибір початкового наближення представляє особливий інтерес."></Run>
+                    <Run Text="Оскільки функція може мати декілька нулів, в різних випадках метод може сходитися до різних значень."></Run>
+                    <Run Text="Проте, що за області забезпечать збіжність до того або іншого кореня?"></Run>
+                    <Run Text="Це питання зацікавило Артура Келі ще в 1879 році, проте вирішити його змогли лише в 1970-х роках ХХ століття з появою обчислювальної техніки. "></Run>
+                    <Run Text="Виявилось, що на перетинах цих областей (їх прийнято називати областями тяжіння) утворюються так звані фрактали — нескінченні самоподібні геометричні фігури."></Run>
+                    <Run Text="З огляду на те, що Ньютон застосовував свій метод виключно до поліномів, фрактали, утворені в результаті такого застосування, набули назви фракталів Ньютона або басейнів Ньютона."></Run>
                 </TextBlock>
+                <TextBlock
+                    Foreground="Black"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"
+                    Margin="10,0,0,10" Height="280">
+                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Алгоритм побудови"/><LineBreak/>
+                        <Run Text="Вхідними даними є максимальна кількість ітерацій; точність обрахунку; масив з нулями функції f; масив з кольорами; розміри зображення;"/><LineBreak/>
+                        <Run Text="1) Знаходження похідної df(z) для функції f(z);"/><LineBreak/>
+                        <Run Text="2) Цикл по усіх пікселах зображення;"/><LineBreak/>
+                        <Run Text="3) Перехід в комплексну площину: від координат x, y піксела в комплексні числа – число z;"/><LineBreak/>
+                        <Run Text="4) Цикл по ітераціям - до задного числа максимальних ітерацій;"/><LineBreak/>
+                        <Run Text="5) Виконання z = z – f(z) / df(z);"/><LineBreak/>
+                        <Run Text="6)Перевірка наближення для кожного кореня і встановлення кольору для піксела. Перехід до наступного піксела."/>
+                </TextBlock>
+                <TextBlock
+                    Foreground="Black"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"
+                    Margin="10,0,0,10" Height="25"><Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Краса фракталів Ньютона"/><LineBreak/></TextBlock>
+                <Grid Height="498">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="232*"/>
+                        <ColumnDefinition Width="232*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="233" />
+                        <RowDefinition Height="233" />
+
+                    </Grid.RowDefinitions>
+                    <Image 
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Margin="10,0,0,2"
+                    Width="218"
+                    HorizontalAlignment="Center"
+                    Source="/UniGraphics;component/Resources/Fractal.png" />
+                    <Image 
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Margin="0,0,0,2"
+                    Width="218"
+                    HorizontalAlignment="Center"
+                    Source="/UniGraphics;component/Resources/Fractal3.png" />
+                    <Image 
+                    Grid.Column="0"
+                    Margin="12,232,2,70"
+                    Width="218"
+                    HorizontalAlignment="Center"
+                    Source="/UniGraphics;component/Resources/Fractal4.jpg" Grid.RowSpan="2" />
+                    <Image 
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Margin="0,0,0,70"
+                    Width="218"
+                    HorizontalAlignment="Center"
+                    Source="/UniGraphics;component/Resources/Fractal1.png" />
+                </Grid>
                 <!--hnkdmcxbfjk-->
             </StackPanel>
         </ScrollViewer>
