@@ -154,4 +154,19 @@
   <data name="Fractal4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Fractal4.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="back" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colormodels" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colormodels.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HSL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HSL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RGB1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RGB1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RGB2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RGB2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -41,5 +41,6 @@ namespace UniGraphics.ColorModels
             StudyWindow studyWindow = new StudyWindow();
             studyWindow.ShowDialog();
         }
+
     }
 }

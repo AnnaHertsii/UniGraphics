@@ -68,8 +68,10 @@
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
-                    Margin="10,0,0,10" Height="25"><Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Краса фракталів Ньютона"/><LineBreak/></TextBlock>
-                <Grid Height="498">
+                    Margin="10,0,0,10" Height="25">
+                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Краса фракталів Ньютона"/><LineBreak/>
+                </TextBlock>
+                <Grid Height="405">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="232*"/>
                         <ColumnDefinition Width="232*"/>
@@ -107,6 +109,15 @@
                     HorizontalAlignment="Center"
                     Source="/UniGraphics;component/Resources/Fractal1.png" />
                 </Grid>
+                <TextBlock
+                    Foreground="Black"
+                    FontStyle="Italic"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"
+                    Margin="10,0,0,10" Height="25">
+                <Run Text="Більш детально ознайомитись з фракталами Ньютона ви можете за посиланням: http://zonakoda.ru/padenie-v-bassejny-nyutona.html"></Run>
+                </TextBlock>
                 <!--hnkdmcxbfjk-->
             </StackPanel>
         </ScrollViewer>

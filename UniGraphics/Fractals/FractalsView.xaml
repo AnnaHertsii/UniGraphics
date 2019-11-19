@@ -499,8 +499,9 @@
                     BorderThickness="0"
                     Background="#99A2F1"
                     Grid.Column="0" >
-                    <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/Unicorn/logo.png" Stretch="Uniform" Height="28" Width="25"/>
+                    <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/back.png" Stretch="Uniform" Height="28" Width="25"/>
                 </Button>
+                
                 <Label
                     Grid.Column="0"
                     Width="134"
