@@ -26,7 +26,7 @@
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
-                    Margin="10,0,0,10" Height="534">
+                    Margin="10,0,0,10">
                     <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="RGB"/><LineBreak/>
                     <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Цікаві факти"/><LineBreak/>
                     <Run Text="1) Адитивна  модель  кольору  найпростіша  для  розуміння."/>
@@ -64,7 +64,12 @@
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
                     Margin="10,0,0,10">
-                <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Недоліки"/><LineBreak/>
+                <Run 
+                    FontStyle ="Italic"
+                    Foreground="#99A2F1"
+                    FontWeight="Bold"
+                    Text="Недоліки"/>
+                    <LineBreak/>
                     <Run Text="Недолік моделі RGB полягає в тому, що не всі кольори, утворені в ній, можна вивести на друк."></Run>
                     <Run Text="Іншими словами, кольори на екрані вашого монітора можуть виглядати інакше при їх виведенні на друк, причому ця відзнака може виявитися принциповою,"></Run>
                     <Run Text="а не обумовленою низькою якістю принтера або монітора. Саме тому існують неапаратно-орієнтовані моделі, однією з яких є HSL. Про неї читайте нижче."></Run>
@@ -75,7 +80,7 @@
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
-                    Margin="10,0,0,10" Height="318">
+                    Margin="10,0,0,10">
                     <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="HSL"/><LineBreak/>
                     <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Цікаві факти"/><LineBreak/>
                     <Run Text="1) Є розширенням моделі HSV. Основними параметрами є Hue, Saturation, Lightness: кольоровий тон, насиченість, освітленість."></Run><LineBreak/>
@@ -96,7 +101,7 @@
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
-                    Margin="10,0,0,10" Height="235">
+                    Margin="10,0,0,10">
                     <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Особливості"/><LineBreak/>
                     <Run Text="HSL добре пристосована для опису кольорів таким чином, як це властиво людині."></Run>
                     <Run Text="Дивлячись на пофарбований об'єкт, людині простіше його описати за допомогою кольору, освітленості і насиченості, що і роблять дані колірні моделі."></Run>
@@ -109,7 +114,7 @@
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
-                    Margin="10,0,0,10" Height="52">
+                    Margin="10,0,0,10">
                     <Run Text="Більш детально ознайомитись з колірними моделями ви можете за посиланням:"></Run>
                 </TextBlock>
                 <TextBlock
@@ -118,12 +123,11 @@
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
-                    Margin="10,0,0,10" Height="113">
+                    Margin="10,0,0,10">
                     <Hyperlink NavigateUri=" http://ciframagazine.com/post.php?id=117" RequestNavigate="LinkRequested">
                         <Run Text=" http://ciframagazine.com/post.php?id=117"/>
                     </Hyperlink>
                 </TextBlock>
-                <!--hnkdmcxbfjk-->
             </StackPanel>
         </ScrollViewer>
     </Grid>

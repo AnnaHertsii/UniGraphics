@@ -36,7 +36,7 @@
                     Foreground="Black"
                     FontSize="16"
                     TextWrapping="Wrap"
-                    TextAlignment="Justify" Height="450">
+                    TextAlignment="Justify">
                         <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Робота з зображенням"/><LineBreak/>
                         <Run Text="Відкрите зображення відображене у RGB. Щоб конвертувати його у HSL натисніть кнопку 'Конвертувати'."/>
                         <Run Text="Після першого ж натиснення кнопка зникне - оскільки зображення уже конвертоване, немає потреби конвертувати знову."></Run>

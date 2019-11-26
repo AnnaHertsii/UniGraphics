@@ -197,7 +197,7 @@ namespace UniGraphics.ColorModels
                     {
                         //беремо значення яскравості з незміненого зображення
                         HSLColor pixelColor = originalHSLPixels[x, y];
-                        if (IsHueAdjacent(pixelColor.H, hue, 10))
+                        if (IsHueAdjacent(pixelColor.H, hue, 20))
                         {
                             //збільшення яскравості
                             int newLightness = lightness + (int)pixelColor.L;

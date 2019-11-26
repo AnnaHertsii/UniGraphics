@@ -7,7 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="500"
       Title="FractalsStudy">
-
     <Grid>
         <ScrollViewer>
             <StackPanel Margin="10,0,10,0">
@@ -53,7 +52,7 @@
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
-                    Margin="10,0,0,10" Height="280">
+                    Margin="10,0,0,10">
                         <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Алгоритм побудови"/><LineBreak/>
                         <Run Text="Вхідними даними є максимальна кількість ітерацій; точність обрахунку; масив з нулями функції f; масив з кольорами; розміри зображення;"/><LineBreak/>
                         <Run Text="1) Знаходження похідної df(z) для функції f(z);"/><LineBreak/>
@@ -68,43 +67,43 @@
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
-                    Margin="10,0,0,10" Height="25">
+                    Margin="10,0,0,10">
                     <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Краса фракталів Ньютона"/><LineBreak/>
                 </TextBlock>
-                <Grid Height="405">
+                <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="232*"/>
-                        <ColumnDefinition Width="232*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="233" />
-                        <RowDefinition Height="233" />
-
+                        <RowDefinition/>
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     <Image 
                     Grid.Column="0"
                     Grid.Row="0"
-                    Margin="10,0,0,2"
+                    Margin="10"
                     Width="218"
                     HorizontalAlignment="Center"
                     Source="/UniGraphics;component/Resources/Fractal.png" />
                     <Image 
                     Grid.Column="1"
                     Grid.Row="0"
-                    Margin="0,0,0,2"
+                    Margin="10"
                     Width="218"
                     HorizontalAlignment="Center"
                     Source="/UniGraphics;component/Resources/Fractal3.png" />
                     <Image 
                     Grid.Column="0"
-                    Margin="12,232,2,70"
+                        Grid.Row="1"
+                        Margin="10"
                     Width="218"
                     HorizontalAlignment="Center"
                     Source="/UniGraphics;component/Resources/Fractal4.jpg" Grid.RowSpan="2" />
                     <Image 
                     Grid.Column="1"
                     Grid.Row="1"
-                    Margin="0,0,0,70"
+                    Margin="10"
                     Width="218"
                     HorizontalAlignment="Center"
                     Source="/UniGraphics;component/Resources/Fractal1.png" />
@@ -115,7 +114,7 @@
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
-                    Margin="10,0,0,10" Height="50">
+                    Margin="10,0,0,10">
                 <Run Text="Більш детально ознайомитись з фракталами Ньютона ви можете за посиланням:"></Run>
                 </TextBlock>
                 <TextBlock
@@ -124,7 +123,7 @@
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
-                    Margin="10,0,0,10" Height="61">
+                    Margin="10,0,0,10">
                     <Hyperlink NavigateUri="http://zonakoda.ru/padenie-v-bassejny-nyutona.html" RequestNavigate="LinkRequested">
                         <Run Text="http://zonakoda.ru/padenie-v-bassejny-nyutona.html"/>
                     </Hyperlink>
