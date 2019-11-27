@@ -96,6 +96,9 @@
     <Compile Include="StudyWindow.xaml.cs">
       <DependentUpon>StudyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Transformation\TransformationView.xaml.cs">
+      <DependentUpon>TransformationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ColorModelsViewModel.cs" />
     <Compile Include="ViewModels\Command.cs" />
     <Compile Include="ViewModels\DataViewModel.cs" />
@@ -166,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StudyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Transformation\TransformationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -248,6 +255,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\stop.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
