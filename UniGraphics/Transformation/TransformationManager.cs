@@ -38,11 +38,21 @@ namespace UniGraphics.Transformation
             set
             {
                 sideLength = value;
+                CalculateVertexOffsets();
                 UpdateParameters();
             }
         }
+        bool rotateAroundCenter;
+        public bool RotateAroundCenter
+        {
+            get { return rotateAroundCenter; }
+            set
+            {
+                rotateAroundCenter = value;
+                UpdateRotationPivot();
+            }
+        }
         public double MaxRotation { get; set; }
-        public bool RotateAroundCenter { get; set; }
         public int VertexIndex { get; set; }
         public WriteableBitmap Image { get; private set; }
 
@@ -57,14 +67,16 @@ namespace UniGraphics.Transformation
 
         private int width, height, tick, 
                     ticksFromX, ticksToX, ticksFromY, ticksToY;
-        private double halfWidth, halfHeight, PlaneX, PlaneY, 
+        private double halfWidth, halfHeight, PlaneX, PlaneY,
                        rootContainer, screenTick,
-                       scale, animationRotation, animationScale;
+                       scale, animationRotation, animationScale,
+                       sideHalf, side3Halves, centerOffsetY, centerOffsetY2;
         private Graphics graphics;
         private PointF[] hexagonPoints;
         private Matrix initialHexagonMatrix, toScreenMatrix,
                        rotationMatrix, scalingMatrix, 
-                       planeMoveMatrix, PlaneMoveBackMatrix;
+                       planeMoveMatrix, planeMoveBackMatrix, 
+                       pivotOffsetMatrix, pivotOffsetBackMatrix;
 
         static TransformationManager()
         {
@@ -88,7 +100,9 @@ namespace UniGraphics.Transformation
             this.rootY = rootY;
             this.sideLength = sideLength;
             InitTransformMatrices();
+            CalculateVertexOffsets();
             UpdateParameters();
+            UpdateRotationPivot();
         }
 
         //виконує початкове налаштування матриць перетворень
@@ -97,7 +111,8 @@ namespace UniGraphics.Transformation
             rotationMatrix = new Matrix(3, 3);
             scalingMatrix = new Matrix(3, 3);
             planeMoveMatrix = new Matrix(3, 3);
-            PlaneMoveBackMatrix = new Matrix(3, 3);
+            planeMoveBackMatrix = new Matrix(3, 3);
+            pivotOffsetMatrix = new Matrix(3, 3);
 
             rotationMatrix.Set(0, 0, 1.0);
             rotationMatrix.Set(1, 1, 1.0);
@@ -107,7 +122,11 @@ namespace UniGraphics.Transformation
 
             planeMoveMatrix = rotationMatrix.DeepCopy();
 
-            PlaneMoveBackMatrix = rotationMatrix.DeepCopy();
+            planeMoveBackMatrix = rotationMatrix.DeepCopy();
+
+            pivotOffsetMatrix = rotationMatrix.DeepCopy();
+
+            pivotOffsetBackMatrix = rotationMatrix.DeepCopy();
         }
 
         //промальовка сітки
@@ -172,20 +191,26 @@ namespace UniGraphics.Transformation
         {
             Matrix result = initialHexagonMatrix *
                             planeMoveMatrix *
+                            pivotOffsetMatrix *
                             scalingMatrix *
                             rotationMatrix *
-                            PlaneMoveBackMatrix;
+                            pivotOffsetBackMatrix *
+                            planeMoveBackMatrix;
             SaveToScreen(result);
+        }
+
+        //розраховує числа, які потрібні для розрахунку позицій вершин
+        private void CalculateVertexOffsets()
+        {
+            sideHalf = sideLength / 2;
+            side3Halves = sideHalf * 3;
+            centerOffsetY = sideLength * (Math.Sqrt(3) / 2);
+            centerOffsetY2 = centerOffsetY * 2;
         }
 
         //оновлює параметри шестикутника
         private void UpdateParameters()
         {
-            double sideHalf = sideLength / 2;
-            double side3Halves = sideHalf * 3;
-            double offsetY = sideLength * (Math.Sqrt(3) / 2);
-            double offsetY2 = offsetY * 2;
-
             //створення матриці з початковими координатами шестикутника
             initialHexagonMatrix.Set(0, 0, rootX);
             initialHexagonMatrix.Set(0, 1, rootY);
@@ -196,27 +221,48 @@ namespace UniGraphics.Transformation
             initialHexagonMatrix.Set(1, 2, 1.0);
 
             initialHexagonMatrix.Set(2, 0, rootX + side3Halves);
-            initialHexagonMatrix.Set(2, 1, rootY + offsetY);
+            initialHexagonMatrix.Set(2, 1, rootY + centerOffsetY);
             initialHexagonMatrix.Set(2, 2, 1.0);
 
             initialHexagonMatrix.Set(3, 0, rootX + sideLength);
-            initialHexagonMatrix.Set(3, 1, rootY + offsetY2);
+            initialHexagonMatrix.Set(3, 1, rootY + centerOffsetY2);
             initialHexagonMatrix.Set(3, 2, 1.0);
 
             initialHexagonMatrix.Set(4, 0, rootX);
-            initialHexagonMatrix.Set(4, 1, rootY + offsetY2);
+            initialHexagonMatrix.Set(4, 1, rootY + centerOffsetY2);
             initialHexagonMatrix.Set(4, 2, 1.0);
 
             initialHexagonMatrix.Set(5, 0, rootX - sideHalf);
-            initialHexagonMatrix.Set(5, 1, rootY + offsetY);
+            initialHexagonMatrix.Set(5, 1, rootY + centerOffsetY);
             initialHexagonMatrix.Set(5, 2, 1.0);
 
             //оновлення матриць зміщення координатної площини для анімації
-            planeMoveMatrix.Set(2, 0, -RootX);
-            planeMoveMatrix.Set(2, 1, -RootY);
+            planeMoveMatrix.Set(2, 0, -rootX);
+            planeMoveMatrix.Set(2, 1, -rootY);
 
-            PlaneMoveBackMatrix.Set(2, 0, RootX);
-            PlaneMoveBackMatrix.Set(2, 1, RootY);
+            planeMoveBackMatrix.Set(2, 0, rootX);
+            planeMoveBackMatrix.Set(2, 1, rootY);
+        }
+
+        //оновлює параметр, що визначає точку, довкола якої відбувається поворот
+        private void UpdateRotationPivot()
+        {
+            if(rotateAroundCenter)
+            {
+                pivotOffsetMatrix.Set(2, 0, -sideHalf);
+                pivotOffsetMatrix.Set(2, 1, -centerOffsetY);
+
+                pivotOffsetBackMatrix.Set(2, 0, sideHalf);
+                pivotOffsetBackMatrix.Set(2, 1, centerOffsetY);
+            }
+            else
+            {
+                pivotOffsetMatrix.Set(2, 0, 0.0);
+                pivotOffsetMatrix.Set(2, 1, 0.0);
+
+                pivotOffsetBackMatrix.Set(2, 0, 0.0);
+                pivotOffsetBackMatrix.Set(2, 1, 0.0);
+            }
         }
 
         //оновлює налаштування сітки

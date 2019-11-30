@@ -150,9 +150,7 @@
                     VerticalContentAlignment="Center"
                     BorderThickness="0"
                     FontSize="14"
-                    Foreground="#8787ed"
-                    SpellCheck.IsEnabled="True"
-                    TextWrapping="Wrap" />
+                    Foreground="#8787ed"/>
                 <Button
                     Name="StartButton"
                     Height="40"
@@ -198,9 +196,7 @@
                     VerticalContentAlignment="Center"
                     BorderThickness="0"
                     FontSize="14"
-                    Foreground="#8787ed"
-                    SpellCheck.IsEnabled="True"
-                    TextWrapping="Wrap" />
+                    Foreground="#8787ed" />
                 <Label
                     Grid.Column="0"
                     Width="112"
@@ -294,13 +290,21 @@
             VerticalAlignment="Bottom"
             Source="/UniGraphics;component/Resources/Unicorn/UnicornHat.png" />
         <TextBox 
-            HorizontalAlignment="Left" 
+            Foreground="#8787ed"
+            BorderThickness="0"
+            HorizontalAlignment="Left"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             Height="29" 
             Margin="173,145,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" 
             Width="86"/>
         <TextBox 
+            Foreground="#8787ed"
+            BorderThickness="0"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             HorizontalAlignment="Left" 
             Height="30" 
             Margin="173,179,0,0" 
