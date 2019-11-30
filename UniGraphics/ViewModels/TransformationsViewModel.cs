@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -19,7 +20,31 @@ namespace UniGraphics.ViewModels
 
         private void PerformTransform(object args)
         {
-            StartTransforming();
+            if (currentRunningTask != null && !currentRunningTask.IsCanceled)
+                tokenSource.Cancel();
+            tokenSource = new CancellationTokenSource();
+            CancellationToken token = tokenSource.Token;
+            currentRunningTask = new Task(() =>
+            {
+                bool finished;
+                Stopwatch timer = new Stopwatch();
+                timer.Start();
+                while (true)
+                {
+                    finished = transformer.HandleTimeFlow(timer.Elapsed.TotalSeconds);
+                    timer.Restart();
+                    if (transformer.UpdateTransform(token))
+                    {
+                        var clone = transformer.Image.Clone();
+                        clone.Freeze();
+                        currentRunningTask = null;
+                        Dispatcher.CurrentDispatcher.Invoke(() => TransformationImage = clone);
+                    }
+                    if (finished)
+                        return;
+                }
+            }, token);
+            currentRunningTask.Start();
         }
 
         public ICommand Exit { get; set; }
@@ -28,25 +53,6 @@ namespace UniGraphics.ViewModels
 
         private Task currentRunningTask = null;
         private CancellationTokenSource tokenSource;
-
-        private void StartTransforming()
-        {
-            if (currentRunningTask != null && !currentRunningTask.IsCanceled)
-                tokenSource.Cancel();
-            tokenSource = new CancellationTokenSource();
-            CancellationToken token = tokenSource.Token;
-            currentRunningTask = new Task(() =>
-            {
-                if (transformer.GenerateTransformOnly(token))
-                {
-                    var clone = transformer.Image.Clone();
-                    clone.Freeze();
-                    currentRunningTask = null;
-                    Dispatcher.CurrentDispatcher.Invoke(() => TransformationImage = clone);
-                }
-            }, token);
-            currentRunningTask.Start();
-        }
 
         public void respondToWindowSizeChange(int width, int height)
         {
@@ -101,13 +107,10 @@ namespace UniGraphics.ViewModels
         {
             Exit = new Command(PerformExit);
             Transform = new Command(PerformTransform);
-            transformer = new TransformationManager()
+            transformer = new TransformationManager(50, 100, 20)
             {
-                RootX = 50,
-                RootY = 100,
                 RotateAroundCenter = true,
                 MaxRotation = 60, 
-                SideLength = 20,
                 VertexIndex = 0
             };
         }

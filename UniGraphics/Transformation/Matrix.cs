@@ -12,7 +12,7 @@
             items = new double[rows, columns];
         }
 
-        public void setCell(int row, int column, double value)
+        public void Set(int row, int column, double value)
         {
             items[row, column] = value;
         }
@@ -22,12 +22,12 @@
             return items[row, column];
         }
 
-        public Matrix deepCopy()
+        public Matrix DeepCopy()
         {
             Matrix newMatrix = new Matrix(Rows, Columns);
             for (int i = 0; i < Rows; ++i)
                 for (int j = 0; j < Columns; ++j)
-                    newMatrix.setCell(i, j, items[i, j]);
+                    newMatrix.Set(i, j, items[i, j]);
             return newMatrix;
         }
 
@@ -40,7 +40,7 @@
                     double cellValue = 0.0;
                     for (int k = 0; k < second.Rows; ++k)
                         cellValue += first.At(i, k) * second.At(k, j);
-                    result.setCell(i, j, cellValue);
+                    result.Set(i, j, cellValue);
                 }
             return result;
         }

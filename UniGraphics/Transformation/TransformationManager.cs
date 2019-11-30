@@ -46,9 +46,11 @@ namespace UniGraphics.Transformation
         public int VertexIndex { get; set; }
         public WriteableBitmap Image { get; private set; }
 
-        private static readonly int offset = 100;
+        private static readonly double offsetCoef = 1.1;
         private static readonly int minScreenTick = 50;
         private static readonly int maxScreenTick = 100;
+        private static readonly double rotationSpeed = 60.0;
+        private static readonly double scalingSpeed = 0.5;
         private static readonly Pen gridPen, axisGridPen;
         private static readonly DBrush tickTextBrush, hexagonBrush;
         private static readonly Font tickTextFont;
@@ -56,11 +58,13 @@ namespace UniGraphics.Transformation
         private int width, height, tick, 
                     ticksFromX, ticksToX, ticksFromY, ticksToY;
         private double halfWidth, halfHeight, PlaneX, PlaneY, 
-                       RootContainer, screenTick,
+                       rootContainer, screenTick,
                        scale, animationRotation, animationScale;
         private Graphics graphics;
         private PointF[] hexagonPoints;
-        private Matrix initialHexagonMatrix, toScreenMatrix;
+        private Matrix initialHexagonMatrix, toScreenMatrix,
+                       rotationMatrix, scalingMatrix, 
+                       planeMoveMatrix, PlaneMoveBackMatrix;
 
         static TransformationManager()
         {
@@ -71,7 +75,7 @@ namespace UniGraphics.Transformation
             hexagonBrush = new SolidBrush(DColor.FromArgb(255, 104, 116, 219));
         }
 
-        public TransformationManager()
+        public TransformationManager(double rootX, double rootY, double sideLength)
         {
             initialHexagonMatrix = new Matrix(6, 3); //матриця з вершинами шестикутника
             //матриця для перетворення координат в декартовій
@@ -80,10 +84,34 @@ namespace UniGraphics.Transformation
             hexagonPoints = new PointF[6];
             animationRotation = 0.0;
             animationScale = 1.0;
+            this.rootX = rootX;
+            this.rootY = rootY;
+            this.sideLength = sideLength;
+            InitTransformMatrices();
+            UpdateParameters();
+        }
+
+        //виконує початкове налаштування матриць перетворень
+        private void InitTransformMatrices()
+        {
+            rotationMatrix = new Matrix(3, 3);
+            scalingMatrix = new Matrix(3, 3);
+            planeMoveMatrix = new Matrix(3, 3);
+            PlaneMoveBackMatrix = new Matrix(3, 3);
+
+            rotationMatrix.Set(0, 0, 1.0);
+            rotationMatrix.Set(1, 1, 1.0);
+            rotationMatrix.Set(2, 2, 1.0);
+
+            scalingMatrix = rotationMatrix.DeepCopy();
+
+            planeMoveMatrix = rotationMatrix.DeepCopy();
+
+            PlaneMoveBackMatrix = rotationMatrix.DeepCopy();
         }
 
         //промальовка сітки
-        private void drawGrid()
+        private void DrawGrid()
         {
             double coord;
             for (int i = ticksFromX; i <= ticksToX; ++i)
@@ -121,12 +149,15 @@ namespace UniGraphics.Transformation
             });
         }
 
-        private void drawHexagon()
+        //малює шестикутник
+        private void DrawHexagon()
         {
             graphics.FillPolygon(hexagonBrush, hexagonPoints);
         }
 
-        private void saveToScreen(Matrix m)
+        //переводить координати вказаної матриці в 
+        //масив з точками, які є в просторі екрану
+        private void SaveToScreen(Matrix m)
         {
             Matrix inScreenCoords = m * toScreenMatrix;
             for(int i = 0; i < 6; ++i)
@@ -136,12 +167,18 @@ namespace UniGraphics.Transformation
             }
         }
 
-        private void processHexagon()
+        //виконує множення матриць афінних перетворень
+        private void ProcessHexagon()
         {
-            //TODO affine transformations
-            saveToScreen(initialHexagonMatrix);
+            Matrix result = initialHexagonMatrix *
+                            planeMoveMatrix *
+                            scalingMatrix *
+                            rotationMatrix *
+                            PlaneMoveBackMatrix;
+            SaveToScreen(result);
         }
 
+        //оновлює параметри шестикутника
         private void UpdateParameters()
         {
             double sideHalf = sideLength / 2;
@@ -150,29 +187,36 @@ namespace UniGraphics.Transformation
             double offsetY2 = offsetY * 2;
 
             //створення матриці з початковими координатами шестикутника
-            initialHexagonMatrix.setCell(0, 0, rootX);
-            initialHexagonMatrix.setCell(0, 1, rootY);
-            initialHexagonMatrix.setCell(0, 2, 1.0);
+            initialHexagonMatrix.Set(0, 0, rootX);
+            initialHexagonMatrix.Set(0, 1, rootY);
+            initialHexagonMatrix.Set(0, 2, 1.0);
 
-            initialHexagonMatrix.setCell(1, 0, rootX + sideLength);
-            initialHexagonMatrix.setCell(1, 1, rootY);
-            initialHexagonMatrix.setCell(1, 2, 1.0);
+            initialHexagonMatrix.Set(1, 0, rootX + sideLength);
+            initialHexagonMatrix.Set(1, 1, rootY);
+            initialHexagonMatrix.Set(1, 2, 1.0);
 
-            initialHexagonMatrix.setCell(2, 0, rootX + side3Halves);
-            initialHexagonMatrix.setCell(2, 1, rootY + offsetY);
-            initialHexagonMatrix.setCell(2, 2, 1.0);
+            initialHexagonMatrix.Set(2, 0, rootX + side3Halves);
+            initialHexagonMatrix.Set(2, 1, rootY + offsetY);
+            initialHexagonMatrix.Set(2, 2, 1.0);
 
-            initialHexagonMatrix.setCell(3, 0, rootX + sideLength);
-            initialHexagonMatrix.setCell(3, 1, rootY + offsetY2);
-            initialHexagonMatrix.setCell(3, 2, 1.0);
+            initialHexagonMatrix.Set(3, 0, rootX + sideLength);
+            initialHexagonMatrix.Set(3, 1, rootY + offsetY2);
+            initialHexagonMatrix.Set(3, 2, 1.0);
 
-            initialHexagonMatrix.setCell(4, 0, rootX);
-            initialHexagonMatrix.setCell(4, 1, rootY + offsetY2);
-            initialHexagonMatrix.setCell(4, 2, 1.0);
+            initialHexagonMatrix.Set(4, 0, rootX);
+            initialHexagonMatrix.Set(4, 1, rootY + offsetY2);
+            initialHexagonMatrix.Set(4, 2, 1.0);
 
-            initialHexagonMatrix.setCell(5, 0, rootX - sideHalf);
-            initialHexagonMatrix.setCell(5, 1, rootY + offsetY);
-            initialHexagonMatrix.setCell(5, 2, 1.0);
+            initialHexagonMatrix.Set(5, 0, rootX - sideHalf);
+            initialHexagonMatrix.Set(5, 1, rootY + offsetY);
+            initialHexagonMatrix.Set(5, 2, 1.0);
+
+            //оновлення матриць зміщення координатної площини для анімації
+            planeMoveMatrix.Set(2, 0, -RootX);
+            planeMoveMatrix.Set(2, 1, -RootY);
+
+            PlaneMoveBackMatrix.Set(2, 0, RootX);
+            PlaneMoveBackMatrix.Set(2, 1, RootY);
         }
 
         //оновлює налаштування сітки
@@ -182,14 +226,19 @@ namespace UniGraphics.Transformation
             this.height = height;
             halfWidth = width / 2;
             halfHeight = height / 2;
+            double rootAbsX = Math.Abs(rootX),
+                   rootAbsY = Math.Abs(rootY);
 
-            RootContainer = (int) Math.Max(Math.Abs(rootX) + offset, Math.Abs(rootY) + offset);
-            double screenMax = Math.Max(halfWidth, halfHeight);
-            scale = RootContainer / screenMax;
+            rootContainer = (Math.Max(rootAbsX, rootAbsY) + sideLength * 2) * offsetCoef;
+            double containerScreenLenght = (rootAbsX > rootAbsY) ? halfWidth : halfHeight;
+            scale = rootContainer / containerScreenLenght;
             PlaneX = (int) (halfWidth * scale);
             PlaneY = (int) (halfHeight * scale);
 
-            for (tick = 10; tick < RootContainer; tick += 10)
+            if (CheckEnd(token))
+                return false;
+
+            for (tick = 10; tick < rootContainer; tick += 10)
             {
                 double scaledTick = tick / scale;
                 if (scaledTick > minScreenTick && scaledTick < maxScreenTick)
@@ -201,24 +250,52 @@ namespace UniGraphics.Transformation
             ticksToY = (int) (PlaneY / tick) + 1;
             ticksFromY = -ticksToY;
 
+            if (CheckEnd(token))
+                return false;
+
             //створення матриці для перетворення в координати екрану
-            toScreenMatrix.setCell(0, 0, 1.0 / scale);
-            toScreenMatrix.setCell(0, 1, 0.0);
-            toScreenMatrix.setCell(0, 2, 0.0);
+            toScreenMatrix.Set(0, 0, 1.0 / scale);
+            toScreenMatrix.Set(0, 1, 0.0);
+            toScreenMatrix.Set(0, 2, 0.0);
 
-            toScreenMatrix.setCell(1, 0, 0.0);
-            toScreenMatrix.setCell(1, 1, 1.0 / scale);
-            toScreenMatrix.setCell(1, 2, 0.0);
+            toScreenMatrix.Set(1, 0, 0.0);
+            toScreenMatrix.Set(1, 1, 1.0 / scale);
+            toScreenMatrix.Set(1, 2, 0.0);
 
-            toScreenMatrix.setCell(2, 0, halfWidth);
-            toScreenMatrix.setCell(2, 1, halfHeight);
-            toScreenMatrix.setCell(2, 2, 1.0);
+            toScreenMatrix.Set(2, 0, halfWidth);
+            toScreenMatrix.Set(2, 1, halfHeight);
+            toScreenMatrix.Set(2, 2, 1.0);
 
             return true;
         }
 
+        //виконує зміну параметрів (поворот і масштаб) в часі
+        public bool HandleTimeFlow(double deltaTime)
+        {
+            bool finished = false;
+            animationRotation += rotationSpeed * deltaTime;
+            animationScale += scalingSpeed * deltaTime;
+            if (animationRotation > MaxRotation)
+            {
+                animationRotation = MaxRotation;
+                finished = true;
+            }
+
+            scalingMatrix.Set(0, 0, animationScale);
+            scalingMatrix.Set(1, 1, animationScale);
+
+            double cos = Math.Cos(Deg2Rad(animationRotation));
+            double sin = Math.Sin(Deg2Rad(animationRotation));
+            rotationMatrix.Set(0, 0, cos);
+            rotationMatrix.Set(0, 1, sin);
+            rotationMatrix.Set(1, 0, -sin);
+            rotationMatrix.Set(1, 1, cos);
+
+            return finished;
+        }
+
         //малює результат і оновлює лише налаштування фігури
-        public bool GenerateTransformOnly(CancellationToken? token)
+        public bool UpdateTransform(CancellationToken? token)
         {
             Image = new WriteableBitmap(width, height, 96, 96, PixelFormats.Bgra32, null);
             Image.Lock();
@@ -230,14 +307,19 @@ namespace UniGraphics.Transformation
             graphics = Graphics.FromImage(bitmap);
             graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
 
-            processHexagon();
-            drawGrid();
-            drawHexagon();
+            ProcessHexagon();
 
-            graphics.Dispose();
-            bitmap.Dispose();
-            Image.AddDirtyRect(new Int32Rect(0, 0, width, height));
-            Image.Unlock();
+            if (CheckEnd(token, bitmap, graphics))
+                return false;
+
+            DrawGrid();
+
+            if (CheckEnd(token, bitmap, graphics))
+                return false;
+
+            DrawHexagon();
+
+            CleanUp(bitmap, graphics);
             return true;
         }
 
@@ -246,7 +328,39 @@ namespace UniGraphics.Transformation
         {
             if (!AdjustView(width, height, token))
                 return false;
-            return GenerateTransformOnly(token);
+            return UpdateTransform(token);
+        }
+
+        //звільняє ресурси і розблоковує зображення
+        private void CleanUp(Bitmap bitmap, Graphics graphics)
+        {
+            graphics.Dispose();
+            bitmap.Dispose();
+            Image.AddDirtyRect(new Int32Rect(0, 0, width, height));
+            Image.Unlock();
+        }
+
+        //робить перевірку чи було запитано зупинку виконання потоку
+        //і за потреби виконує звільнення ресурсів
+        private bool CheckEnd(CancellationToken? token, Bitmap bitmap, Graphics graphics)
+        {
+            if (token != null && token.Value.IsCancellationRequested)
+            {
+                CleanUp(bitmap, graphics);
+                return true;
+            }
+            return false;
+        }
+
+        //робить перевірку чи було запитано зупинку виконання потоку
+        private bool CheckEnd(CancellationToken? token)
+        {
+            return token != null && token.Value.IsCancellationRequested;
+        }
+
+        public static double Deg2Rad(double degrees)
+        {
+            return degrees * Math.PI / 180;
         }
     }
 }
