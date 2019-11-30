@@ -11,18 +11,18 @@
             Columns = columns;
             items = new double[rows, columns];
         }
-        
-        void setCell(int row, int column, double value)
+
+        public void setCell(int row, int column, double value)
         {
             items[row, column] = value;
         }
 
-        double at(int row, int column)
+        public double At(int row, int column)
         {
             return items[row, column];
         }
 
-        Matrix deepCopy()
+        public Matrix deepCopy()
         {
             Matrix newMatrix = new Matrix(Rows, Columns);
             for (int i = 0; i < Rows; ++i)
@@ -36,8 +36,12 @@
             Matrix result = new Matrix(first.Rows, second.Columns);
             for (int i = 0; i < first.Rows; ++i)
                 for (int j = 0; j < second.Columns; ++j)
+                {
+                    double cellValue = 0.0;
                     for (int k = 0; k < second.Rows; ++k)
-                        result.setCell(i, j, first.at(i, k) * second.at(k, j));
+                        cellValue += first.At(i, k) * second.At(k, j);
+                    result.setCell(i, j, cellValue);
+                }
             return result;
         }
     }

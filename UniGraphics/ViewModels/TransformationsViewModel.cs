@@ -106,8 +106,8 @@ namespace UniGraphics.ViewModels
                 RootX = 50,
                 RootY = 100,
                 RotateAroundCenter = true,
-                Rotation = 0, 
-                SideLength = 2,
+                MaxRotation = 60, 
+                SideLength = 20,
                 VertexIndex = 0
             };
         }
