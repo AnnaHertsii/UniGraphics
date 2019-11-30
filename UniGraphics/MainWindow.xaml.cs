@@ -23,6 +23,8 @@ namespace UniGraphics
             transformationsView = new TransformationView();
             transformationsViewModel = new TransformationsViewModel();
             MainFrame.DataContext = transformationsViewModel;
+            transformationsView.CenterTransformRadio.Checked += TransformRadioChanged;
+            transformationsView.VertexTransformRadio.Checked += TransformRadioChanged;
             MainFrame.Content = transformationsView;
 
             //colorModelsView = new ColorModelsView();
@@ -64,9 +66,15 @@ namespace UniGraphics
                 fractalsViewModel.FractalPower = 4;
         }
 
+        private void TransformRadioChanged(object sender, RoutedEventArgs e)
+        {
+                transformationsViewModel.RotateAroundCenter = 
+                    transformationsView.CenterTransformRadio.IsChecked.Value;
+        }
+
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            transformationsViewModel.respondToWindowSizeChange(
+            transformationsViewModel.FullUpdate(
                     (int)transformationsView.TransformCanvas.ActualWidth,
                     (int)transformationsView.TransformCanvas.ActualHeight);
             return;//TODO remove this later
@@ -76,7 +84,7 @@ namespace UniGraphics
 
         private void MainFrame_ContentRendered(object sender, System.EventArgs e)
         {
-            transformationsViewModel.initialSettings(
+            transformationsViewModel.FullUpdate(
                     (int)transformationsView.TransformCanvas.ActualWidth,
                     (int)transformationsView.TransformCanvas.ActualHeight);
         }

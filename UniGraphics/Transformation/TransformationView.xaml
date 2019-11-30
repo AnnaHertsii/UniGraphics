@@ -140,6 +140,7 @@
                     FontSize="18"
                     Foreground="White" />
                 <TextBox
+                    Text="{Binding Path=CoordX}"
                     Grid.Column="0"
                     Width="86"
                     Height="27"
@@ -169,6 +170,7 @@
                     </StackPanel>
                 </Button>
                 <Button
+                    Command="{Binding Path=StopTransform}"
                     Name="StopButton"
                     Height="40"
                     Margin="138,288,10,0"
@@ -186,6 +188,7 @@
                     </StackPanel>
                 </Button>
                 <TextBox
+                    Text="{Binding Path=CoordY}"
                     Grid.Column="0"
                     Width="86"
                     Height="27"
@@ -290,6 +293,7 @@
             VerticalAlignment="Bottom"
             Source="/UniGraphics;component/Resources/Unicorn/UnicornHat.png" />
         <TextBox 
+            Text="{Binding Path=SideLength}"
             Foreground="#8787ed"
             BorderThickness="0"
             HorizontalAlignment="Left"
@@ -298,9 +302,11 @@
             Height="29" 
             Margin="173,145,0,0" 
             Grid.Row="1" 
+            FontSize="14"
             VerticalAlignment="Top" 
             Width="86"/>
         <TextBox 
+            Text="{Binding Path=MaxRotation}"
             Foreground="#8787ed"
             BorderThickness="0"
             HorizontalContentAlignment="Center"
@@ -308,6 +314,7 @@
             HorizontalAlignment="Left" 
             Height="30" 
             Margin="173,179,0,0" 
+            FontSize="14"
             Grid.Row="1" 
             VerticalAlignment="Top" 
             Width="86"/>

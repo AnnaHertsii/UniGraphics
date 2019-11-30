@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,7 +19,7 @@ namespace UniGraphics.ViewModels
             Application.Current.Shutdown();
         }
 
-        private void PerformTransform(object args)
+        private void PerformAnimation(object args)
         {
             if (currentRunningTask != null && !currentRunningTask.IsCanceled)
                 tokenSource.Cancel();
@@ -31,15 +32,17 @@ namespace UniGraphics.ViewModels
                 timer.Start();
                 while (true)
                 {
+                    if (token.IsCancellationRequested)
+                        return;
                     finished = transformer.HandleTimeFlow(timer.Elapsed.TotalSeconds);
                     timer.Restart();
                     if (transformer.UpdateTransform(token))
                     {
-                        var clone = transformer.Image.Clone();
-                        clone.Freeze();
-                        currentRunningTask = null;
-                        Dispatcher.CurrentDispatcher.Invoke(() => TransformationImage = clone);
+                        transformer.Image.Freeze();
+                        Dispatcher.CurrentDispatcher.Invoke(() => TransformationImage = transformer.Image);
                     }
+                    else
+                        return;
                     if (finished)
                         return;
                 }
@@ -49,12 +52,29 @@ namespace UniGraphics.ViewModels
 
         public ICommand Exit { get; set; }
         public ICommand Transform { get; set; }
+        public ICommand StopTransform { get; set; }
 
+        private void PerformStop(object args)
+        {
+            if (currentRunningTask != null && !currentRunningTask.IsCanceled)
+                tokenSource.Cancel();
+            tokenSource = new CancellationTokenSource();
+            CancellationToken token = tokenSource.Token;
+            currentRunningTask = new Task(() =>
+            {
+                transformer.Rollback();
+                transformer.GenerateWithSameResolution(token);
+                transformer.Image.Freeze();
+                currentRunningTask = null;
+                Dispatcher.CurrentDispatcher.Invoke(() => TransformationImage = transformer.Image);
+            }, token);
+            currentRunningTask.Start();
+        }
 
         private Task currentRunningTask = null;
         private CancellationTokenSource tokenSource;
 
-        public void respondToWindowSizeChange(int width, int height)
+        public void FullUpdate(int width, int height)
         {
             if (width == 0 || height == 0)
                 return;
@@ -64,29 +84,29 @@ namespace UniGraphics.ViewModels
             CancellationToken token = tokenSource.Token;
             currentRunningTask = new Task(() =>
             {
-                if (transformer.FullGenerate(width, height, token))
+                if (transformer.Generate(width, height, token))
                 {
-                    var clone = transformer.Image.Clone();
-                    clone.Freeze();
+                    transformer.Image.Freeze();
                     currentRunningTask = null;
-                    Dispatcher.CurrentDispatcher.Invoke(() => TransformationImage = clone);
+                    Dispatcher.CurrentDispatcher.Invoke(() => TransformationImage = transformer.Image);
                 }
             }, token);
             currentRunningTask.Start();
         }
 
-        public void initialSettings(int width, int height)
+        public void PartUpdate()
         {
+            if (currentRunningTask != null && !currentRunningTask.IsCanceled)
+                tokenSource.Cancel();
             tokenSource = new CancellationTokenSource();
             CancellationToken token = tokenSource.Token;
             currentRunningTask = new Task(() =>
             {
-                if (transformer.FullGenerate(width, height, token))
+                if (transformer.GenerateWithSameResolution(token))
                 {
-                    var clone = transformer.Image.Clone();
-                    clone.Freeze();
+                    transformer.Image.Freeze();
                     currentRunningTask = null;
-                    Dispatcher.CurrentDispatcher.Invoke(() => TransformationImage = clone);
+                    Dispatcher.CurrentDispatcher.Invoke(() => TransformationImage = transformer.Image);
                 }
             }, token);
             currentRunningTask.Start();
@@ -103,14 +123,87 @@ namespace UniGraphics.ViewModels
             }
         }
 
+        private double _CoordX;
+        public double CoordX
+        {
+            get { return _CoordX; }
+            set
+            {
+                _CoordX = value;
+                transformer.RootX = value;
+                OnPropertyChanged("CoordX");
+                PartUpdate();
+            }
+        }
+
+        private double _CoordY;
+        public double CoordY
+        {
+            get { return _CoordY; }
+            set
+            {
+                _CoordY = value;
+                transformer.RootY = value;
+                OnPropertyChanged("CoordY");
+                PartUpdate();
+            }
+        }
+
+        private double _SideLength;
+        public double SideLength
+        {
+            get { return _SideLength; }
+            set
+            {
+                if (value <= 0.0)
+                    return;
+                _SideLength = value;
+                transformer.SideLength = value;
+                OnPropertyChanged("SideLength");
+                PartUpdate();
+            }
+        }
+
+        private double _MaxRotation;
+        public double MaxRotation
+        {
+            get { return _MaxRotation; }
+            set
+            {
+                if (value < 0.01 || value > 360.0)
+                    return;
+                _MaxRotation = value;
+                transformer.MaxRotation = value;
+                OnPropertyChanged("MaxRotation");
+            }
+        }
+
+        private bool _RotateAroundCenter;
+        public bool RotateAroundCenter
+        {
+            get { return _RotateAroundCenter; }
+            set
+            {
+                _RotateAroundCenter = value;
+                transformer.RotateAroundCenter = value;
+                OnPropertyChanged("RotateAroundCenter");
+            }
+        }
+
         public TransformationsViewModel()
         {
             Exit = new Command(PerformExit);
-            Transform = new Command(PerformTransform);
-            transformer = new TransformationManager(50, 100, 20)
+            Transform = new Command(PerformAnimation);
+            StopTransform = new Command(PerformStop);
+            _CoordX = 0;
+            _CoordY = 0;
+            _SideLength = 1;
+            _MaxRotation = 90;
+            _RotateAroundCenter = true;
+            transformer = new TransformationManager(_CoordX, _CoordY, _SideLength)
             {
-                RotateAroundCenter = true,
-                MaxRotation = 60, 
+                RotateAroundCenter = _RotateAroundCenter,
+                MaxRotation = _MaxRotation, 
                 VertexIndex = 0
             };
         }

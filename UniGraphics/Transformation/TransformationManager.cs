@@ -272,6 +272,13 @@ namespace UniGraphics.Transformation
             this.height = height;
             halfWidth = width / 2;
             halfHeight = height / 2;
+
+            return AdjustView(token);
+        }
+
+        //оновлює налаштування сітки
+        private bool AdjustView(CancellationToken? token)
+        {
             double rootAbsX = Math.Abs(rootX),
                    rootAbsY = Math.Abs(rootY);
 
@@ -370,9 +377,16 @@ namespace UniGraphics.Transformation
         }
 
         //малює результат і оновлює налаштування сітки та фігури
-        public bool FullGenerate(int width, int height, CancellationToken? token)
+        public bool Generate(int width, int height, CancellationToken? token)
         {
             if (!AdjustView(width, height, token))
+                return false;
+            return UpdateTransform(token);
+        }
+
+        public bool GenerateWithSameResolution(CancellationToken? token)
+        {
+            if (!AdjustView(token))
                 return false;
             return UpdateTransform(token);
         }
@@ -407,6 +421,20 @@ namespace UniGraphics.Transformation
         public static double Deg2Rad(double degrees)
         {
             return degrees * Math.PI / 180;
+        }
+
+        public void Rollback()
+        {
+            animationRotation = 0.0;
+            animationScale = 1.0;
+
+            scalingMatrix.Set(0, 0, 1.0);
+            scalingMatrix.Set(1, 1, 1.0);
+
+            rotationMatrix.Set(0, 0, 1.0);
+            rotationMatrix.Set(0, 1, 0.0);
+            rotationMatrix.Set(1, 0, 0.0);
+            rotationMatrix.Set(1, 1, 1.0);
         }
     }
 }
