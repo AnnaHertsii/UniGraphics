@@ -54,17 +54,20 @@
                     Padding="-20,0,0,0"
                     Background="#F2F2F2"
                     Foreground="#99A2F1"
-                    Header="Довідка" />
+                    Header="Довідка" 
+                    Click="HelpClicked"/>
                 <MenuItem
                     Padding="-20,0,0,0"
                     Background="#F2F2F2"
                     Foreground="#99A2F1"
-                    Header="Навчальні матеріали" />
+                    Header="Навчальні матеріали" 
+                    Click="StudyMaterialsClicked"/>
                 <MenuItem
                     Padding="-20,0,0,0"
                     Background="#F2F2F2"
                     Foreground="#99A2F1"
-                    Header="Про програму"/>
+                    Header="Про програму"
+                    Click="CreditsClicked"/>
             </MenuItem>
         </Menu>
         <Border
@@ -159,13 +162,32 @@
                     BorderThickness="0"
                     Background="#99A2F1"
                     Command="{Binding Transform}"
-                    Grid.Column="0" >
+                    Grid.Column="0" Click="StartButton_Click" >
+
                     <StackPanel Orientation="Horizontal">
                         <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/start.png" Stretch="Uniform" Height="28" Width="26"></Image>
                         <TextBlock  
                             FontSize="16"
                             Text="Почати"
                             Foreground="White" Width="58" Height="22"/>
+                    </StackPanel>
+                </Button>
+                <Button
+                    Name="PauseButton"
+                    Height="40"
+                    Margin="10,288,136,0"
+                    VerticalAlignment="Top"
+                    BorderThickness="0"
+                    Background="#99A2F1"
+                    Visibility="Collapsed"
+                    Grid.Column="0" Click="PauseButton_Click" >
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/pause.png" Stretch="Uniform" Height="28" Width="35"></Image>
+                        <TextBlock  
+                            FontSize="16"
+                            Text="Пауза"
+                            Foreground="White" Width="48" Height="22"/>
                     </StackPanel>
                 </Button>
                 <Button
