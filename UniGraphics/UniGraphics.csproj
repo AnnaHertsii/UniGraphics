@@ -96,6 +96,8 @@
     <Compile Include="StudyWindow.xaml.cs">
       <DependentUpon>StudyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Transformation\TransformationManager.cs" />
+    <Compile Include="Transformation\Matrix.cs" />
     <Compile Include="Transformation\TransformationView.xaml.cs">
       <DependentUpon>TransformationView.xaml</DependentUpon>
     </Compile>
@@ -103,6 +105,7 @@
     <Compile Include="ViewModels\Command.cs" />
     <Compile Include="ViewModels\DataViewModel.cs" />
     <Compile Include="ViewModels\FractalsDataViewModel.cs" />
+    <Compile Include="ViewModels\TransformationsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="ColorModels\ColorModelsView.xaml">
       <SubType>Designer</SubType>

@@ -21,6 +21,16 @@
             <ColumnDefinition />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Canvas
+            Name="TransformCanvas"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Grid.Row="1"
+            Grid.RowSpan="2">
+            <Image 
+                Name="TransformImg"
+                Source="{Binding Path=TransformationImage}"/>
+        </Canvas>
         <Menu
             Grid.ColumnSpan="4"
             Background="#99A2F1"
@@ -29,18 +39,6 @@
                 FontSize="16"
                 Foreground="White"
                 Header="Файл">
-                <MenuItem
-                    Padding="-20,0,0,0"
-                    Background="#F2F2F2"
-                    Foreground="#99A2F1"
-                    Command="{Binding OpenFile}"
-                    Header="Відкрити" />
-                <MenuItem
-                    Padding="-20,0,0,0"
-                    Background="#F2F2F2"
-                    Foreground="#99A2F1"
-                    Command="{Binding SaveFile}"
-                    Header="Зберегти як..." />
                 <MenuItem
                     Padding="-20,0,0,0"
                     Background="#F2F2F2"
@@ -69,8 +67,6 @@
                     Header="Про програму"/>
             </MenuItem>
         </Menu>
-        <TextBlock Text="RGB" Foreground="White" FontSize="16" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="21" Margin="143,2" Width="28"></TextBlock>
-        <TextBlock Text="HSL" Foreground="White" FontSize="16" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="21" Margin="144,2" Width="26"></TextBlock>
         <Border
             Grid.Row="1"
             Grid.RowSpan="2"
@@ -144,9 +140,8 @@
                     FontSize="18"
                     Foreground="White" />
                 <TextBox
-                    Name="ConstantRealText"
                     Grid.Column="0"
-                    Width="73"
+                    Width="86"
                     Height="27"
                     Margin="39,95,0,0"
                     HorizontalAlignment="Left"
@@ -165,14 +160,14 @@
                     VerticalAlignment="Top"
                     BorderThickness="0"
                     Background="#99A2F1"
+                    Command="{Binding Transform}"
                     Grid.Column="0" >
                     <StackPanel Orientation="Horizontal">
                         <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/start.png" Stretch="Uniform" Height="28" Width="26"></Image>
                         <TextBlock  
                             FontSize="16"
                             Text="Почати"
-                            Foreground="White" Width="58" Height="22"
-                            ></TextBlock>
+                            Foreground="White" Width="58" Height="22"/>
                     </StackPanel>
                 </Button>
                 <Button
@@ -193,9 +188,8 @@
                     </StackPanel>
                 </Button>
                 <TextBox
-                    x:Name="ConstantRealText_Copy"
                     Grid.Column="0"
-                    Width="73"
+                    Width="86"
                     Height="27"
                     Margin="173,95,0,0"
                     HorizontalAlignment="Left"
@@ -272,23 +266,6 @@
                     Foreground="White" />
             </Grid>
         </Border>
-        <Border Background="#BCC3FF" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Margin="315,0,0,0"></Border>
-        <Grid
-            ClipToBounds="True"
-            Grid.Row="1"
-            Grid.RowSpan="2">
-           
-            <TextBlock
-                HorizontalAlignment="Left" 
-                Margin="-257,482,0,0" 
-                VerticalAlignment="Top" Width="147" Height="78"/>
-
-        </Grid>
-        <Grid
-            ClipToBounds="True"
-            Grid.Row="1"
-            Grid.RowSpan="2"
-            Grid.Column="2" Margin="96,0,0,0"/>
         <Border
             Grid.Row="2"
             Grid.Column="0"
@@ -306,7 +283,7 @@
                 Text="Щоб почати роботу з рухом шестикутника, введіть необхідні параметри зверху :)"
                 TextAlignment="Center"
                 TextWrapping="Wrap" Margin="0,17,0,19" />
-            
+
         </Border>
         <Image
             Grid.Row="2"
@@ -316,19 +293,19 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
             Source="/UniGraphics;component/Resources/Unicorn/UnicornHat.png" />
-        <ListBox 
+        <TextBox 
             HorizontalAlignment="Left" 
             Height="29" 
-            Margin="168,145,0,0" 
+            Margin="173,145,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" 
-            Width="91"/>
-        <ListBox 
+            Width="86"/>
+        <TextBox 
             HorizontalAlignment="Left" 
             Height="30" 
-            Margin="168,179,0,0" 
+            Margin="173,179,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" 
-            Width="91"/>
+            Width="86"/>
     </Grid>
 </Page>

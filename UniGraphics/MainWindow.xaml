@@ -16,6 +16,6 @@
             Name="MainFrame"
             DataContextChanged="MainFrame_DataContextChanged"
             LoadCompleted="MainFrame_LoadCompleted"
-            NavigationUIVisibility="Hidden" />
+            NavigationUIVisibility="Hidden" ContentRendered="MainFrame_ContentRendered" />
     </Grid>
 </Window>

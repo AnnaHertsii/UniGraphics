@@ -5,16 +5,14 @@ namespace UniGraphics.ViewModels
 {
     public class Command : ICommand
     {
-        #region Constructor
         public Command(Action<object> action)
         {
             ExecuteDelegate = action;
         }
-        #endregion
-        #region Properties
+
         public Predicate<Object> CanExecuteDelegate { get; set; }
         public Action<Object> ExecuteDelegate { get; set; }
-        #endregion
+
         public event EventHandler CanExecuteChanged
         {
             add
