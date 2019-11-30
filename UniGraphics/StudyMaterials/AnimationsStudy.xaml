@@ -7,8 +7,33 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="500"
       Title="AnimationStudy">
-
     <Grid>
-        
-    </Grid>
+    <ScrollViewer>
+        <StackPanel Margin="10,0,10,0">
+            <Label 
+                FontStyle ="Italic" 
+                Foreground="#99A2F1" 
+                FontWeight="Bold"
+                Content="Афінні перетворення" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top"
+                FontSize="18"
+                Width="208" 
+                RenderTransformOrigin="0.5,0.516"/>
+            <TextBlock
+                    Foreground="Black"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"
+                    Margin="10,0,0,10">
+                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Означення"/><LineBreak/>                  
+                    <Run Text=""/>
+                    <Run Text=""/>
+                    <Run Text=""/>
+                    <Run Text=""/>
+                    <Run Text=""/>
+            </TextBlock>
+        </StackPanel>
+    </ScrollViewer>
+ </Grid>
 </Page>
