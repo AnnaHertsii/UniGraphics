@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace UniGraphics.Transformation
 {
@@ -45,13 +33,35 @@ namespace UniGraphics.Transformation
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            StartButton.Visibility = Visibility.Hidden;
+            StartButtonText.Text = "Продовжити";
+            StartButton.Visibility = Visibility.Collapsed;
             PauseButton.Visibility = Visibility.Visible;
+            StopButton.IsEnabled = true;
         }
 
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
+            StartButton.Visibility = Visibility.Visible;
+            PauseButton.Visibility = Visibility.Collapsed;
+            StopButton.IsEnabled = true;
+        }
 
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            StartButtonText.Text = "Розпочати";
+            StartButton.Visibility = Visibility.Visible;
+            PauseButton.Visibility = Visibility.Collapsed;
+            StopButton.IsEnabled = false;
+        }
+
+        public void HandleAnimationEnd()
+        {
+            Dispatcher.Invoke(() => {
+                StartButtonText.Text = "Розпочати";
+                StartButton.Visibility = Visibility.Visible;
+                PauseButton.Visibility = Visibility.Collapsed;
+                StopButton.IsEnabled = false;
+            });
         }
     }
 }

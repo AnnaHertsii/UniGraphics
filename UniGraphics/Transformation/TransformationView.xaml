@@ -9,7 +9,35 @@
       d:DesignHeight="600"
       d:DesignWidth="900"
       Background="White">
-
+    <Page.Resources>
+        <Style x:Key="BlueButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="Background" Value="#99A2F1" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#8189cc" />
+                                        </Trigger>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Background" Value="#FFCED3FD" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid Background="Transparent">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
@@ -161,14 +189,17 @@
                     Margin="10,288,136,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
-                    Background="#99A2F1"
-                    Command="{Binding Transform}"
+                    Click="StartButton_Click"
+                    Style="{StaticResource BlueButtonStyle}"
+                    Command="{Binding Transform}">
                     <StackPanel Orientation="Horizontal">
                         <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/start.png" Stretch="Uniform" Height="28" Width="26"></Image>
                         <TextBlock  
-                            FontSize="16"
-                            Text="Почати"
-                            Foreground="White" Width="58" Height="22"/>
+                            FontSize="15"
+                            Name="StartButtonText"
+                            Text="Розпочати"
+                            Foreground="White" 
+                            Height="22"/>
                     </StackPanel>
                 </Button>
                 <Button
@@ -177,9 +208,10 @@
                     Margin="10,288,136,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
-                    Background="#99A2F1"
                     Visibility="Collapsed"
                     Grid.Column="0" 
+                    Command="{Binding Path=PauseTransform}"
+                    Style="{StaticResource BlueButtonStyle}"
 					Click="PauseButton_Click" >
 
                     <StackPanel Orientation="Horizontal">
@@ -197,15 +229,23 @@
                     Margin="138,288,10,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
-                    Background="#99A2F1"
+                    Click="StopButton_Click"
+                    IsEnabled="False"
+                    Style="{StaticResource BlueButtonStyle}"
                     Grid.Column="0" >
                     <StackPanel Orientation="Horizontal">
-                        <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/stop.png" Stretch="Uniform" Height="25" Width="32"></Image>
+                        <Image 
+                            HorizontalAlignment="Left" 
+                            Source="/UniGraphics;component/Resources/stop.png" 
+                            Stretch="Uniform" 
+                            Height="25" 
+                            Width="32"/>
                         <TextBlock  
-                            FontSize="16"
+                            FontSize="15"
                             Text="Зупинити"
-                            Foreground="White" Width="71" Height="24"
-                            ></TextBlock>
+                            Foreground="White" 
+                            Width="71" 
+                            Height="24"/>
                     </StackPanel>
                 </Button>
                 <TextBox
@@ -244,6 +284,7 @@
                     FontSize="16"
                     Foreground="White" />
                 <RadioButton
+                    Cursor="Hand"
                     Name="CenterTransformRadio"
                     Grid.Column="0"
                     Width="12"
@@ -254,6 +295,7 @@
                     BorderThickness="0"
                     IsChecked="True" />
                 <RadioButton
+                    Cursor="Hand"
                     Name="VertexTransformRadio"
                     Grid.Column="0"
                     Width="12"

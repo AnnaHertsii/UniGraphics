@@ -14,10 +14,14 @@ namespace UniGraphics.ViewModels
     {
         private TransformationManager transformer;
 
+        Action animationFinished;
+
         private void PerformExit(object args)
         {
             Application.Current.Shutdown();
         }
+
+        private bool IsAnimationFinished = false;
 
         private void PerformAnimation(object args)
         {
@@ -25,16 +29,18 @@ namespace UniGraphics.ViewModels
                 tokenSource.Cancel();
             tokenSource = new CancellationTokenSource();
             CancellationToken token = tokenSource.Token;
+            if (IsAnimationFinished)
+                transformer.Rollback();
             currentRunningTask = new Task(() =>
             {
-                bool finished;
+                IsAnimationFinished = false;
                 Stopwatch timer = new Stopwatch();
                 timer.Start();
                 while (true)
                 {
                     if (token.IsCancellationRequested)
                         return;
-                    finished = transformer.HandleTimeFlow(timer.Elapsed.TotalSeconds);
+                    IsAnimationFinished = transformer.HandleTimeFlow(timer.Elapsed.TotalSeconds);
                     timer.Restart();
                     if (transformer.UpdateTransform(token))
                     {
@@ -43,16 +49,26 @@ namespace UniGraphics.ViewModels
                     }
                     else
                         return;
-                    if (finished)
+                    if (IsAnimationFinished)
+                    {
+                        animationFinished();
                         return;
+                    }
                 }
             }, token);
             currentRunningTask.Start();
         }
 
+        private void PerformPause(object args)
+        {
+            if (currentRunningTask != null && !currentRunningTask.IsCanceled)
+                tokenSource.Cancel();
+        }
+
         public ICommand Exit { get; set; }
         public ICommand Transform { get; set; }
         public ICommand StopTransform { get; set; }
+        public ICommand PauseTransform { get; set; }
 
         private void PerformStop(object args)
         {
@@ -190,11 +206,13 @@ namespace UniGraphics.ViewModels
             }
         }
 
-        public TransformationsViewModel()
+        public TransformationsViewModel(Action animFinished)
         {
+            animationFinished = animFinished;
             Exit = new Command(PerformExit);
             Transform = new Command(PerformAnimation);
             StopTransform = new Command(PerformStop);
+            PauseTransform = new Command(PerformPause);
             _CoordX = 0;
             _CoordY = 0;
             _SideLength = 1;

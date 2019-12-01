@@ -21,7 +21,7 @@ namespace UniGraphics
         {
             InitializeComponent();
             transformationsView = new TransformationView();
-            transformationsViewModel = new TransformationsViewModel();
+            transformationsViewModel = new TransformationsViewModel(transformationsView.HandleAnimationEnd);
             MainFrame.DataContext = transformationsViewModel;
             transformationsView.CenterTransformRadio.Checked += TransformRadioChanged;
             transformationsView.VertexTransformRadio.Checked += TransformRadioChanged;
