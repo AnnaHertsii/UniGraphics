@@ -145,6 +145,8 @@ namespace UniGraphics.ViewModels
             get { return _CoordX; }
             set
             {
+                if (Math.Abs(value) > 200000)
+                    return;
                 _CoordX = value;
                 transformer.RootX = value;
                 OnPropertyChanged("CoordX");
@@ -158,6 +160,8 @@ namespace UniGraphics.ViewModels
             get { return _CoordY; }
             set
             {
+                if (Math.Abs(value) > 200000)
+                    return;
                 _CoordY = value;
                 transformer.RootY = value;
                 OnPropertyChanged("CoordY");
@@ -171,7 +175,7 @@ namespace UniGraphics.ViewModels
             get { return _SideLength; }
             set
             {
-                if (value <= 0.0)
+                if (value <= 0.0 || value > 50000)
                     return;
                 _SideLength = value;
                 transformer.SideLength = value;

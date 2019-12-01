@@ -13,6 +13,7 @@
     mc:Ignorable="d">
     <Grid Name="mainGrid">
         <Frame
+            IsTabStop="False"
             Name="MainFrame"
             DataContextChanged="MainFrame_DataContextChanged"
             LoadCompleted="MainFrame_LoadCompleted"

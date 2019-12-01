@@ -60,6 +60,7 @@
                 Source="{Binding Path=TransformationImage}"/>
         </Canvas>
         <Menu
+            IsTabStop="False"
             Grid.ColumnSpan="4"
             Background="#99A2F1"
             Foreground="White">
@@ -105,12 +106,13 @@
             Background="#BCC3FF">
             <Grid>
                 <Button
+                    TabIndex="9"
                     Name="BackButton" 
                     Height="29"
                     Margin="10,19,229,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
-                    Background="#99A2F1"
+                    Style="{StaticResource BlueButtonStyle}"
                     Grid.Column="0" >
                     <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/back.png" Stretch="Uniform" Height="28" Width="25"/>
                 </Button>
@@ -171,6 +173,9 @@
                     FontSize="18"
                     Foreground="White" />
                 <TextBox
+                    TabIndex="0"
+                    KeyDown="KeyDownHandler"
+                    Name="InputY"
                     Text="{Binding Path=CoordX}"
                     Grid.Column="0"
                     Width="86"
@@ -184,6 +189,7 @@
                     FontSize="14"
                     Foreground="#8787ed"/>
                 <Button
+                    TabIndex="6"
                     Name="StartButton"
                     Height="40"
                     Margin="10,288,136,0"
@@ -203,6 +209,7 @@
                     </StackPanel>
                 </Button>
                 <Button
+                    TabIndex="7"
                     Name="PauseButton"
                     Height="40"
                     Margin="10,288,136,0"
@@ -223,6 +230,7 @@
                     </StackPanel>
                 </Button>
                 <Button
+                    TabIndex="8"
 					Command="{Binding Path=StopTransform}"
                     Name="StopButton"
                     Height="40"
@@ -249,6 +257,9 @@
                     </StackPanel>
                 </Button>
                 <TextBox
+                    TabIndex="1"
+                    KeyDown="KeyDownHandler"
+                    Name="InputX"
                     Text="{Binding Path=CoordY}"
                     Grid.Column="0"
                     Width="86"
@@ -284,6 +295,7 @@
                     FontSize="16"
                     Foreground="White" />
                 <RadioButton
+                    TabIndex="4"
                     Cursor="Hand"
                     Name="CenterTransformRadio"
                     Grid.Column="0"
@@ -295,6 +307,7 @@
                     BorderThickness="0"
                     IsChecked="True" />
                 <RadioButton
+                    TabIndex="5"
                     Cursor="Hand"
                     Name="VertexTransformRadio"
                     Grid.Column="0"
@@ -305,6 +318,9 @@
                     VerticalAlignment="Top"
                     BorderThickness="0"/>
                 <Label
+                    Name="CenterPivotLabel"
+                    MouseDown="CenterPivotClicked"
+                    Cursor="Hand"
                     Grid.Column="0"
                     Width="57"
                     Height="30"
@@ -316,6 +332,9 @@
                     FontSize="16"
                     Foreground="White" />
                 <Label
+                    Name="VertexPivotLabel"
+                    MouseDown="VertexPivotClicked"
+                    Cursor="Hand"
                     Grid.Column="0"
                     Width="77"
                     Height="30"
@@ -356,6 +375,9 @@
             VerticalAlignment="Bottom"
             Source="/UniGraphics;component/Resources/Unicorn/UnicornHat.png" />
         <TextBox 
+            TabIndex="2"
+            Name="InputSideLength"
+            KeyDown="KeyDownHandler"
             Text="{Binding Path=SideLength}"
             Foreground="#8787ed"
             BorderThickness="0"
@@ -369,6 +391,9 @@
             VerticalAlignment="Top" 
             Width="86"/>
         <TextBox 
+            TabIndex="3"
+            KeyDown="KeyDownHandler"
+            Name="InputMaxRotation"
             Text="{Binding Path=MaxRotation}"
             Foreground="#8787ed"
             BorderThickness="0"

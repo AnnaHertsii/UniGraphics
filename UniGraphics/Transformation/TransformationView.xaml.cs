@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace UniGraphics.Transformation
 {
@@ -37,6 +38,7 @@ namespace UniGraphics.Transformation
             StartButton.Visibility = Visibility.Collapsed;
             PauseButton.Visibility = Visibility.Visible;
             StopButton.IsEnabled = true;
+            ToggleTransformUI(false);
         }
 
         private void PauseButton_Click(object sender, RoutedEventArgs e)
@@ -52,6 +54,7 @@ namespace UniGraphics.Transformation
             StartButton.Visibility = Visibility.Visible;
             PauseButton.Visibility = Visibility.Collapsed;
             StopButton.IsEnabled = false;
+            ToggleTransformUI(true);
         }
 
         public void HandleAnimationEnd()
@@ -61,7 +64,37 @@ namespace UniGraphics.Transformation
                 StartButton.Visibility = Visibility.Visible;
                 PauseButton.Visibility = Visibility.Collapsed;
                 StopButton.IsEnabled = false;
+                ToggleTransformUI(true);
             });
+        }
+
+        private void ToggleTransformUI(bool state)
+        {
+            InputX.IsEnabled = state;
+            InputY.IsEnabled = state;
+            InputSideLength.IsEnabled = state;
+            InputMaxRotation.IsEnabled = state;
+            VertexTransformRadio.IsEnabled = state;
+            CenterTransformRadio.IsEnabled = state;
+            VertexPivotLabel.IsEnabled = state;
+            CenterPivotLabel.IsEnabled = state;
+        }
+
+        private void CenterPivotClicked(object sender, RoutedEventArgs e)
+        {
+            CenterTransformRadio.IsChecked = true;
+        }
+
+        private void VertexPivotClicked(object sender, RoutedEventArgs e)
+        {
+            VertexTransformRadio.IsChecked = true;
+        }
+
+        private void KeyDownHandler(object sender, KeyEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if(e.Key == Key.Return)
+                textBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
         }
     }
 }

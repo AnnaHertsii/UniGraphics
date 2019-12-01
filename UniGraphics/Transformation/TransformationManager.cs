@@ -8,6 +8,7 @@ using MColor = System.Windows.Media.Color;
 using DColor = System.Drawing.Color;
 using Pen = System.Drawing.Pen;
 using DBrush = System.Drawing.Brush;
+using System.Linq;
 
 namespace UniGraphics.Transformation
 {
@@ -21,6 +22,7 @@ namespace UniGraphics.Transformation
             {
                 rootX = value;
                 UpdateParameters();
+                Rollback();
             }
         }
         public double RootY
@@ -28,8 +30,9 @@ namespace UniGraphics.Transformation
             get { return rootY; }
             set
             {
-                rootY = value;
+                rootY = -value;
                 UpdateParameters();
+                Rollback();
             }
         }
         public double SideLength
@@ -39,7 +42,9 @@ namespace UniGraphics.Transformation
             {
                 sideLength = value;
                 CalculateVertexOffsets();
+                UpdateRotationPivot();
                 UpdateParameters();
+                Rollback();
             }
         }
         bool rotateAroundCenter;
@@ -57,18 +62,16 @@ namespace UniGraphics.Transformation
         public WriteableBitmap Image { get; private set; }
 
         private static readonly double offsetCoef = 1.1;
-        private static readonly int minScreenTick = 50;
-        private static readonly int maxScreenTick = 100;
         private static readonly double rotationSpeed = 60.0;
         private static readonly double scalingSpeed = 0.5;
         private static readonly Pen gridPen, axisGridPen;
         private static readonly DBrush tickTextBrush, hexagonBrush;
         private static readonly Font tickTextFont;
 
-        private int width, height, tick, 
+        private int width, height, 
                     ticksFromX, ticksToX, ticksFromY, ticksToY;
         private double halfWidth, halfHeight, PlaneX, PlaneY,
-                       rootContainer, screenTick,
+                       rootContainer, screenTick, tick,
                        scale, animationRotation, animationScale,
                        sideHalf, side3Halves, centerOffsetY, centerOffsetY2;
         private Graphics graphics;
@@ -97,7 +100,7 @@ namespace UniGraphics.Transformation
             animationRotation = 0.0;
             animationScale = 1.0;
             this.rootX = rootX;
-            this.rootY = rootY;
+            this.rootY = -rootY;
             this.sideLength = sideLength;
             InitTransformMatrices();
             CalculateVertexOffsets();
@@ -166,6 +169,8 @@ namespace UniGraphics.Transformation
                 new PointF(width - 10, (float) (halfHeight + 5)),
                 new PointF(width - 10, (float) (halfHeight - 6))
             });
+            graphics.DrawString("X", tickTextFont, tickTextBrush, width - 20, (float)(halfHeight - 20));
+            graphics.DrawString("Y", tickTextFont, tickTextBrush, (float)(halfWidth - 20), 5.0f);
         }
 
         //малює шестикутник
@@ -276,6 +281,19 @@ namespace UniGraphics.Transformation
             return AdjustView(token);
         }
 
+        //рахує довжину одиничного відрізку
+        private static double CalculateTick(double container)
+        {
+            int stepCount = 10;
+            double roughStep = container / (stepCount - 1);
+
+            double[] goodSteps = { 1.0, 2.0, 5.0, 10.0 };
+            double stepPower = Math.Pow(10, -Math.Floor(Math.Log10(roughStep)));
+            double normalizedStep = roughStep * stepPower;
+            double goodNormalizedStep = goodSteps.First(step => step >= normalizedStep);
+            return goodNormalizedStep / stepPower;
+        }
+
         //оновлює налаштування сітки
         private bool AdjustView(CancellationToken? token)
         {
@@ -285,18 +303,14 @@ namespace UniGraphics.Transformation
             rootContainer = (Math.Max(rootAbsX, rootAbsY) + sideLength * 2) * offsetCoef;
             double containerScreenLenght = (rootAbsX > rootAbsY) ? halfWidth : halfHeight;
             scale = rootContainer / containerScreenLenght;
-            PlaneX = (int) (halfWidth * scale);
-            PlaneY = (int) (halfHeight * scale);
+            PlaneX = halfWidth * scale;
+            PlaneY = halfHeight * scale;
 
             if (CheckEnd(token))
                 return false;
 
-            for (tick = 10; tick < rootContainer; tick += 10)
-            {
-                double scaledTick = tick / scale;
-                if (scaledTick > minScreenTick && scaledTick < maxScreenTick)
-                    break;
-            }
+            tick = CalculateTick(rootContainer);
+
             screenTick = tick / scale;
             ticksToX = (int) (PlaneX / tick) + 1;
             ticksFromX = -ticksToX;
@@ -331,6 +345,7 @@ namespace UniGraphics.Transformation
             if (animationRotation > MaxRotation)
             {
                 animationRotation = MaxRotation;
+                animationScale = (MaxRotation / rotationSpeed) * scalingSpeed + 1.0;
                 finished = true;
             }
 
