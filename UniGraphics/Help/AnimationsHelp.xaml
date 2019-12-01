@@ -5,22 +5,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UniGraphics.Help"
       mc:Ignorable="d" 
-      Background="White" d:DesignWidth="500" Height="450"
+      Background="White" 
+      d:DesignWidth="450" Height="500"
       Title="AnimationsHelp">
-
     <Grid>
         <ScrollViewer>
             <StackPanel Margin="10,0,10,0">
                 <Label 
-                FontStyle ="Italic" 
-                Foreground="#99A2F1" 
-                FontWeight="Bold"
-                Content="Рух шестикутника" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Top"
-                FontSize="18"
-                Width="186" 
-                RenderTransformOrigin="0.5,0.516"/>
+                    FontStyle ="Italic" 
+                    Foreground="#99A2F1" 
+                    FontWeight="Bold"
+                    Content="Рух шестикутника" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top"
+                    FontSize="18"
+                    Width="186" 
+                    RenderTransformOrigin="0.5,0.516"/>
                 <TextBlock
                     Foreground="Black"
                     FontSize="16"
@@ -29,7 +29,7 @@
                         <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Вхідні дані"/><LineBreak/>
                         <Run Text="Для початку роботи з рухом шестикутника необхідно ввести такі вхідні дані, як:"/>
                         <Run Text="координати лівої верхньої вершини шестикутника X та Y, довжину сторони та кут повороту."/>
-                        <Run Text="Заборонено вводити будь-які символи, літери окрім чисел."/><LineBreak/>
+                        <Run Text="Заборонено вводити будь-які символи, літери окрім чисел та крапки."/><LineBreak/>
                         <Run Text="Допустимі межі вхідних даних:"/><LineBreak/>
                         <Run Text="Координати лівої верхньої вершини X та Y: (-200 000; 200 000)"/><LineBreak/>
                         <Run Text="Довжина сторони: (0; 200 000)"/><LineBreak/>
