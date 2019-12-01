@@ -68,8 +68,8 @@ namespace UniGraphics
 
         private void TransformRadioChanged(object sender, RoutedEventArgs e)
         {
-                transformationsViewModel.RotateAroundCenter = 
-                    transformationsView.CenterTransformRadio.IsChecked.Value;
+            transformationsViewModel.RotateAroundCenter = 
+                transformationsView.CenterTransformRadio.IsChecked.Value;
         }
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)

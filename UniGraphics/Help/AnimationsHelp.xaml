@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:UniGraphics.Help"
       mc:Ignorable="d" 
       Background="White" 
-      d:DesignWidth="450" Height="500"
+      d:DesignWidth="450" 
       Title="AnimationsHelp">
     <Grid>
         <ScrollViewer>
