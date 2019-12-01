@@ -5,11 +5,63 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UniGraphics.Help"
       mc:Ignorable="d" 
-      Background="White"
-      d:DesignHeight="450" d:DesignWidth="800"
+      Background="White" d:DesignWidth="500" Height="450"
       Title="AnimationsHelp">
 
     <Grid>
-        <Label Content="АНІМАЦІЇ ДОПОМОГА!"></Label>
+        <ScrollViewer>
+            <StackPanel Margin="10,0,10,0">
+                <Label 
+                FontStyle ="Italic" 
+                Foreground="#99A2F1" 
+                FontWeight="Bold"
+                Content="Рух шестикутника" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top"
+                FontSize="18"
+                Width="186" 
+                RenderTransformOrigin="0.5,0.516"/>
+                <TextBlock
+                    Foreground="Black"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify">
+                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Вхідні дані"/><LineBreak/>
+                        <Run Text="Для початку роботи з рухом шестикутника необхідно ввести такі вхідні дані, як:"/>
+                        <Run Text="координати лівої верхньої вершини шестикутника X та Y, довжину сторони та кут повороту."/>
+                        <Run Text="Заборонено вводити будь-які символи, літери окрім чисел."/><LineBreak/>
+                        <Run Text="Допустимі межі вхідних даних:"/><LineBreak/>
+                        <Run Text="Координати лівої верхньої вершини X та Y: (-200 000; 200 000)"/><LineBreak/>
+                        <Run Text="Довжина сторони: (0; 200 000)"/><LineBreak/>
+                        <Run Text="Кут повороту: (0; 360)"/><LineBreak/>
+                        <Run Text="Приклад допустимих вхідних даних:"/><LineBreak/>
+                        <Run Text="Х: 195, У: 497, сторона: 70, кут: 300"/><LineBreak/>
+                        <Run Text="Приклад недопустимих вхідних даних:"/><LineBreak/>
+                        <Run Text="Х: a, У: b, сторона: a+b, кут: a*b"/><LineBreak/>
+                        <Run Text="Також для обертання шестикутника потрібно обрати точку повороту - нею може бути центр шестикутника або одна з його сторін."/>
+                        <Run Text="Якщо в якості точки повороту обрано вершину - є можливим вказати яку, за замовчуванням точкою повороту є ліва верхня вершина."/>
+                        <Run Text="Після введення усіх даних для здійснення повороту шестикутника натисніть кнопку 'Почати'."/>
+                </TextBlock>
+                <TextBlock
+                    Foreground="Black" 
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify">
+                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Масштабування координатної площини"/><LineBreak/>
+                    <Run Text="Для зручного та доступного для розуміння відображення шестикутника розмір площина координат"/>
+                    <Run Text="залежить від заданих даних: координат вершини та довжини сторони."/><LineBreak/>
+                    <Run Text="При великих значеннях вхідних даних розмір координатної площини також буде великим."/>
+                    <Run Text="Розмір визначається як максимальне значення з вхідних даних плюс деяка величина (100 одиниць). "/>
+                    <Run Text="Масштабування задається автоматично."/><LineBreak/>
+                </TextBlock>
+                <TextBlock
+                    Foreground="Black" 
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify">
+                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Можливі проблемні ситуації"/><LineBreak/>
+                </TextBlock>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

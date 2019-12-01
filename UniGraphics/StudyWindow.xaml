@@ -64,7 +64,10 @@
             VerticalAlignment="Top"
             Grid.Column="0"
             Foreground="White"
-            FontSize="18" Width="203" Height="37"/>
+            FontSize="18"
+            Width="203" 
+            Height="37"
+            MouseLeftButtonUp="TransformationStudyClicked"/>
         <Image
             Width="72"
             Grid.Column="0"
