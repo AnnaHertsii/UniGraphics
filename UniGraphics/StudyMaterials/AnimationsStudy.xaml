@@ -8,9 +8,9 @@
       d:DesignHeight="450" d:DesignWidth="500"
       Title="AnimationStudy">
     <Grid>
-    <ScrollViewer>
-        <StackPanel Margin="10,0,10,0">
-            <Label 
+        <ScrollViewer>
+            <StackPanel Margin="10,0,10,0">
+                <Label 
                 FontStyle ="Italic" 
                 Foreground="#99A2F1" 
                 FontWeight="Bold"
@@ -20,20 +20,103 @@
                 FontSize="18"
                 Width="208" 
                 RenderTransformOrigin="0.5,0.516"/>
-            <TextBlock
+                <TextBlock
                     Foreground="Black"
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
                     Margin="10,0,0,10">
                     <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Означення"/><LineBreak/>                  
-                    <Run Text=""/>
-                    <Run Text=""/>
-                    <Run Text=""/>
-                    <Run Text=""/>
-                    <Run Text=""/>
-            </TextBlock>
-        </StackPanel>
-    </ScrollViewer>
- </Grid>
+                    <Run Text="Афінне перетворення - це перетворення, при яких зберігаються прямі лінії, "/>
+                    <Run Text="паралельність прямих, відношення довжин відрізків, що лежать на одній прямій, і відношення площ фігур."/>
+                    <Run Text="Афінними перетвореннями є:"/><LineBreak/>
+                    <Run Text="1) Зсув"/><LineBreak/>
+                    <Run Text="2) Масштабування"/><LineBreak/>
+                    <Run Text="3) Поворот"/><LineBreak/>
+                    <Run Text="Усі афінні перетворення задаються формулами або матричними виразами. Афінні перетворення базуються на використанні матриць перетворень."/>
+                </TextBlock>
+                <TextBlock
+                    Foreground="Black"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"
+                    Margin="10,0,0,10">
+                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Зсув"/><LineBreak/>
+                    <Run Text="Зсув об'єкта відповідає матриці:"/>
+                </TextBlock>
+                <Image 
+                    Margin="10,0,0,2"
+                    Width="160"
+                    HorizontalAlignment="Center"
+                    Source="/UniGraphics;component/Resources/movematrix.jpg" Height="110" />
+                <TextBlock
+                    Foreground="Black"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"
+                    Margin="10,0,0,10">
+                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Масштабування"/><LineBreak/>
+                    <Run Text="Масштабування відповідає матриці:"/>
+                </TextBlock>
+                <Image 
+                    Margin="10,0,0,2"
+                    Width="162"
+                    HorizontalAlignment="Center"
+                    Source="/UniGraphics;component/Resources/scalematrix.jpg" Height="110" />
+                <TextBlock
+                    Foreground="Black"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"
+                    Margin="10,0,0,10">
+                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Поворот"/><LineBreak/>
+                    <Run Text="Поворот об'єкта відносно центру координат на кут alfa відповідає матриці:"/>
+                </TextBlock>
+                <Image 
+                    Margin="10,0,0,2"
+                    Width="198"
+                    HorizontalAlignment="Center"
+                    Source="/UniGraphics;component/Resources/turnmatrix.jpg" Height="81" />
+                <TextBlock
+                    Foreground="Black"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"
+                    Margin="10,0,0,10">
+                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Правила виконання перетворень"/><LineBreak/>
+                    <Run Text="Для представлення даних та виконання різноманітних перетворень використовуються певні узгодження."/>
+                    <Run Text="Наприклад, перед виконанням повороту необхідно отримати відповіді на наступні питання:"/><LineBreak/>
+                    <Run Text="Обертається об'єкт або система координат?"/><LineBreak/>
+                    <Run Text="Поворот здійснюється за чи проти годинникової стрілки?"/><LineBreak/>
+                    <Run Text="У якій системі координат (лівосторонній чи правосторонній) здійснюється поворот?"/><LineBreak/>
+                    <Run Text="Навколо якої лінії або осі здійснюється поворот?"/>
+                </TextBlock>
+                <TextBlock
+                    Foreground="Black"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"
+                    Margin="10,0,0,10">
+                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Матриця перетворень"/><LineBreak/>
+                    <Run Text="Складне перетворення - це перетворення,  яке  містить ланцюжок базових перетворень (не менше двох)."/>
+                    <Run Text="Результат афінних перетворень залежить від порядку їх виконання."/>
+                    <Run Text="Часто при комбінованих перетворенях зручніше визначити саму матрицю перетворення. Для цього необхідно "/>
+                    <Run Text="знати координати вершин фігури до перетворення і координати вершин кінцевої фігури після перетворення."/>
+                    <Run Text="Вершини фігури записуються у матричній формі і матриця перетворення визначається як добуток оберненої матриці початкового об'єкта і матриці кінцевого об'єкта."/>
+                </TextBlock>
+                <TextBlock
+                    Foreground="Black"
+                    FontStyle="Italic"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"
+                    Margin="10,0,0,10">
+                    <Run Text="Більш детально ознайомитись з афінними перетвореннями ви можете за посиланням:"/>
+                    <Hyperlink NavigateUri=" https://studopedia.su/10_116636_affinnie-preobrazovaniya-na-ploskosti.html" RequestNavigate="LinkRequested">
+                        <Run Text="https://studopedia.su/10_116636_affinnie-preobrazovaniya-na-ploskosti.html"/>
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </Page>

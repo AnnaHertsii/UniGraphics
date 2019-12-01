@@ -26,5 +26,13 @@ namespace UniGraphics
             ColorModelsSection.FontWeight = FontWeights.Bold;
             AnimationsSection.FontWeight = FontWeights.Normal;
         }
+
+        private void TransformationHelpClicked(object sender, MouseButtonEventArgs e)
+        {
+            HelpFrame.Content = new AnimationsHelp();
+            FractalsSection.FontWeight = FontWeights.Normal;
+            ColorModelsSection.FontWeight = FontWeights.Normal;
+            AnimationsSection.FontWeight = FontWeights.Bold;
+        }
     }
 }
