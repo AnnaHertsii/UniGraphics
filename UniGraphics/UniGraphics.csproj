@@ -66,6 +66,9 @@
     <Compile Include="CreditsWindow.xaml.cs">
       <DependentUpon>CreditsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ErrorWindow.xaml.cs">
+      <DependentUpon>ErrorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
@@ -83,6 +86,9 @@
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PivotVertexWindow.xaml.cs">
+      <DependentUpon>PivotVertexWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="StudyMaterials\AnimationsStudy.xaml.cs">
       <DependentUpon>AnimationsStudy.xaml</DependentUpon>
@@ -112,6 +118,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreditsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ErrorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +169,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PivotVertexWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StudyMaterials\AnimationsStudy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -269,13 +283,16 @@
     <Resource Include="Resources\pause.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\movematrix.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\scalematrix.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\movematrix.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\turnmatrix.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Hexagon.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
