@@ -10,7 +10,7 @@ using Pen = System.Drawing.Pen;
 using DBrush = System.Drawing.Brush;
 using System.Linq;
 
-namespace UniGraphics.Transformation
+namespace UniGraphics.Transformation 
 {
     public class TransformationManager
     {
