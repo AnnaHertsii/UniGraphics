@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:UniGraphics"
         mc:Ignorable="d"
         Icon="/UniGraphics;component/Resources/Unicorn/logo.png"
-        Title="Помилка введення даних" Height="300" Width="450">
+        Title="Помилка" 
+        Height="350" 
+        Width="550"
+        ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="BlueButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
@@ -45,25 +48,31 @@
             VerticalAlignment="Bottom"
             Source="/UniGraphics;component/Resources/Unicorn/UnicornCry.png" 
             Margin="164,0,170,10" />
-        <TextBlock
-            Foreground="Black"
-            FontSize="14"
+        <Label
             HorizontalAlignment="Center"
             Grid.Row="1"
-            TextWrapping="Wrap"
-            TextAlignment="Center" Margin="35,0,35,44" Width="372">    
-                <Run Text="Введенні вами дані є некоректними! :( "></Run><LineBreak/>
-                <Run Text="Заборонено вводити будь-які символи окрім чисел. Ознайомтесь детальніше з розділом 'Вхідні дані' у вкладці 'Афінні перетворення' довідки."></Run>
-        </TextBlock>
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Margin="20,0,20,45" 
+            Width="500">
+            <TextBlock 
+                TextAlignment="Center"
+                Name="ErrorText"
+                Foreground="Black"
+                FontSize="14"
+                TextWrapping="Wrap"/>
+        </Label>
         <Button
-                    Name="OKButton"
-                    FontSize="14"
-                    Height="29"
-                    Margin="174,86,170,0"
-                    VerticalAlignment="Top"
-                    BorderThickness="0"
-                    Content="Oк"
-                    Foreground="White"
-                    Style="{StaticResource BlueButtonStyle}" Grid.Row="1" Click="OKButton_Click" />
+            Name="OKButton"
+            FontSize="14"
+            Height="30"
+            Margin="160,0,160,10"
+            VerticalAlignment="Bottom"
+            BorderThickness="0"
+            Content="Oк"
+            Foreground="White"
+            Style="{StaticResource BlueButtonStyle}" 
+            Grid.Row="1" 
+            Click="OKButton_Click" />
     </Grid>
 </Window>

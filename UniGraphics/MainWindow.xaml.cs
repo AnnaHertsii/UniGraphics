@@ -70,6 +70,12 @@ namespace UniGraphics
         {
             transformationsViewModel.RotateAroundCenter = 
                 transformationsView.CenterTransformRadio.IsChecked.Value;
+            if(!transformationsViewModel.RotateAroundCenter)
+            {
+                PivotVertexWindow pivotVertexWindow = new PivotVertexWindow();
+                pivotVertexWindow.ShowDialog();
+                transformationsViewModel.PivotVertex = pivotVertexWindow.PivotVertex;
+            }
         }
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)

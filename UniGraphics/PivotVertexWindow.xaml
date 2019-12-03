@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:UniGraphics"
         mc:Ignorable="d"
         Icon="/UniGraphics;component/Resources/Unicorn/logo.png"
-        Title="Вершина обертання" Height="400" Width="600">
+        Title="Вершина обертання" 
+        Height="400"
+        Width="600"
+        ResizeMode="NoResize"
+        Closing="OnClosing">
     <Window.Resources>
         <Style x:Key="BlueButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
@@ -16,6 +20,7 @@
                             <Border.Style>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="Background" Value="#99A2F1" />
+                                    <Setter Property="Cursor" Value="Hand"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Background" Value="#8189cc" />
@@ -46,53 +51,61 @@
             Source="/UniGraphics;component/Resources/Hexagon.jpg" 
             Margin="197,0,187,10" />
         <Label
-                    Width="280"
-                    Margin="162,10,150,98"
-                    HorizontalAlignment="Center"
-                    Content="Оберіть вершину обертання:"
-                    FontSize="18"
-                    Foreground="Black" Grid.Row="1" />
+            Width="280"
+            Margin="162,10,150,98"
+            HorizontalAlignment="Center"
+            Content="Оберіть вершину обертання:"
+            FontSize="18"
+            Foreground="Black" Grid.Row="1" />
         <Button
-                    Name="ChooseButton"
-                    FontSize="14"
-                    Height="37"
-                    Margin="247,100,237,0"
-                    VerticalAlignment="Top"
-                    BorderThickness="0"
-                    Content="Oбрати"
-                    Foreground="White"
-                    Style="{StaticResource BlueButtonStyle}" Grid.Row="1" />
+            Click="ChooseClicked"
+            Name="ChooseButton"
+            FontSize="14"
+            Height="37"
+            Margin="200,0,200,10"
+            VerticalAlignment="Bottom"
+            BorderThickness="0"
+            Content="Oбрати"
+            Foreground="White"
+            Style="{StaticResource BlueButtonStyle}" Grid.Row="1" />
         <RadioButton 
+            Click="RadioClicked"
+            IsChecked="True"
             Content="1" 
             HorizontalAlignment="Left"
             Margin="33,61,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" Height="16" Width="32"/>
         <RadioButton 
+            Click="RadioClicked"
             Content="2" 
             HorizontalAlignment="Left"
             Margin="126,61,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" Height="16" Width="32"/>
         <RadioButton 
+            Click="RadioClicked"
             Content="3" 
             HorizontalAlignment="Left"
             Margin="223,61,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" Height="16" Width="32"/>
         <RadioButton 
+            Click="RadioClicked"
             Content="4" 
             HorizontalAlignment="Left"
             Margin="323,61,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" Height="16" Width="32"/>
         <RadioButton 
+            Click="RadioClicked"
             Content="5" 
             HorizontalAlignment="Left"
             Margin="430,61,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" Height="16" Width="32"/>
         <RadioButton 
+            Click="RadioClicked"
             Content="6" 
             HorizontalAlignment="Left"
             Margin="529,61,0,0" 

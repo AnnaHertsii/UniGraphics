@@ -64,8 +64,9 @@ namespace UniGraphics.Transformation
         private static readonly double offsetCoef = 1.1;
         private static readonly double rotationSpeed = 60.0;
         private static readonly double scalingSpeed = 0.5;
+        private static readonly int pivotRadius = 10;
         private static readonly Pen gridPen, axisGridPen;
-        private static readonly DBrush tickTextBrush, hexagonBrush;
+        private static readonly DBrush tickTextBrush, hexagonBrush, pivotBrush;
         private static readonly Font tickTextFont;
 
         private int width, height, 
@@ -88,6 +89,7 @@ namespace UniGraphics.Transformation
             tickTextBrush = new SolidBrush(DColor.FromArgb(255, 79, 81, 100));
             tickTextFont = new Font("Times New Roman", 14, GraphicsUnit.Pixel);
             hexagonBrush = new SolidBrush(DColor.FromArgb(255, 104, 116, 219));
+            pivotBrush = new SolidBrush(DColor.FromArgb(255, 255, 0, 0));
         }
 
         public TransformationManager(double rootX, double rootY, double sideLength)
@@ -177,6 +179,14 @@ namespace UniGraphics.Transformation
         private void DrawHexagon()
         {
             graphics.FillPolygon(hexagonBrush, hexagonPoints);
+            if(!rotateAroundCenter)
+            {
+                var pivot = hexagonPoints[VertexIndex - 1];
+                int radiushalf = pivotRadius / 2;
+                graphics.FillEllipse(pivotBrush, pivot.X - radiushalf, 
+                                                 pivot.Y - radiushalf,
+                                                 pivotRadius, pivotRadius);
+            }
         }
 
         //переводить координати вказаної матриці в 

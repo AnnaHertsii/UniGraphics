@@ -139,6 +139,12 @@ namespace UniGraphics.ViewModels
             }
         }
 
+        private static readonly string badCoordRangeError =
+            "Введенні вами дані є некоректними! :(\n" + 
+            "Заборонено вводити значення, що не належать проміжку [-200000; 200000]. " + 
+            "Ознайомтесь детальніше з розділом 'Вхідні дані' у вкладці " + 
+            "'Афінні перетворення' довідки.";
+
         private double _CoordX;
         public double CoordX
         {
@@ -146,7 +152,11 @@ namespace UniGraphics.ViewModels
             set
             {
                 if (Math.Abs(value) > 200000)
+                {
+                    ErrorWindow error = new ErrorWindow(badCoordRangeError);
+                    error.ShowDialog();
                     return;
+                }
                 _CoordX = value;
                 transformer.RootX = value;
                 OnPropertyChanged("CoordX");
@@ -161,13 +171,23 @@ namespace UniGraphics.ViewModels
             set
             {
                 if (Math.Abs(value) > 200000)
+                {
+                    ErrorWindow error = new ErrorWindow(badCoordRangeError);
+                    error.ShowDialog();
                     return;
+                }
                 _CoordY = value;
                 transformer.RootY = value;
                 OnPropertyChanged("CoordY");
                 PartUpdate();
             }
         }
+
+        private static readonly string badSideLengthError =
+            "Введенні вами дані є некоректними! :(\n" +
+            "Заборонено вводити значення, що не належать проміжку (0; 50000]. " +
+            "Ознайомтесь детальніше з розділом 'Вхідні дані' у вкладці " +
+            "'Афінні перетворення' довідки.";
 
         private double _SideLength;
         public double SideLength
@@ -176,13 +196,23 @@ namespace UniGraphics.ViewModels
             set
             {
                 if (value <= 0.0 || value > 50000)
+                {
+                    ErrorWindow error = new ErrorWindow(badSideLengthError);
+                    error.ShowDialog();
                     return;
+                }
                 _SideLength = value;
                 transformer.SideLength = value;
                 OnPropertyChanged("SideLength");
                 PartUpdate();
             }
         }
+
+        private static readonly string badRotationError =
+            "Введенні вами дані є некоректними! :(\n" +
+            "Заборонено вводити значення, що не належать проміжку [0.01; 360]. " +
+            "Ознайомтесь детальніше з розділом 'Вхідні дані' у вкладці " +
+            "'Афінні перетворення' довідки.";
 
         private double _MaxRotation;
         public double MaxRotation
@@ -191,7 +221,11 @@ namespace UniGraphics.ViewModels
             set
             {
                 if (value < 0.01 || value > 360.0)
+                {
+                    ErrorWindow error = new ErrorWindow(badRotationError);
+                    error.ShowDialog();
                     return;
+                }
                 _MaxRotation = value;
                 transformer.MaxRotation = value;
                 OnPropertyChanged("MaxRotation");
@@ -210,6 +244,18 @@ namespace UniGraphics.ViewModels
             }
         }
 
+        private int _PivotVertex;
+        public int PivotVertex
+        {
+            get { return _PivotVertex; }
+            set
+            {
+                _PivotVertex = value;
+                transformer.VertexIndex = value;
+                OnPropertyChanged("PivotVertex");
+            }
+        }
+
         public TransformationsViewModel(Action animFinished)
         {
             animationFinished = animFinished;
@@ -222,11 +268,12 @@ namespace UniGraphics.ViewModels
             _SideLength = 1;
             _MaxRotation = 90;
             _RotateAroundCenter = true;
+            _PivotVertex = 1;
             transformer = new TransformationManager(_CoordX, _CoordY, _SideLength)
             {
                 RotateAroundCenter = _RotateAroundCenter,
                 MaxRotation = _MaxRotation, 
-                VertexIndex = 0
+                VertexIndex = _PivotVertex
             };
         }
     }
