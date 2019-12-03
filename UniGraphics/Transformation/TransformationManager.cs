@@ -331,22 +331,27 @@ namespace UniGraphics.Transformation
             return goodNormalizedStep / stepPower;
         }
 
-        private static void CalculateContainerAndScale(out double rootContainer,
+        //шукає масштаб для того, щоб вмістити фігуру, а також "контейтер"
+        private void CalculateContainerAndScale(out double rootContainer,
                                                        out double scale)
         {
-            rootContainer = 2;
-            scale = 2;
+            double figureFromX = rootX - sideHalf;
+            double figureToX = rootX + side3Halves;
+            double figureToY = rootY + centerOffsetY2;
+            double maxX = Math.Max(Math.Abs(figureFromX), Math.Abs(figureToX));
+            double maxY = Math.Max(Math.Abs(rootY), Math.Abs(figureToY));
+            double maxCoord = Math.Max(maxX, maxY);
+            rootContainer = (maxCoord + sideLength * 2) * offsetCoef;
+            double containerScreenLength = (maxX > maxY) ? halfWidth : halfHeight;
+            scale = rootContainer / containerScreenLength;
         }
 
         //оновлює налаштування сітки
         private bool AdjustView(CancellationToken? token)
         {
-            double rootAbsX = Math.Abs(rootX),
-                   rootAbsY = Math.Abs(rootY);
+            double rootContainer;
+            CalculateContainerAndScale(out rootContainer, out scale);
 
-            double rootContainer = (Math.Max(rootAbsX, rootAbsY) + sideLength * 2) * offsetCoef;
-            double containerScreenLenght = (rootAbsX > rootAbsY) ? halfWidth : halfHeight;
-            scale = rootContainer / containerScreenLenght;
             PlaneX = halfWidth * scale;
             PlaneY = halfHeight * scale;
 
