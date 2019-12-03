@@ -241,6 +241,7 @@ namespace UniGraphics.ViewModels
                 _RotateAroundCenter = value;
                 transformer.RotateAroundCenter = value;
                 OnPropertyChanged("RotateAroundCenter");
+                PartUpdate();
             }
         }
 
@@ -253,6 +254,7 @@ namespace UniGraphics.ViewModels
                 _PivotVertex = value;
                 transformer.VertexIndex = value;
                 OnPropertyChanged("PivotVertex");
+                PartUpdate();
             }
         }
 

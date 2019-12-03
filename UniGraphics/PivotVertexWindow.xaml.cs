@@ -8,28 +8,23 @@ namespace UniGraphics
     /// </summary>
     public partial class PivotVertexWindow : Window
     {
-        private bool canClose = false;
+        public bool PivotSelected = false;
         public int PivotVertex = 1;
         public PivotVertexWindow()
         {
             InitializeComponent();
         }
 
-        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if(!canClose)
-                e.Cancel = true;
-        }
-
         private void ChooseClicked(object sender, RoutedEventArgs e)
         {
-            canClose = true;
+            PivotSelected = true;
             Close();
         }
 
         private void RadioClicked(object sender, RoutedEventArgs e)
         {
             PivotVertex = int.Parse((sender as RadioButton).Content.ToString());
+            ChooseButton.IsEnabled = true;
         }
     }
 }

@@ -15,6 +15,8 @@ namespace UniGraphics.Transformation
     public class TransformationManager
     {
         private double rootX, rootY, sideLength;
+        bool rotateAroundCenter;
+        int vertexIndex;
         public double RootX
         {
             get { return rootX; }
@@ -47,7 +49,6 @@ namespace UniGraphics.Transformation
                 Rollback();
             }
         }
-        bool rotateAroundCenter;
         public bool RotateAroundCenter
         {
             get { return rotateAroundCenter; }
@@ -55,10 +56,21 @@ namespace UniGraphics.Transformation
             {
                 rotateAroundCenter = value;
                 UpdateRotationPivot();
+                Rollback();
             }
         }
+        public int VertexIndex
+        {
+            get { return vertexIndex; }
+            set
+            {
+                vertexIndex = value;
+                UpdateRotationPivot();
+                Rollback();
+            }
+        }
+
         public double MaxRotation { get; set; }
-        public int VertexIndex { get; set; }
         public WriteableBitmap Image { get; private set; }
 
         private static readonly double offsetCoef = 1.1;
@@ -72,11 +84,12 @@ namespace UniGraphics.Transformation
         private int width, height, 
                     ticksFromX, ticksToX, ticksFromY, ticksToY;
         private double halfWidth, halfHeight, PlaneX, PlaneY,
-                       rootContainer, screenTick, tick,
+                       screenTick, tick,
                        scale, animationRotation, animationScale,
                        sideHalf, side3Halves, centerOffsetY, centerOffsetY2;
         private Graphics graphics;
         private PointF[] hexagonPoints;
+        private double[,] vertexOffsets;
         private Matrix initialHexagonMatrix, toScreenMatrix,
                        rotationMatrix, scalingMatrix, 
                        planeMoveMatrix, planeMoveBackMatrix, 
@@ -179,14 +192,16 @@ namespace UniGraphics.Transformation
         private void DrawHexagon()
         {
             graphics.FillPolygon(hexagonBrush, hexagonPoints);
-            if(!rotateAroundCenter)
-            {
-                var pivot = hexagonPoints[VertexIndex - 1];
-                int radiushalf = pivotRadius / 2;
-                graphics.FillEllipse(pivotBrush, pivot.X - radiushalf, 
-                                                 pivot.Y - radiushalf,
-                                                 pivotRadius, pivotRadius);
-            }
+            PointF pivot;
+            if (rotateAroundCenter)
+                pivot = new PointF((hexagonPoints[0].X + hexagonPoints[3].X) / 2,
+                                   (hexagonPoints[0].Y + hexagonPoints[3].Y) / 2);
+            else
+                pivot = hexagonPoints[vertexIndex - 1];
+            int radiushalf = pivotRadius / 2;
+            graphics.FillEllipse(pivotBrush, pivot.X - radiushalf, 
+                                                pivot.Y - radiushalf,
+                                                pivotRadius, pivotRadius);
         }
 
         //переводить координати вказаної матриці в 
@@ -221,6 +236,16 @@ namespace UniGraphics.Transformation
             side3Halves = sideHalf * 3;
             centerOffsetY = sideLength * (Math.Sqrt(3) / 2);
             centerOffsetY2 = centerOffsetY * 2;
+
+            vertexOffsets = new double[6, 2]
+            {
+                { 0.0, 0.0 },
+                { sideLength, 0.0 },
+                { side3Halves, centerOffsetY },
+                { sideLength, 2 * centerOffsetY },
+                { 0.0, 2 * centerOffsetY },
+                { -sideHalf, centerOffsetY }
+            };
         }
 
         //оновлює параметри шестикутника
@@ -259,7 +284,7 @@ namespace UniGraphics.Transformation
             planeMoveBackMatrix.Set(2, 1, rootY);
         }
 
-        //оновлює параметр, що визначає точку, довкола якої відбувається поворот
+        //оновлює матрицю, що визначає точку, довкола якої відбувається поворот
         private void UpdateRotationPivot()
         {
             if(rotateAroundCenter)
@@ -272,11 +297,13 @@ namespace UniGraphics.Transformation
             }
             else
             {
-                pivotOffsetMatrix.Set(2, 0, 0.0);
-                pivotOffsetMatrix.Set(2, 1, 0.0);
+                if (vertexIndex < 1)
+                    return;
+                pivotOffsetMatrix.Set(2, 0, -vertexOffsets[vertexIndex - 1, 0]);
+                pivotOffsetMatrix.Set(2, 1, -vertexOffsets[vertexIndex - 1, 1]);
 
-                pivotOffsetBackMatrix.Set(2, 0, 0.0);
-                pivotOffsetBackMatrix.Set(2, 1, 0.0);
+                pivotOffsetBackMatrix.Set(2, 0, vertexOffsets[vertexIndex - 1, 0]);
+                pivotOffsetBackMatrix.Set(2, 1, vertexOffsets[vertexIndex - 1, 1]);
             }
         }
 
@@ -304,13 +331,20 @@ namespace UniGraphics.Transformation
             return goodNormalizedStep / stepPower;
         }
 
+        private static void CalculateContainerAndScale(out double rootContainer,
+                                                       out double scale)
+        {
+            rootContainer = 2;
+            scale = 2;
+        }
+
         //оновлює налаштування сітки
         private bool AdjustView(CancellationToken? token)
         {
             double rootAbsX = Math.Abs(rootX),
                    rootAbsY = Math.Abs(rootY);
 
-            rootContainer = (Math.Max(rootAbsX, rootAbsY) + sideLength * 2) * offsetCoef;
+            double rootContainer = (Math.Max(rootAbsX, rootAbsY) + sideLength * 2) * offsetCoef;
             double containerScreenLenght = (rootAbsX > rootAbsY) ? halfWidth : halfHeight;
             scale = rootContainer / containerScreenLenght;
             PlaneX = halfWidth * scale;

@@ -9,8 +9,7 @@
         Title="Вершина обертання" 
         Height="400"
         Width="600"
-        ResizeMode="NoResize"
-        Closing="OnClosing">
+        ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="BlueButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
@@ -58,6 +57,7 @@
             FontSize="18"
             Foreground="Black" Grid.Row="1" />
         <Button
+            IsEnabled="False"
             Click="ChooseClicked"
             Name="ChooseButton"
             FontSize="14"
@@ -70,7 +70,6 @@
             Style="{StaticResource BlueButtonStyle}" Grid.Row="1" />
         <RadioButton 
             Click="RadioClicked"
-            IsChecked="True"
             Content="1" 
             HorizontalAlignment="Left"
             Margin="33,61,0,0" 

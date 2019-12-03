@@ -68,14 +68,25 @@ namespace UniGraphics
 
         private void TransformRadioChanged(object sender, RoutedEventArgs e)
         {
-            transformationsViewModel.RotateAroundCenter = 
+            bool rotateAroundCenter = 
                 transformationsView.CenterTransformRadio.IsChecked.Value;
-            if(!transformationsViewModel.RotateAroundCenter)
+            if (!rotateAroundCenter)
             {
                 PivotVertexWindow pivotVertexWindow = new PivotVertexWindow();
                 pivotVertexWindow.ShowDialog();
-                transformationsViewModel.PivotVertex = pivotVertexWindow.PivotVertex;
+                if (pivotVertexWindow.PivotSelected)
+                {
+                    transformationsViewModel.PivotVertex = pivotVertexWindow.PivotVertex;
+                    transformationsViewModel.RotateAroundCenter = false;
+                }
+                else
+                {
+                    transformationsViewModel.RotateAroundCenter = true;
+                    transformationsView.CenterTransformRadio.IsChecked = true;
+                }
             }
+            else
+                transformationsViewModel.RotateAroundCenter = true;
         }
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
