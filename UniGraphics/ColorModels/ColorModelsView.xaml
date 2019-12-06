@@ -13,7 +13,10 @@
     mc:Ignorable="d">
     <Page.Resources>
         <Color x:Key="CurrentColor">#00FF00</Color>
-
+        <Style x:Key="Helpable" TargetType="FrameworkElement">
+            <EventSetter Event="MouseEnter" Handler="HelpableHover"/>
+            <EventSetter Event="MouseLeave" Handler="HelpableMouseLeave"/>
+        </Style>
         <LinearGradientBrush x:Key="HueBrush" StartPoint="0,0" EndPoint="1,0">
             <LinearGradientBrush.GradientStops>
                 <GradientStop Color="#FF0000" Offset="0" />
@@ -256,10 +259,10 @@
             Background="White"
             CornerRadius="15">
             <TextBlock
+                x:Name="UnicornHelper"
                 Padding="5"
                 Foreground="#4278cf"
                 FontSize="10"
-                Text="Щоб почати роботу з колірними моделями RGB та HSL, оберіть зображення у 'Файл' та натисніть кнопку 'Конвертувати' :)"
                 TextAlignment="Center"
                 TextWrapping="Wrap" Margin="0,4,0,0" />
         </Border>

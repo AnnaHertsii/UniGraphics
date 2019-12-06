@@ -12,7 +12,11 @@
     Background="White"
     mc:Ignorable="d">
     <Page.Resources>
-        <Style x:Key="BlueButtonStyle" TargetType="{x:Type Button}">
+        <Style x:Key="Helpable" TargetType="FrameworkElement">
+            <EventSetter Event="MouseEnter" Handler="HelpableHover"/>
+            <EventSetter Event="MouseLeave" Handler="HelpableMouseLeave"/>
+        </Style>
+        <Style x:Key="BlueButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource Helpable}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -753,10 +757,10 @@
             Background="White"
             CornerRadius="15">
             <TextBlock
+                x:Name="UnicornHelper"
                 Padding="5"
                 FontSize="13"
                 Foreground="#4278cf"
-                Text="Це секція фракталів. Тут ви можете візуалізувати фрактал Ньютона!"
                 TextAlignment="Center"
                 TextWrapping="Wrap" />
         </Border>

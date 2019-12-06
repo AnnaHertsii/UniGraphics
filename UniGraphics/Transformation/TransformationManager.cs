@@ -219,13 +219,13 @@ namespace UniGraphics.Transformation
         //виконує множення матриць афінних перетворень
         private void ProcessHexagon()
         {
-            Matrix result = initialHexagonMatrix *
-                            planeMoveMatrix *
-                            pivotOffsetMatrix *
-                            scalingMatrix *
-                            rotationMatrix *
-                            pivotOffsetBackMatrix *
-                            planeMoveBackMatrix;
+            Matrix modification = planeMoveMatrix *
+                                  pivotOffsetMatrix *
+                                  scalingMatrix *
+                                  rotationMatrix *
+                                  pivotOffsetBackMatrix *
+                                  planeMoveBackMatrix;
+            Matrix result = initialHexagonMatrix * modification;
             SaveToScreen(result);
         }
 

@@ -4,14 +4,15 @@ using System.Windows.Input;
 
 namespace UniGraphics.Transformation
 {
-    /// <summary>
-    /// Логика взаимодействия для TransformationView.xaml
-    /// </summary>
     public partial class TransformationView : Page
     {
+        private static readonly string defaultHelperMessage = 
+            "Щоб почати роботу з рухом шестикутника, введіть необхідні параметри зверху :)";
+
         public TransformationView()
         {
             InitializeComponent();
+            UnicornHelper.Text = defaultHelperMessage;
         }
 
         private void StudyMaterialsClicked(object sender, RoutedEventArgs e)
@@ -95,6 +96,17 @@ namespace UniGraphics.Transformation
             TextBox textBox = sender as TextBox;
             if(e.Key == Key.Return)
                 textBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+        }
+
+        private void HelpableHover(object sender, MouseEventArgs e)
+        {
+            var helpable = sender as FrameworkElement;
+            UnicornHelper.Text = helpable.Tag.ToString();
+        }
+
+        private void HelpableMouseLeave(object sender, MouseEventArgs e)
+        {
+            UnicornHelper.Text = defaultHelperMessage;
         }
     }
 }

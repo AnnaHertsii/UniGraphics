@@ -2,15 +2,19 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace UniGraphics.Fractals
 {
     public partial class FractalsView : Page
     {
+        private static readonly string defaultHelperMessage =
+            "Зміни цей текст в файлі FractalsView.xaml.cs";
         public FractalsView()
         {
             InitializeComponent();
+            UnicornHelper.Text = defaultHelperMessage;
         }
 
         private void SavePictureAs(object sender, RoutedEventArgs e)
@@ -29,6 +33,17 @@ namespace UniGraphics.Fractals
         private void ExitClicked(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void HelpableHover(object sender, MouseEventArgs e)
+        {
+            var helpable = sender as FrameworkElement;
+            UnicornHelper.Text = helpable.Tag.ToString();
+        }
+
+        private void HelpableMouseLeave(object sender, MouseEventArgs e)
+        {
+            UnicornHelper.Text = defaultHelperMessage;
         }
     }
 }

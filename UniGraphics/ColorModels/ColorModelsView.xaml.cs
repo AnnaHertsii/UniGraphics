@@ -8,6 +8,10 @@ namespace UniGraphics.ColorModels
 {
     public partial class ColorModelsView : Page
     {
+        private static readonly string defaultHelperMessage =
+            "Зміни цей текст в файлі ColorModelsView.xaml.cs";
+        //Це те, що в тебе було в xaml:
+        //Щоб почати роботу з колірними моделями RGB та HSL, оберіть зображення у 'Файл' та натисніть кнопку 'Конвертувати' :)
         public ColorModelsView()
         {
             InitializeComponent();
@@ -65,6 +69,17 @@ namespace UniGraphics.ColorModels
                 var width = ((Rectangle)sender).Width;
                 ((ColorModelsViewModel)DataContext).HandleHuePicked((int)x, (int)width);
             }
+        }
+
+        private void HelpableHover(object sender, MouseEventArgs e)
+        {
+            var helpable = sender as FrameworkElement;
+            UnicornHelper.Text = helpable.Tag.ToString();
+        }
+
+        private void HelpableMouseLeave(object sender, MouseEventArgs e)
+        {
+            UnicornHelper.Text = defaultHelperMessage;
         }
     }
 }

@@ -10,7 +10,11 @@
       d:DesignWidth="900"
       Background="White">
     <Page.Resources>
-        <Style x:Key="BlueButtonStyle" TargetType="{x:Type Button}">
+        <Style x:Key="Helpable" TargetType="FrameworkElement">
+            <EventSetter Event="MouseEnter" Handler="HelpableHover"/>
+            <EventSetter Event="MouseLeave" Handler="HelpableMouseLeave"/>
+        </Style>
+        <Style x:Key="BlueButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource Helpable}">
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -173,6 +177,8 @@
                     FontSize="18"
                     Foreground="White" />
                 <TextBox
+                    Style="{StaticResource Helpable}"
+                    Tag="Лол кек чебурек"
                     TabIndex="0"
                     KeyDown="KeyDownHandler"
                     Name="InputY"
@@ -189,6 +195,7 @@
                     FontSize="14"
                     Foreground="#8787ed"/>
                 <Button
+                    Tag="Бла бла бла"
                     TabIndex="6"
                     Name="StartButton"
                     Height="40"
@@ -358,13 +365,13 @@
             Background="White"
             CornerRadius="15">
             <TextBlock
+                Name="UnicornHelper"
                 Padding="5"
                 Foreground="#4278cf"
                 FontSize="10"
-                Text="Щоб почати роботу з рухом шестикутника, введіть необхідні параметри зверху :)"
                 TextAlignment="Center"
-                TextWrapping="Wrap" Margin="0,17,0,19" />
-
+                TextWrapping="Wrap" 
+                Margin="0,17,0,19" />
         </Border>
         <Image
             Grid.Row="2"
