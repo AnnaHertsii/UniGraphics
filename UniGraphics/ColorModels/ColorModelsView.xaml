@@ -91,7 +91,7 @@
                     Click="CreditsClicked" />
             </MenuItem>
         </Menu>
-        <TextBlock Text="RGB" Foreground="White" FontSize="16" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="21" Margin="143,2" Width="28"></TextBlock>
+        <TextBlock Text="RGB" Foreground="White" FontSize="16" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="21" Margin="143,2,135,2" Width="36"></TextBlock>
         <TextBlock Text="HSL" Foreground="White" FontSize="16" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="21" Margin="144,2" Width="26"></TextBlock>
         <Border
             Grid.Row="1"
@@ -131,6 +131,8 @@
                     FontSize="18"
                     Foreground="White" />
                 <Slider 
+                    Style="{StaticResource Helpable}"
+                    Tag="Потягніть, щоб встановити бажану яскравість тону."
                     x:Name="lightnessSlider" 
                     Margin="31,167,39,0" 
                     VerticalAlignment="Top" 
@@ -190,6 +192,8 @@
                     FontSize="16"
                     Foreground="White" />
                 <Button
+                    Style="{StaticResource Helpable}"
+                    Tag="Натисніть, щоб здійснити конвертацію між RGB та HSL"
                     Cursor="Hand"
                     Visibility="{Binding ConvertButtonVisibility}"
                     Name="Convert" 
@@ -213,6 +217,8 @@
             Grid.Column="1"
             Grid.RowSpan="2">
             <Image
+                Style="{StaticResource Helpable}"
+                Tag="В даному відділі знаходиться зображення RGB."
                 MouseMove="ImageMouseMove"
                 MouseLeave="ImageMouseLeave"
                 Name="colorModelsImageLeft"
@@ -232,6 +238,8 @@
             Grid.RowSpan="2"
             Grid.Column="3">
             <Image
+                Style="{StaticResource Helpable}"
+                Tag="В даному відділі знаходиться зображення HSL."
                 MouseMove="ImageMouseMove"
                 MouseLeave="ImageMouseLeave"
                 Name="colorModelsImageRight"
@@ -241,6 +249,8 @@
                 Source="{Binding Path=ImageRight}" />
         </Grid>
         <Image
+            Style="{StaticResource Helpable}"
+            Tag="Привіт! Я - єдиноріг Юні. Я допоможу тобі вивчити колірні моделі RGB та HSL! :)"
             Grid.Row="2"
             Width="118"
             Height="114"
@@ -264,9 +274,11 @@
                 Foreground="#4278cf"
                 FontSize="10"
                 TextAlignment="Center"
-                TextWrapping="Wrap" Margin="0,4,0,0" />
+                TextWrapping="Wrap" />
         </Border>
         <Rectangle
+            Style="{StaticResource Helpable}"
+            Tag="Оберіть тон, яскравість якого бажаєте змінювати."
             Fill="{StaticResource HueBrush}" 
             StrokeThickness="2"
             HorizontalAlignment="Left"

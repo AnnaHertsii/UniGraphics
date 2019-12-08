@@ -44,5 +44,41 @@
             Margin="444,443,0,0" 
             VerticalAlignment="Top" 
             Width="321"/>
+        <Label 
+            Foreground="#2d0a4c"
+            FontStyle="Italic"
+            FontSize="18"
+            Content="почни вчити фрактали!" 
+            HorizontalAlignment="Left" 
+            Margin="444,477,0,0" 
+            VerticalAlignment="Top"
+            Width="224"/>
+        <Label 
+            Foreground="#2d0a4c"
+            FontStyle="Italic"
+            FontSize="18"
+            Content="почни вчити афінні перетворення!" 
+            HorizontalAlignment="Left" 
+            Margin="444,511,0,0" 
+            VerticalAlignment="Top"
+            Width="321"/>
+        <Label 
+            Foreground="#2d0a4c"
+            FontStyle="Italic"
+            FontSize="18"
+            Content="зверни увагу на матриці перетворень!" 
+            HorizontalAlignment="Left" 
+            Margin="444,550,0,0" 
+            VerticalAlignment="Top"
+            Width="348"/>
+        <Label 
+            Foreground="#2d0a4c"
+            FontStyle="Italic"
+            FontSize="18"
+            Content="зверни увагу на масштабування фракталів!" 
+            HorizontalAlignment="Left" 
+            Margin="444,584,0,0" 
+            VerticalAlignment="Top"
+            Width="387"/>
     </Grid>
 </Page>

@@ -54,6 +54,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Canvas
+            Style="{StaticResource Helpable}"
+            Tag="Рух шестикутника обмежений даною ділянкою."
             Name="TransformCanvas"
             Grid.Column="1"
             Grid.ColumnSpan="2"
@@ -178,7 +180,7 @@
                     Foreground="White" />
                 <TextBox
                     Style="{StaticResource Helpable}"
-                    Tag="Лол кек чебурек"
+                    Tag="Введіть координату X лівої верхньої вершини шестикутника. Допустимі значення: -200 000 до 200 000."
                     TabIndex="0"
                     KeyDown="KeyDownHandler"
                     Name="InputY"
@@ -195,7 +197,7 @@
                     FontSize="14"
                     Foreground="#8787ed"/>
                 <Button
-                    Tag="Бла бла бла"
+                    Tag="Натисніть, щоб розпочати рух шестикутника. Перевірте чи введені усі дані."
                     TabIndex="6"
                     Name="StartButton"
                     Height="40"
@@ -237,6 +239,7 @@
                     </StackPanel>
                 </Button>
                 <Button
+                    Tag="Натисніть, щоб розпочати все з початку і ввести нові дані для руху."
                     TabIndex="8"
 					Command="{Binding Path=StopTransform}"
                     Name="StopButton"
@@ -264,6 +267,8 @@
                     </StackPanel>
                 </Button>
                 <TextBox
+                    Style="{StaticResource Helpable}"
+                    Tag="Введіть координату Y лівої верхньої вершини шестикутника. Допустимі значення: -200 000 до 200 000."
                     TabIndex="1"
                     KeyDown="KeyDownHandler"
                     Name="InputX"
@@ -302,6 +307,8 @@
                     FontSize="16"
                     Foreground="White" />
                 <RadioButton
+                    Style="{StaticResource Helpable}"
+                    Tag="Оберіть точку навколо якої хочете здійснювати обертання. Центр шестикутника, або одна з його вершин."           
                     TabIndex="4"
                     Cursor="Hand"
                     Name="CenterTransformRadio"
@@ -370,10 +377,11 @@
                 Foreground="#4278cf"
                 FontSize="10"
                 TextAlignment="Center"
-                TextWrapping="Wrap" 
-                Margin="0,17,0,19" />
+                TextWrapping="Wrap" />
         </Border>
         <Image
+            Style="{StaticResource Helpable}"
+            Tag="Привіт! Я - єдиноріг Юні. Я допоможу тобі вивчити афінні перетворення! :)"
             Grid.Row="2"
             Width="118"
             Height="114"
@@ -382,6 +390,8 @@
             VerticalAlignment="Bottom"
             Source="/UniGraphics;component/Resources/Unicorn/UnicornHat.png" />
         <TextBox 
+            Style="{StaticResource Helpable}"
+            Tag="Введіть довжину сторони шестикутника від 0 до 50 000. Усі сторони рівні."
             TabIndex="2"
             Name="InputSideLength"
             KeyDown="KeyDownHandler"
@@ -398,6 +408,8 @@
             VerticalAlignment="Top" 
             Width="86"/>
         <TextBox 
+            Style="{StaticResource Helpable}"
+            Tag="Вкажіть кут повороту від 0 до 360 градусів, на який бажаєте повернути шестикутник."
             TabIndex="3"
             KeyDown="KeyDownHandler"
             Name="InputMaxRotation"
