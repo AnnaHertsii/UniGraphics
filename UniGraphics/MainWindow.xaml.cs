@@ -12,32 +12,57 @@ namespace UniGraphics
         FractalsView fractalsView;
         ColorModelsView colorModelsView;
         TransformationView transformationsView;
+        MainPage mainPageView;
 
         FractalsDataViewModel fractalsViewModel;
         ColorModelsViewModel colorModelsViewModel;
         TransformationsViewModel transformationsViewModel;
 
+        int pageIndex = -1;
+
         public MainWindow()
         {
             InitializeComponent();
-            transformationsView = new TransformationView();
-            transformationsViewModel = new TransformationsViewModel(transformationsView.HandleAnimationEnd);
-            MainFrame.DataContext = transformationsViewModel;
-            transformationsView.CenterTransformRadio.Checked += TransformRadioChanged;
-            transformationsView.VertexTransformRadio.Checked += TransformRadioChanged;
-            MainFrame.Content = transformationsView;
 
-            //colorModelsView = new ColorModelsView();
-            //colorModelsViewModel = new ColorModelsViewModel();
-            //MainFrame.DataContext = colorModelsViewModel;
-            //MainFrame.Content = colorModelsView;
+            mainPageView = new MainPage(PageChanged);
+            MainFrame.Content = mainPageView;
+        }
 
-            //fractalsView = new FractalsView();
-            //fractalsViewModel = new FractalsDataViewModel(400, 400);
-            //MainFrame.DataContext = fractalsViewModel;
-            //fractalsView.FractalPower3Radio.Checked += FractalPowerChanged;
-            //fractalsView.FractalPower4Radio.Checked += FractalPowerChanged;
-            //MainFrame.Content = fractalsView;
+        private void PageChanged(int pageIndex)
+        {
+            this.pageIndex = pageIndex;
+            switch(pageIndex)
+            {
+                case 0:
+                    colorModelsView = new ColorModelsView(CloseFrame);
+                    colorModelsViewModel = new ColorModelsViewModel();
+                    MainFrame.DataContext = colorModelsViewModel;
+                    MainFrame.Content = colorModelsView;
+                    break;
+                case 1:
+                    fractalsView = new FractalsView(CloseFrame);
+                    fractalsViewModel = new FractalsDataViewModel(400, 400);
+                    MainFrame.DataContext = fractalsViewModel;
+                    fractalsView.FractalPower3Radio.Checked += FractalPowerChanged;
+                    fractalsView.FractalPower4Radio.Checked += FractalPowerChanged;
+                    MainFrame.Content = fractalsView;
+                    break;
+                case 2:
+                    transformationsView = new TransformationView(CloseFrame);
+                    transformationsViewModel = new TransformationsViewModel(transformationsView.HandleAnimationEnd);
+                    MainFrame.DataContext = transformationsViewModel;
+                    transformationsView.CenterTransformRadio.Checked += TransformRadioChanged;
+                    transformationsView.VertexTransformRadio.Checked += TransformRadioChanged;
+                    MainFrame.Content = transformationsView;
+                    break;
+            }
+        }
+
+        private void CloseFrame()
+        {
+            pageIndex = -1;
+            MainFrame.Content = mainPageView;
+            MainFrame.DataContext = null;
         }
 
         private void MainFrame_LoadCompleted(object sender, NavigationEventArgs e)
@@ -91,19 +116,28 @@ namespace UniGraphics
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            transformationsViewModel.FullUpdate(
-                    (int)transformationsView.TransformCanvas.ActualWidth,
-                    (int)transformationsView.TransformCanvas.ActualHeight);
-            return;//TODO remove this later
-            fractalsViewModel.respondToWindowSizeChange((int)fractalsView.fractalImg.ActualWidth,
-                                                        (int)fractalsView.fractalImg.ActualHeight);
+            switch(pageIndex)
+            {
+                case 1:
+                    fractalsViewModel.respondToWindowSizeChange((int)fractalsView.fractalImg.ActualWidth,
+                                                                (int)fractalsView.fractalImg.ActualHeight);
+                    break;
+                case 2:
+                    transformationsViewModel.FullUpdate(
+                        (int)transformationsView.TransformCanvas.ActualWidth,
+                        (int)transformationsView.TransformCanvas.ActualHeight);
+                    break;
+            }
         }
 
         private void MainFrame_ContentRendered(object sender, System.EventArgs e)
         {
-            transformationsViewModel.FullUpdate(
-                    (int)transformationsView.TransformCanvas.ActualWidth,
-                    (int)transformationsView.TransformCanvas.ActualHeight);
+            if(pageIndex == 2)
+            {
+                transformationsViewModel.FullUpdate(
+                        (int)transformationsView.TransformCanvas.ActualWidth,
+                        (int)transformationsView.TransformCanvas.ActualHeight);
+            }
         }
     }
 }

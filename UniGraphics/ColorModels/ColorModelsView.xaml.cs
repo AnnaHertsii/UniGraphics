@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Shapes;
@@ -9,12 +10,14 @@ namespace UniGraphics.ColorModels
     public partial class ColorModelsView : Page
     {
         private static readonly string defaultHelperMessage =
-            "Зміни цей текст в файлі ColorModelsView.xaml.cs";
-        //Це те, що в тебе було в xaml:
-        //Щоб почати роботу з колірними моделями RGB та HSL, оберіть зображення у 'Файл' та натисніть кнопку 'Конвертувати' :)
-        public ColorModelsView()
+            "Щоб почати роботу з колірними моделями RGB та HSL, оберіть зображення у 'Файл' та натисніть кнопку 'Конвертувати";
+        private Action goBack;
+        
+        public ColorModelsView(Action goBack)
         {
+            this.goBack = goBack;
             InitializeComponent();
+            UnicornHelper.Text = defaultHelperMessage;
         }
 
         private void ImageMouseMove(object sender, MouseEventArgs e)
@@ -47,13 +50,6 @@ namespace UniGraphics.ColorModels
             studyWindow.ShowDialog();
         }
 
-        private void BackClicked(object sender, RoutedEventArgs e)
-        {
-            /*MainWindow main = new MainWindow();
-            main.MainFrame.Content = new MainPage();
-            main.ShowDialog();*/
-        }
-
         private void HuePicked(object sender, MouseButtonEventArgs e)
         {
             var x = e.GetPosition((IInputElement)sender).X;
@@ -80,6 +76,11 @@ namespace UniGraphics.ColorModels
         private void HelpableMouseLeave(object sender, MouseEventArgs e)
         {
             UnicornHelper.Text = defaultHelperMessage;
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            goBack();
         }
     }
 }

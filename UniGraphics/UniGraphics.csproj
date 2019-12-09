@@ -235,13 +235,10 @@
     <Resource Include="Resources\Unicorn\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\BuildFractal.png" />
+    <Resource Include="Resources\BuildFractal.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\exit.png" />
+    <Resource Include="Resources\save.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Fractal.png" />
@@ -268,7 +265,7 @@
     <Resource Include="Resources\RGB2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\colormodels.png" />
+    <Resource Include="Resources\colormodels.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\back.png" />

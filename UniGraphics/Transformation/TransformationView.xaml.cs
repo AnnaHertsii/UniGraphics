@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -8,9 +9,11 @@ namespace UniGraphics.Transformation
     {
         private static readonly string defaultHelperMessage = 
             "Щоб почати роботу з рухом шестикутника, введіть необхідні параметри зверху :)";
+        private Action goBack;
 
-        public TransformationView()
+        public TransformationView(Action goBack)
         {
+            this.goBack = goBack;
             InitializeComponent();
             UnicornHelper.Text = defaultHelperMessage;
         }
@@ -107,6 +110,11 @@ namespace UniGraphics.Transformation
         private void HelpableMouseLeave(object sender, MouseEventArgs e)
         {
             UnicornHelper.Text = defaultHelperMessage;
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            goBack();
         }
     }
 }

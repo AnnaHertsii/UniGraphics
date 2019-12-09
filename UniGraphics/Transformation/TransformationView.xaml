@@ -112,6 +112,7 @@
             Background="#BCC3FF">
             <Grid>
                 <Button
+                    Tag="Натисніть, щоб повернутись в головне меню."
                     TabIndex="9"
                     Name="BackButton" 
                     Height="29"
@@ -119,7 +120,8 @@
                     VerticalAlignment="Top"
                     BorderThickness="0"
                     Style="{StaticResource BlueButtonStyle}"
-                    Grid.Column="0" >
+                    Grid.Column="0"
+                    Click="BackButton_Click">
                     <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/back.png" Stretch="Uniform" Height="28" Width="25"/>
                 </Button>
                 <Label
@@ -197,7 +199,7 @@
                     FontSize="14"
                     Foreground="#8787ed"/>
                 <Button
-                    Tag="Натисніть, щоб розпочати рух шестикутника. Перевірте чи введені усі дані."
+                    Tag="Натисніть, щоб розпочати рух шестикутника."
                     TabIndex="6"
                     Name="StartButton"
                     Height="40"
@@ -218,6 +220,7 @@
                     </StackPanel>
                 </Button>
                 <Button
+                    Tag="Натисніть, щоб призупинити рух."
                     TabIndex="7"
                     Name="PauseButton"
                     Height="40"
@@ -321,6 +324,8 @@
                     BorderThickness="0"
                     IsChecked="True" />
                 <RadioButton
+                    Style="{StaticResource Helpable}"
+                    Tag="Оберіть точку навколо якої хочете здійснювати обертання. Центр шестикутника, або одна з його вершин."  
                     TabIndex="5"
                     Cursor="Hand"
                     Name="VertexTransformRadio"
@@ -332,6 +337,8 @@
                     VerticalAlignment="Top"
                     BorderThickness="0"/>
                 <Label
+                    Style="{StaticResource Helpable}"
+                    Tag="Оберіть точку навколо якої хочете здійснювати обертання. Центр шестикутника, або одна з його вершин."           
                     Name="CenterPivotLabel"
                     MouseDown="CenterPivotClicked"
                     Cursor="Hand"
@@ -346,6 +353,8 @@
                     FontSize="16"
                     Foreground="White" />
                 <Label
+                    Style="{StaticResource Helpable}"
+                    Tag="Оберіть точку навколо якої хочете здійснювати обертання. Центр шестикутника, або одна з його вершин."  
                     Name="VertexPivotLabel"
                     MouseDown="VertexPivotClicked"
                     Cursor="Hand"
@@ -376,6 +385,7 @@
                 Padding="5"
                 Foreground="#4278cf"
                 FontSize="10"
+                VerticalAlignment="Center"
                 TextAlignment="Center"
                 TextWrapping="Wrap" />
         </Border>
@@ -409,7 +419,7 @@
             Width="86"/>
         <TextBox 
             Style="{StaticResource Helpable}"
-            Tag="Вкажіть кут повороту від 0 до 360 градусів, на який бажаєте повернути шестикутник."
+            Tag="Вкажіть кут повороту від 0.01 до 360 градусів, на який бажаєте повернути шестикутник."
             TabIndex="3"
             KeyDown="KeyDownHandler"
             Name="InputMaxRotation"

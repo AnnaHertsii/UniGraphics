@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,9 +11,12 @@ namespace UniGraphics.Fractals
     public partial class FractalsView : Page
     {
         private static readonly string defaultHelperMessage =
-            "Зміни цей текст в файлі FractalsView.xaml.cs";
-        public FractalsView()
+            "Давай почнемо вивчати фрактали! Введи початкові дані в полях вище.";
+        private Action goBack;
+
+        public FractalsView(Action goBack)
         {
+            this.goBack = goBack;
             InitializeComponent();
             UnicornHelper.Text = defaultHelperMessage;
         }
@@ -44,6 +48,11 @@ namespace UniGraphics.Fractals
         private void HelpableMouseLeave(object sender, MouseEventArgs e)
         {
             UnicornHelper.Text = defaultHelperMessage;
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            goBack();
         }
     }
 }

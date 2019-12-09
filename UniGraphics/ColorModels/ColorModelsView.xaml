@@ -17,6 +17,33 @@
             <EventSetter Event="MouseEnter" Handler="HelpableHover"/>
             <EventSetter Event="MouseLeave" Handler="HelpableMouseLeave"/>
         </Style>
+        <Style x:Key="BlueButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource Helpable}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="Background" Value="#99A2F1" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#8189cc" />
+                                        </Trigger>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Background" Value="#FFCED3FD" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid Background="Transparent">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <LinearGradientBrush x:Key="HueBrush" StartPoint="0,0" EndPoint="1,0">
             <LinearGradientBrush.GradientStops>
                 <GradientStop Color="#FF0000" Offset="0" />
@@ -91,8 +118,8 @@
                     Click="CreditsClicked" />
             </MenuItem>
         </Menu>
-        <TextBlock Text="RGB" Foreground="White" FontSize="16" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="21" Margin="143,2,135,2" Width="36"></TextBlock>
-        <TextBlock Text="HSL" Foreground="White" FontSize="16" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="21" Margin="144,2" Width="26"></TextBlock>
+        <TextBlock Text="RGB" Foreground="White" FontSize="16" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="21" Width="36"></TextBlock>
+        <TextBlock Text="HSL" Foreground="White" FontSize="16" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="21" Width="26"></TextBlock>
         <Border
             Grid.Row="1"
             Grid.RowSpan="2"
@@ -100,13 +127,15 @@
             Background="#BCC3FF">
             <Grid>
                 <Button
-                    Name="BackButton" 
+                    Tag="Натисніть, щоб повернутись в головне меню."
+                    Name="BackButton"
+                    Click="BackButton_Click"
                     Height="29"
                     Margin="10,19,229,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
-                    Background="#99A2F1"
-                    Grid.Column="0" Click="BackClicked" >
+                    Style="{StaticResource BlueButtonStyle}"
+                    Grid.Column="0">
                     <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/back.png" Stretch="Uniform" Height="28" Width="25"/>
                 </Button>
                 <Label
@@ -192,9 +221,8 @@
                     FontSize="16"
                     Foreground="White" />
                 <Button
-                    Style="{StaticResource Helpable}"
+                    Style="{StaticResource BlueButtonStyle}"
                     Tag="Натисніть, щоб здійснити конвертацію між RGB та HSL"
-                    Cursor="Hand"
                     Visibility="{Binding ConvertButtonVisibility}"
                     Name="Convert" 
                     FontSize="18"
@@ -203,8 +231,6 @@
                     Height="38"
                     Margin="10,218,10,0"
                     VerticalAlignment="Top"
-                    BorderThickness="0"
-                    Background="#99A2F1"
                     Command="{Binding Convert}"
                     Grid.Column="0" >
                 </Button>
@@ -271,6 +297,7 @@
             <TextBlock
                 x:Name="UnicornHelper"
                 Padding="5"
+                VerticalAlignment="Center"
                 Foreground="#4278cf"
                 FontSize="10"
                 TextAlignment="Center"
@@ -292,6 +319,8 @@
             MouseMove="HueMouseMove"
             SnapsToDevicePixels="True"/>
         <Rectangle 
+            Style="{StaticResource Helpable}"
+            Tag="Це тон, за яким відбуватимуться зміни"
             StrokeThickness="2"
             Fill="{Binding HueColor}" 
             HorizontalAlignment="Left" 
