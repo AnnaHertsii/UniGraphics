@@ -4,6 +4,7 @@ using System.Windows.Navigation;
 using UniGraphics.ViewModels;
 using UniGraphics.ColorModels;
 using UniGraphics.Transformation;
+using System.Windows.Controls;
 
 namespace UniGraphics
 {
@@ -13,19 +14,27 @@ namespace UniGraphics
         ColorModelsView colorModelsView;
         TransformationView transformationsView;
         MainPage mainPageView;
+        LoadingPage loadingPage;
 
         FractalsDataViewModel fractalsViewModel;
         ColorModelsViewModel colorModelsViewModel;
         TransformationsViewModel transformationsViewModel;
 
-        int pageIndex = -1;
+        int pageIndex = -2;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            mainPageView = new MainPage(PageChanged);
+            loadingPage = new LoadingPage(LoadFinished);
+            MainFrame.Content = loadingPage;
+        }
+
+        private void LoadFinished()
+        {
+            mainPageView = new MainPage(PageChanged); 
             MainFrame.Content = mainPageView;
+            loadingPage = null;
         }
 
         private void PageChanged(int pageIndex)

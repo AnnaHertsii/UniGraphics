@@ -271,13 +271,7 @@
     <Resource Include="Resources\back.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\start.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\stop.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\pause.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\scalematrix.jpg" />
@@ -290,6 +284,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Hexagon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\pause.png" />
+    <Resource Include="Resources\start.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

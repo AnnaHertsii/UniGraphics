@@ -54,5 +54,23 @@ namespace UniGraphics.Fractals
         {
             goBack();
         }
+
+        private void StudyMaterialsClicked(object sender, RoutedEventArgs e)
+        {
+            StudyWindow studyWindow = new StudyWindow();
+            studyWindow.ShowDialog();
+        }
+
+        private void HelpClicked(object sender, RoutedEventArgs e)
+        {
+            HelpWindow helpWindow = new HelpWindow();
+            helpWindow.ShowDialog();
+        }
+
+        private void CreditsClicked(object sender, RoutedEventArgs e)
+        {
+            CreditsWindow creditWindow = new CreditsWindow();
+            creditWindow.ShowDialog();
+        }
     }
 }

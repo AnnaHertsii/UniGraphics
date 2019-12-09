@@ -113,7 +113,7 @@
             <Grid>
                 <Button
                     Tag="Натисніть, щоб повернутись в головне меню."
-                    TabIndex="9"
+                    TabIndex="1"
                     Name="BackButton" 
                     Height="29"
                     Margin="10,19,229,0"
@@ -183,7 +183,7 @@
                 <TextBox
                     Style="{StaticResource Helpable}"
                     Tag="Введіть координату X лівої верхньої вершини шестикутника. Допустимі значення: -200 000 до 200 000."
-                    TabIndex="0"
+                    TabIndex="2"
                     KeyDown="KeyDownHandler"
                     Name="InputY"
                     Text="{Binding Path=CoordX}"
@@ -200,7 +200,7 @@
                     Foreground="#8787ed"/>
                 <Button
                     Tag="Натисніть, щоб розпочати рух шестикутника."
-                    TabIndex="6"
+                    TabIndex="8"
                     Name="StartButton"
                     Height="40"
                     Margin="10,288,136,0"
@@ -216,12 +216,14 @@
                             Name="StartButtonText"
                             Text="Розпочати"
                             Foreground="White" 
+                            TextAlignment="Center"
+                            Width="90"
                             Height="22"/>
                     </StackPanel>
                 </Button>
                 <Button
                     Tag="Натисніть, щоб призупинити рух."
-                    TabIndex="7"
+                    TabIndex="9"
                     Name="PauseButton"
                     Height="40"
                     Margin="10,288,136,0"
@@ -237,13 +239,14 @@
                         <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/pause.png" Stretch="Uniform" Height="28" Width="35"></Image>
                         <TextBlock  
                             FontSize="16"
+                            TextAlignment="Center"
                             Text="Пауза"
-                            Foreground="White" Width="48" Height="22"/>
+                            Foreground="White" Width="80" Height="22"/>
                     </StackPanel>
                 </Button>
                 <Button
                     Tag="Натисніть, щоб розпочати все з початку і ввести нові дані для руху."
-                    TabIndex="8"
+                    TabIndex="10"
 					Command="{Binding Path=StopTransform}"
                     Name="StopButton"
                     Height="40"
@@ -264,15 +267,16 @@
                         <TextBlock  
                             FontSize="15"
                             Text="Зупинити"
+                            TextAlignment="Center"
                             Foreground="White" 
-                            Width="71" 
+                            Width="80" 
                             Height="24"/>
                     </StackPanel>
                 </Button>
                 <TextBox
                     Style="{StaticResource Helpable}"
                     Tag="Введіть координату Y лівої верхньої вершини шестикутника. Допустимі значення: -200 000 до 200 000."
-                    TabIndex="1"
+                    TabIndex="3"
                     KeyDown="KeyDownHandler"
                     Name="InputX"
                     Text="{Binding Path=CoordY}"
@@ -312,7 +316,7 @@
                 <RadioButton
                     Style="{StaticResource Helpable}"
                     Tag="Оберіть точку навколо якої хочете здійснювати обертання. Центр шестикутника, або одна з його вершин."           
-                    TabIndex="4"
+                    TabIndex="6"
                     Cursor="Hand"
                     Name="CenterTransformRadio"
                     Grid.Column="0"
@@ -326,7 +330,7 @@
                 <RadioButton
                     Style="{StaticResource Helpable}"
                     Tag="Оберіть точку навколо якої хочете здійснювати обертання. Центр шестикутника, або одна з його вершин."  
-                    TabIndex="5"
+                    TabIndex="7"
                     Cursor="Hand"
                     Name="VertexTransformRadio"
                     Grid.Column="0"
@@ -402,7 +406,7 @@
         <TextBox 
             Style="{StaticResource Helpable}"
             Tag="Введіть довжину сторони шестикутника від 0 до 50 000. Усі сторони рівні."
-            TabIndex="2"
+            TabIndex="4"
             Name="InputSideLength"
             KeyDown="KeyDownHandler"
             Text="{Binding Path=SideLength}"
@@ -420,7 +424,7 @@
         <TextBox 
             Style="{StaticResource Helpable}"
             Tag="Вкажіть кут повороту від 0.01 до 360 градусів, на який бажаєте повернути шестикутник."
-            TabIndex="3"
+            TabIndex="5"
             KeyDown="KeyDownHandler"
             Name="InputMaxRotation"
             Text="{Binding Path=MaxRotation}"

@@ -5,7 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UniGraphics"
       mc:Ignorable="d" 
-      d:DesignHeight="640" d:DesignWidth="917"
+      d:DesignHeight="640" 
+      d:DesignWidth="917"
       Title="MainPage">
     <Page.Resources>
         <Style x:Key="Helpable" TargetType="FrameworkElement">

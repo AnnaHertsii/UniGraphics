@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:UniGraphics"
         mc:Ignorable="d"
         Icon="/UniGraphics;component/Resources/Unicorn/logo.png"
-        Title="Про програму" Height="550" Width="610">
+        Title="Про програму" 
+        Height="550"
+        Width="610"
+        MinHeight="400"
+        MinWidth="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="233" />

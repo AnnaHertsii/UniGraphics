@@ -472,17 +472,20 @@
                     Padding="-20,0,0,0"
                     Background="#F2F2F2"
                     Foreground="#99A2F1"
-                    Header="Довідка" />
+                    Header="Довідка" 
+                    Click="HelpClicked"/>
                 <MenuItem
                     Padding="-20,0,0,0"
                     Background="#F2F2F2"
                     Foreground="#99A2F1"
-                    Header="Навчальні матеріали" />
+                    Header="Навчальні матеріали" 
+                    Click="StudyMaterialsClicked"/>
                 <MenuItem
                     Padding="-20,0,0,0"
                     Background="#F2F2F2"
                     Foreground="#99A2F1"
-                    Header="Про програму" />
+                    Header="Про програму"
+                    Click="CreditsClicked"/>
             </MenuItem>
         </Menu>
         <Border
@@ -696,7 +699,7 @@
                     Foreground="White" />
                 <ComboBox
                     Style="{StaticResource Helpable}"
-                    Tag="Оберіть одну з 5 колірних моделей для фракталу."
+                    Tag="Оберіть одну з 5 колірних моделей для фрактала."
                     Grid.Column="1"
                     Width="101"
                     Height="22"
@@ -751,7 +754,7 @@
         </Border>
         <Image
             Style="{StaticResource Helpable}"
-            Tag="Це ділянка для промальовки фракталу."
+            Tag="Це ділянка для промальовки фрактала."
             Name="fractalImg"
             Grid.Row="1"
             Grid.RowSpan="2"
@@ -790,7 +793,7 @@
         </Border>
         <TextBlock
             Style="{StaticResource Helpable}"
-            Tag="Це загальна формула фракталу Ньютона!"
+            Tag="Це загальна формула фрактала Ньютона!"
             Grid.Row="1"
             Grid.Column="0"
             Width="249"
