@@ -290,9 +290,6 @@
     <Resource Include="Resources\start.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\affine.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\newton.png" />
   </ItemGroup>
   <ItemGroup>
