@@ -114,13 +114,14 @@
                 <Button
                     Tag="Натисніть цю кнопку, щоб перейти на розділ 'Колірні моделі'."
                     Name="ColorModelsButton"
+                    Cursor="Hand"
                     Height="40"
                     Margin="10,54,10,0"
                     Style="{StaticResource BlueButtonStyle}"
                     Click="ColorModelsButton_Click"
                     VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
-                        <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/colormodels.png" Stretch="Uniform" Height="28"></Image>
+                        <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/rgb.png" Stretch="Uniform" Height="28"></Image>
                         <TextBlock  
                             TextAlignment="Center"
                             FontSize="18"
@@ -134,11 +135,12 @@
                     x:Name="FractalsButton"
                     Click="FractalsButton_Click"
                     Height="40"
+                    Cursor="Hand"
                     Margin="10,113,10,0"
                     VerticalAlignment="Top"
                     Style="{StaticResource BlueButtonStyle}">
                     <StackPanel Orientation="Horizontal">
-                        <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/Fractal.png" Stretch="Uniform" Height="28"/>
+                        <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/newton.png" Stretch="Uniform" Height="28"/>
                         <TextBlock  
                             FontSize="18"
                             Text="Фрактали"
@@ -153,11 +155,12 @@
                     x:Name="AnimationButton"
                     Click="AnimationButton_Click"
                     Height="40"
+                    Cursor="Hand"
                     Margin="10,170,10,0"
                     VerticalAlignment="Top"
                     Style="{StaticResource BlueButtonStyle}">
                     <StackPanel Orientation="Horizontal">
-                        <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/Hexagon.jpg" Stretch="Uniform" Height="28"/>
+                        <Image HorizontalAlignment="Left" Source="/UniGraphics;component/Resources/hexagon.png" Stretch="Uniform" Height="28"/>
                         <TextBlock  
                             FontSize="18"
                             Text="Афінні перетворення"

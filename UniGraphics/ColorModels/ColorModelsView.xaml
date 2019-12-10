@@ -221,6 +221,7 @@
                     FontSize="16"
                     Foreground="White" />
                 <Button
+                    Cursor="Hand"
                     Style="{StaticResource BlueButtonStyle}"
                     Tag="Натисніть, щоб здійснити конвертацію між RGB та HSL"
                     Visibility="{Binding ConvertButtonVisibility}"

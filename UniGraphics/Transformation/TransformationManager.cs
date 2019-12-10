@@ -76,7 +76,7 @@ namespace UniGraphics.Transformation
         private static readonly double offsetCoef = 1.1;
         private static readonly double rotationSpeed = 60.0;
         private static readonly double scalingSpeed = 0.5;
-        private static readonly int pivotRadius = 10;
+        private static readonly int pivotRadius = 6;
         private static readonly Pen gridPen, axisGridPen;
         private static readonly DBrush tickTextBrush, hexagonBrush, pivotBrush;
         private static readonly Font tickTextFont;
