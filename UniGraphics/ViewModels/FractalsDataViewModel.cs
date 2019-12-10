@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using UniGraphics.Converters;
 using UniGraphics.Fractals;
 
 namespace UniGraphics.ViewModels
@@ -21,7 +22,7 @@ namespace UniGraphics.ViewModels
 
         private void StartVisualization(object args)
         {
-            Generator.FractalScale = _fractalScale;
+            Generator.FractalScale = ScaleConverter.remapScale(-_fractalScale);
             Generator.Power = _fractalPower;
             Generator.Constant = new Complex(_constantReal, _constantImaginary);
             Generator.currentColorModel = NewtonFractalGenerator.colorModels[_currentColorModel];
@@ -157,7 +158,7 @@ namespace UniGraphics.ViewModels
             _constantReal = -1.0;
             _constantImaginary = 0.0;
             _currentColorModel = 0;
-            _fractalScale = 1.0;
+            _fractalScale = 0.0;
             _fractalPower = 3.0;
             setProgressAction = (p => GeneratingProgress = p);
             Generator = new NewtonFractalGenerator(_fractalPower,
@@ -166,7 +167,7 @@ namespace UniGraphics.ViewModels
             {
                 Width = width,
                 Height = height,
-                FractalScale = _fractalScale
+                FractalScale = ScaleConverter.remapScale(-_fractalScale)
             };
             Generator.generate(null, setProgressAction);
             _image = Generator.Image;
