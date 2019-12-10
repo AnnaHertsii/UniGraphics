@@ -75,12 +75,24 @@ namespace UniGraphics.ViewModels
             }
         }
 
+        private static readonly string badComplexRangeError =
+            "Введенні вами дані є некоректними! :(\n" +
+            "Заборонено вводити значення, що не належать проміжку [-1000; 1000]." +
+            "Ознайомтесь детальніше з розділом 'Вхідні дані' у вкладці " +
+            "'Фрактали' довідки.";
+
         private double _constantReal;
         public double ConstantReal
         {
             get { return _constantReal; }
             set
             {
+                if (Math.Abs(value) > 1000)
+                {
+                    ErrorWindow error = new ErrorWindow(badComplexRangeError);
+                    error.ShowDialog();
+                    return;
+                }
                 _constantReal = value;
                 OnPropertyChanged("ConstantReal");
             }
@@ -92,6 +104,12 @@ namespace UniGraphics.ViewModels
             get { return _constantImaginary; }
             set
             {
+                if (Math.Abs(value) > 1000)
+                {
+                    ErrorWindow error = new ErrorWindow(badComplexRangeError);
+                    error.ShowDialog();
+                    return;
+                }
                 _constantImaginary = value;
                 OnPropertyChanged("ConstantImaginary");
             }
