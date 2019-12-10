@@ -203,6 +203,7 @@
                     TabIndex="8"
                     Name="StartButton"
                     Height="40"
+                    Cursor="Hand"
                     Margin="10,288,136,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
@@ -247,6 +248,7 @@
                 <Button
                     Tag="Натисніть, щоб розпочати все з початку і ввести нові дані для руху."
                     TabIndex="10"
+                    Cursor="Hand"
 					Command="{Binding Path=StopTransform}"
                     Name="StopButton"
                     Height="40"

@@ -59,6 +59,7 @@
         <Button
             IsEnabled="False"
             Click="ChooseClicked"
+            Cursor="Hand"
             Name="ChooseButton"
             FontSize="14"
             Height="37"
