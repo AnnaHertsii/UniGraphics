@@ -22,6 +22,8 @@
                 Width="192" 
                 RenderTransformOrigin="0.5,0.516"/>
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="InputDataBlock"
                     Foreground="Black"
                     FontSize="16"
                     TextWrapping="Wrap"
@@ -45,6 +47,8 @@
                 </TextBlock>
 
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="ScalingBlock"
                     Foreground="Black" 
                     FontSize="16"
                     TextWrapping="Wrap"
@@ -57,6 +61,8 @@
                 </TextBlock>
 
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="ColorModelBlock"
                     Foreground="Black" 
                     FontSize="16"
                     TextWrapping="Wrap"
@@ -71,6 +77,8 @@
                 </TextBlock>
 
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="ProblemsBlock"
                     Foreground="Black" 
                     FontSize="16"
                     TextWrapping="Wrap"
@@ -82,7 +90,6 @@
                     <Run Text="ви можете бачити знизу біля кнопки 'Візуалізувати'. Для уникнення зависання програми бажано"/>
                     <Run Text="зачекати поки не з'явиться зображення фрактала."/><LineBreak/>
                 </TextBlock>
-<!--hnkdmcxbfjk-->
             </StackPanel>
         </ScrollViewer>
     </Grid>

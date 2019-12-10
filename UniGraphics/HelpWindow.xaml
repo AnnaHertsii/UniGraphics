@@ -8,9 +8,18 @@
         Icon="/UniGraphics;component/Resources/Unicorn/logo.png"
         Title="Довідка" 
         MinWidth="600"
-        MinHeight="300"
+        MinHeight="350"
         Height="450" 
         Width="800">
+    <Window.Resources>
+        <Style x:Key="HelpTreeItem" TargetType="{x:Type TreeViewItem}">
+            <EventSetter Event="Selected" Handler="HelpTreeItemSelected"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="224" />
@@ -18,61 +27,57 @@
         </Grid.ColumnDefinitions>
         <Frame
             NavigationUIVisibility="Hidden"
-            Source="Help/FractalsHelp.xaml"
             Name="HelpFrame" 
             Margin="10" Grid.Column="1"/>
         <Border
             Grid.Column="0"
             Background="#BCC3FF">
-            <Label
-                Width="134"
-                Height="37"
-                Margin="42,0,48,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                HorizontalContentAlignment="Center"
-                Content="Зміст"
-                FontSize="22"
-                Foreground="White" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <Label
+                    Width="134"
+                    Height="37"
+                    Margin="42,0,48,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    Content="Зміст"
+                    FontSize="22"
+                    Foreground="White" />
+                <TreeView 
+                    Name="HelpTree" 
+                    Grid.Row="1"
+                    Background="Transparent" 
+                    BorderThickness="0">
+                    <TreeViewItem Header="Фрактали" Style="{StaticResource HelpTreeItem}" Name="FractalsSection">
+                        <TreeViewItem Header="Вхідні дані" Tag="InputDataBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Масштабування" Tag="ScalingBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Колірна модель" Tag="ColorModelBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Можливі пробле..." Tag="ProblemsBlock" Style="{StaticResource HelpTreeItem}"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Колірні моделі" Style="{StaticResource HelpTreeItem}" Name="ColorModelsSection">
+                        <TreeViewItem Header="Вхідні дані" Tag="InputDataBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Робота зі зобр..." Tag="ImageWorkBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Проблемні ситуа..." Tag="ProblemsBlock" Style="{StaticResource HelpTreeItem}"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Афінні перетворення" Style="{StaticResource HelpTreeItem}" Name="TransformationsSection">
+                        <TreeViewItem Header="Вхідні дані" Tag="InputDataBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Масштабування..." Tag="ScalingBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Особливості ро..." Tag="SpecialWorkBlock" Style="{StaticResource HelpTreeItem}"/>
+                    </TreeViewItem>
+                    <TreeView.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                      Color="#99A2F1" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"
+                      Color="#99A2F1" />
+                    </TreeView.Resources>
+                </TreeView>
+            </Grid>
         </Border>
-        <Label 
-            FontWeight="Bold"
-            Name="FractalsSection"
-            Cursor="Hand"
-            Content="Фрактали" 
-            HorizontalAlignment="Left" 
-            Margin="10,36,0,0" 
-            VerticalAlignment="Top"
-            Grid.Column="0"
-            Foreground="White"
-            FontSize="18" 
-            Width="118" 
-            Height="32"
-            MouseLeftButtonUp="FractalHelpClicked"/>
-        <Label 
-            Name="ColorModelsSection"
-            Cursor="Hand"
-            Content="Колірні моделі" 
-            HorizontalAlignment="Left" 
-            Margin="10,68,0,0" 
-            VerticalAlignment="Top"
-            Grid.Column="0"
-            Foreground="White"
-            FontSize="18" 
-            Width="145" 
-            Height="31"
-            MouseLeftButtonUp="ColorModelHelpClicked"/>
-        <Label 
-            Name="AnimationsSection"
-            Cursor="Hand"
-            Content="Афінні перетворення" 
-            HorizontalAlignment="Left" 
-            Margin="10,99,0,0" 
-            VerticalAlignment="Top"
-            Grid.Column="0"
-            Foreground="White"
-            FontSize="18" Width="203" Height="37"
-            MouseLeftButtonUp="TransformationHelpClicked"/>
         <Image
             Width="72"
             Grid.Column="0"

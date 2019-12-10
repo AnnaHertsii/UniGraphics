@@ -8,7 +8,7 @@ namespace UniGraphics
     public partial class LoadingPage : Page
     {
         Action loadFinished;
-        static readonly int sleepTime = 0;
+        static readonly int sleepTime = 20;
 
         public LoadingPage(Action loadFinished)
         {

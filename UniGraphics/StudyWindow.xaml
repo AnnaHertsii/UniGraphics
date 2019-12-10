@@ -10,8 +10,17 @@
     Title="Навчальні матеріали" 
     Height="450"
     Width="800"
-    MinHeight="300"
+    MinHeight="350"
     MinWidth="600">
+    <Window.Resources>
+        <Style x:Key="HelpTreeItem" TargetType="{x:Type TreeViewItem}">
+            <EventSetter Event="Selected" Handler="HelpTreeItemSelected"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="224" />
@@ -19,60 +28,65 @@
         </Grid.ColumnDefinitions>
         <Frame
             NavigationUIVisibility="Hidden"
-            Source="StudyMaterials/FractalsStudy.xaml"
             Name="StudyFrame" 
             Margin="10" Grid.Column="1"/>
 
         <Border
             Grid.Column="0"
             Background="#BCC3FF">
-            <Label
-                Width="134"
-                Height="37"
-                Margin="42,0,48,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                HorizontalContentAlignment="Center"
-                Content="Зміст"
-                FontSize="22"
-                Foreground="White" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <Label
+                    Width="134"
+                    Height="37"
+                    Margin="42,0,48,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    Content="Зміст"
+                    FontSize="22"
+                    Foreground="White" />
+                <TreeView 
+                    Grid.Row="1"
+                    Name="HelpTree" 
+                    Background="Transparent" 
+                    BorderThickness="0">
+                    <TreeViewItem Header="Фрактали" Style="{StaticResource HelpTreeItem}" Name="FractalsSection">
+                        <TreeViewItem Header="Загальні відомості" Tag="OveralBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Історія" Tag="HistoryBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Алгоритм побуд..." Tag="AlgoBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Краса фракталів..." Tag="BeautyBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Посилання" Tag="LinksBlock" Style="{StaticResource HelpTreeItem}"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Колірні моделі" Style="{StaticResource HelpTreeItem}" Name="ColorModelsSection">
+                        <TreeViewItem Header="Цікаві факти (RGB)" Tag="RGBInterestingBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Недоліки (RGB)" Tag="ConsBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Цікаві факти (HSL)" Tag="HSLInterestingBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Особливості (HSL)" Tag="SpecialInfoBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Посилання" Tag="LinksBlock" Style="{StaticResource HelpTreeItem}"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Афінні перетворення" Style="{StaticResource HelpTreeItem}" Name="TransformationsSection">
+                        <TreeViewItem Header="Означення" Tag="DefinitionBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Зсув" Tag="TranslateBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Масштабування" Tag="ScalingBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Поворот" Tag="RotationBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Правила викона..." Tag="RulesBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Матриця перет..." Tag="MatrixBlock" Style="{StaticResource HelpTreeItem}"/>
+                        <TreeViewItem Header="Посилання" Tag="LinksBlock" Style="{StaticResource HelpTreeItem}"/>
+                    </TreeViewItem>
+                    <TreeView.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                      Color="#99A2F1" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"
+                      Color="#99A2F1" />
+                    </TreeView.Resources>
+                </TreeView>
+            </Grid>
         </Border>
-        <Label 
-            FontWeight="Bold"
-            Name="FractalsSection"
-            Cursor="Hand"
-            Content="Фрактали" 
-            HorizontalAlignment="Left" 
-            Margin="10,36,0,0" 
-            VerticalAlignment="Top"
-            Grid.Column="0"
-            Foreground="White"
-            FontSize="18" 
-            Width="118" 
-            Height="32" MouseLeftButtonUp="FractalStudyClicked"/>
-        <Label 
-            Name="ColorModelsSection"
-            Cursor="Hand"
-            Content="Колірні моделі" 
-            HorizontalAlignment="Left" 
-            Margin="10,68,0,0" 
-            VerticalAlignment="Top"
-            Grid.Column="0"
-            Foreground="White"
-            FontSize="18" Width="145" Height="31" MouseLeftButtonUp="ColorModelsStudyClicked"/>
-        <Label 
-            Name="AnimationsSection"
-            Cursor="Hand"
-            Content="Афінні перетворення" 
-            HorizontalAlignment="Left" 
-            Margin="10,99,0,0" 
-            VerticalAlignment="Top"
-            Grid.Column="0"
-            Foreground="White"
-            FontSize="18"
-            Width="203" 
-            Height="37"
-            MouseLeftButtonUp="TransformationStudyClicked"/>
         <Image
             Width="72"
             Grid.Column="0"

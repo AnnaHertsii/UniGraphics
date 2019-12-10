@@ -21,6 +21,8 @@
                 Width="204" 
                 RenderTransformOrigin="0.5,0.516"/>
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="OveralBlock"
                     Foreground="Black"
                     FontSize="16"
                     TextWrapping="Wrap"
@@ -34,6 +36,8 @@
                              z(n+1) = z(n) – f(z(n))/f'(z(n))."/>
                 </TextBlock>
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="HistoryBlock"
                     Foreground="Black"
                     FontSize="16"
                     TextWrapping="Wrap"
@@ -48,6 +52,8 @@
                     <Run Text="З огляду на те, що Ньютон застосовував свій метод виключно до поліномів, фрактали, утворені в результаті такого застосування, набули назви фракталів Ньютона або басейнів Ньютона."></Run>
                 </TextBlock>
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="AlgoBlock"
                     Foreground="Black"
                     FontSize="16"
                     TextWrapping="Wrap"
@@ -62,71 +68,76 @@
                         <Run Text="5) Виконання z = z – f(z) / df(z);"/><LineBreak/>
                         <Run Text="6)Перевірка наближення для кожного кореня і встановлення кольору для піксела. Перехід до наступного піксела."/>
                 </TextBlock>
+                <StackPanel 
+                    x:Name="BeautyBlock"
+                    Visibility="Collapsed">
+                    <TextBlock
+                        Foreground="Black"
+                        FontSize="16"
+                        TextWrapping="Wrap"
+                        TextAlignment="Justify"
+                        Margin="10,0,0,10">
+                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Краса фракталів Ньютона"/><LineBreak/>
+                        </TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                        <Image 
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Margin="10"
+                                Width="218"
+                                HorizontalAlignment="Center"
+                                Source="/UniGraphics;component/Resources/Fractal.png" />
+                        <Image 
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Margin="10"
+                            Width="218"
+                            HorizontalAlignment="Center"
+                            Source="/UniGraphics;component/Resources/Fractal3.png" />
+                        <Image 
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            Margin="10"
+                            Width="218"
+                            HorizontalAlignment="Center"
+                            Source="/UniGraphics;component/Resources/Fractal4.jpg" Grid.RowSpan="2" />
+                        <Image 
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Margin="10"
+                            Width="218"
+                            HorizontalAlignment="Center"
+                            Source="/UniGraphics;component/Resources/Fractal1.png" />
+                    </Grid>
+                </StackPanel>
                 <TextBlock
-                    Foreground="Black"
-                    FontSize="16"
-                    TextWrapping="Wrap"
-                    TextAlignment="Justify"
-                    Margin="10,0,0,10">
-                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Краса фракталів Ньютона"/><LineBreak/>
-                </TextBlock>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Image 
-                    Grid.Column="0"
-                    Grid.Row="0"
-                    Margin="10"
-                    Width="218"
-                    HorizontalAlignment="Center"
-                    Source="/UniGraphics;component/Resources/Fractal.png" />
-                    <Image 
-                    Grid.Column="1"
-                    Grid.Row="0"
-                    Margin="10"
-                    Width="218"
-                    HorizontalAlignment="Center"
-                    Source="/UniGraphics;component/Resources/Fractal3.png" />
-                    <Image 
-                    Grid.Column="0"
-                        Grid.Row="1"
-                        Margin="10"
-                    Width="218"
-                    HorizontalAlignment="Center"
-                    Source="/UniGraphics;component/Resources/Fractal4.jpg" Grid.RowSpan="2" />
-                    <Image 
-                    Grid.Column="1"
-                    Grid.Row="1"
-                    Margin="10"
-                    Width="218"
-                    HorizontalAlignment="Center"
-                    Source="/UniGraphics;component/Resources/Fractal1.png" />
-                </Grid>
-                <TextBlock
-                    Foreground="Black"
-                    FontStyle="Italic"
-                    FontSize="16"
-                    TextWrapping="Wrap"
-                    TextAlignment="Justify"
-                    Margin="10,0,0,10">
-                <Run Text="Більш детально ознайомитись з фракталами Ньютона ви можете за посиланням:"></Run>
-                </TextBlock>
-                <TextBlock
+                    Visibility="Collapsed"
+                    Name="LinksBlock"
                     Foreground="Black"
                     FontStyle="Italic"
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
                     Margin="10,0,0,10">
-                    <Hyperlink NavigateUri="http://zonakoda.ru/padenie-v-bassejny-nyutona.html" RequestNavigate="LinkRequested">
-                        <Run Text="http://zonakoda.ru/padenie-v-bassejny-nyutona.html"/>
-                    </Hyperlink>
+                    <Run Text="Більш детально ознайомитись з фракталами Ньютона ви можете за посиланням:"></Run><LineBreak/>
+                    <TextBlock
+                        Foreground="Black"
+                        FontStyle="Italic"
+                        FontSize="16"
+                        TextWrapping="Wrap"
+                        TextAlignment="Justify">
+                        <Hyperlink NavigateUri="http://zonakoda.ru/padenie-v-bassejny-nyutona.html" RequestNavigate="LinkRequested">
+                            <Run Text="http://zonakoda.ru/padenie-v-bassejny-nyutona.html"/>
+                        </Hyperlink>
+                    </TextBlock>
                 </TextBlock>
             </StackPanel>
         </ScrollViewer>

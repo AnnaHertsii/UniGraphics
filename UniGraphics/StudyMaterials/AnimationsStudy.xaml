@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UniGraphics.StudyMaterials"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="500"
+      d:DesignHeight="1200" d:DesignWidth="900"
       Title="AnimationStudy">
     <Grid>
         <ScrollViewer>
@@ -21,6 +21,8 @@
                 Width="208" 
                 RenderTransformOrigin="0.5,0.516"/>
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="DefinitionBlock"
                     Foreground="Black"
                     FontSize="16"
                     TextWrapping="Wrap"
@@ -35,49 +37,63 @@
                     <Run Text="3) Поворот"/><LineBreak/>
                     <Run Text="Усі афінні перетворення задаються формулами або матричними виразами. Афінні перетворення базуються на використанні матриць перетворень."/>
                 </TextBlock>
+                <StackPanel 
+                    x:Name="TranslateBlock"
+                    Visibility="Collapsed">
+                    <TextBlock
+                        Foreground="Black"
+                        FontSize="16"
+                        TextWrapping="Wrap"
+                        TextAlignment="Justify"
+                        Margin="10,0,0,10">
+                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Зсув"/><LineBreak/>
+                        <Run Text="Зсув об'єкта відповідає матриці:"/>
+                        </TextBlock>
+                        <Image 
+                        Margin="10,0,0,2"
+                        Width="160"
+                        HorizontalAlignment="Center"
+                        Source="/UniGraphics;component/Resources/movematrix.jpg" Height="110" />
+                </StackPanel>
+                <StackPanel 
+                    x:Name="ScalingBlock"
+                    Visibility="Collapsed">
+                    <TextBlock
+                        Foreground="Black"
+                        FontSize="16"
+                        TextWrapping="Wrap"
+                        TextAlignment="Justify"
+                        Margin="10,0,0,10">
+                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Масштабування"/><LineBreak/>
+                        <Run Text="Масштабування відповідає матриці:"/>
+                        </TextBlock>
+                        <Image 
+                        Margin="10,0,0,2"
+                        Width="162"
+                        HorizontalAlignment="Center"
+                        Source="/UniGraphics;component/Resources/scalematrix.jpg" Height="110" />
+                </StackPanel>
+                <StackPanel 
+                    x:Name="RotationBlock"
+                    Visibility="Collapsed">
+                    <TextBlock
+                        Foreground="Black"
+                        FontSize="16"
+                        TextWrapping="Wrap"
+                        TextAlignment="Justify"
+                        Margin="10,0,0,10">
+                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Поворот"/><LineBreak/>
+                        <Run Text="Поворот об'єкта відносно центру координат на кут alfa відповідає матриці:"/>
+                        </TextBlock>
+                        <Image 
+                            Margin="10,0,0,2"
+                            Width="198"
+                            HorizontalAlignment="Center"
+                            Source="/UniGraphics;component/Resources/turnmatrix.jpg" Height="81" />
+                </StackPanel>
                 <TextBlock
-                    Foreground="Black"
-                    FontSize="16"
-                    TextWrapping="Wrap"
-                    TextAlignment="Justify"
-                    Margin="10,0,0,10">
-                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Зсув"/><LineBreak/>
-                    <Run Text="Зсув об'єкта відповідає матриці:"/>
-                </TextBlock>
-                <Image 
-                    Margin="10,0,0,2"
-                    Width="160"
-                    HorizontalAlignment="Center"
-                    Source="/UniGraphics;component/Resources/movematrix.jpg" Height="110" />
-                <TextBlock
-                    Foreground="Black"
-                    FontSize="16"
-                    TextWrapping="Wrap"
-                    TextAlignment="Justify"
-                    Margin="10,0,0,10">
-                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Масштабування"/><LineBreak/>
-                    <Run Text="Масштабування відповідає матриці:"/>
-                </TextBlock>
-                <Image 
-                    Margin="10,0,0,2"
-                    Width="162"
-                    HorizontalAlignment="Center"
-                    Source="/UniGraphics;component/Resources/scalematrix.jpg" Height="110" />
-                <TextBlock
-                    Foreground="Black"
-                    FontSize="16"
-                    TextWrapping="Wrap"
-                    TextAlignment="Justify"
-                    Margin="10,0,0,10">
-                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Поворот"/><LineBreak/>
-                    <Run Text="Поворот об'єкта відносно центру координат на кут alfa відповідає матриці:"/>
-                </TextBlock>
-                <Image 
-                    Margin="10,0,0,2"
-                    Width="198"
-                    HorizontalAlignment="Center"
-                    Source="/UniGraphics;component/Resources/turnmatrix.jpg" Height="81" />
-                <TextBlock
+                    Visibility="Collapsed"
+                    Name="RulesBlock"
                     Foreground="Black"
                     FontSize="16"
                     TextWrapping="Wrap"
@@ -92,6 +108,8 @@
                     <Run Text="Навколо якої лінії або осі здійснюється поворот?"/>
                 </TextBlock>
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="MatrixBlock"
                     Foreground="Black"
                     FontSize="16"
                     TextWrapping="Wrap"
@@ -105,6 +123,8 @@
                     <Run Text="Вершини фігури записуються у матричній формі і матриця перетворення визначається як добуток оберненої матриці початкового об'єкта і матриці кінцевого об'єкта."/>
                 </TextBlock>
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="LinksBlock"
                     Foreground="Black"
                     FontStyle="Italic"
                     FontSize="16"
@@ -112,6 +132,7 @@
                     TextAlignment="Justify"
                     Margin="10,0,0,10">
                     <Run Text="Більш детально ознайомитись з афінними перетвореннями ви можете за посиланням:"/>
+                    <LineBreak/>
                     <Hyperlink NavigateUri=" https://studopedia.su/10_116636_affinnie-preobrazovaniya-na-ploskosti.html" RequestNavigate="LinkRequested">
                         <Run Text="https://studopedia.su/10_116636_affinnie-preobrazovaniya-na-ploskosti.html"/>
                     </Hyperlink>

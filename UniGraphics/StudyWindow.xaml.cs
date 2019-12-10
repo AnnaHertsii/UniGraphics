@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Controls;
 using UniGraphics.StudyMaterials;
 
 namespace UniGraphics
@@ -16,29 +11,22 @@ namespace UniGraphics
             InitializeComponent();
         }
 
-        private void FractalStudyClicked(object sender, MouseButtonEventArgs e)
+        private void HelpTreeItemSelected(object sender, RoutedEventArgs e)
         {
-            StudyFrame.Content = new FractalsStudy();
-            FractalsSection.FontWeight = FontWeights.Bold;
-            ColorModelsSection.FontWeight = FontWeights.Normal;
-            AnimationsSection.FontWeight = FontWeights.Normal;
+            TreeViewItem item = (TreeViewItem)sender;
+            TreeViewItem parent = item.Parent as TreeViewItem;
+            if (parent == null)
+                return;
+            Page content;
+            if (parent.Name == "FractalsSection")
+                content = new FractalsStudy();
+            else if (parent.Name == "ColorModelsSection")
+                content = new ColorModelsStudy();
+            else
+                content = new AnimationStudy();
+            StudyFrame.Content = content;
+            FrameworkElement block = content.FindName((string)item.Tag) as FrameworkElement;
+            block.Visibility = Visibility.Visible;
         }
-
-        private void ColorModelsStudyClicked(object sender, MouseButtonEventArgs e)
-        {
-            StudyFrame.Content = new ColorModelsStudy();
-            FractalsSection.FontWeight = FontWeights.Normal;
-            ColorModelsSection.FontWeight = FontWeights.Bold;
-            AnimationsSection.FontWeight = FontWeights.Normal;
-        }
-
-        private void TransformationStudyClicked(object sender, MouseButtonEventArgs e)
-        {
-            StudyFrame.Content = new AnimationStudy();
-            FractalsSection.FontWeight = FontWeights.Normal;
-            ColorModelsSection.FontWeight = FontWeights.Normal;
-            AnimationsSection.FontWeight = FontWeights.Bold;
-        }
-        
     }
 }

@@ -23,6 +23,8 @@
                 Width="260" 
                 RenderTransformOrigin="0.5,0.516"/>
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="InputDataBlock"
                     Foreground="Black"
                     FontSize="16"
                     TextWrapping="Wrap"
@@ -33,11 +35,13 @@
                         <Run Text="'Файл->Відкрити' та оберіть зображення. Ви побачите його у відділі RGB. Тепер ви можете починати роботу!"/><LineBreak/>
                 </TextBlock>
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="ImageWorkBlock"
                     Foreground="Black"
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify">
-                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Робота з зображенням"/><LineBreak/>
+                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Робота зі зображенням"/><LineBreak/>
                         <Run Text="Відкрите зображення відображене у RGB. Щоб конвертувати його у HSL натисніть кнопку 'Конвертувати'."/>
                         <Run Text="Після першого ж натиснення кнопка зникне - оскільки зображення уже конвертоване, немає потреби конвертувати знову."></Run>
                         <Run Text="Можливість конвертувати з'явиться при відкритті іншого зображення."></Run>
@@ -49,6 +53,8 @@
                         <Run Text="Для збереження зображення натисніть 'Файл->Зберегти як'. Можливе збереження у таких форматах, як: .jpeg, .jpg, .png, .tiff, .bmp, .wmf."/> <LineBreak/>
                 </TextBlock>
                 <TextBlock
+                    Visibility="Collapsed"
+                        Name="ProblemsBlock"
                         Foreground="Black"
                         FontSize="16"
                         TextWrapping="Wrap"

@@ -5,65 +5,72 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UniGraphics.StudyMaterials"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="500"
+      d:DesignHeight="2000" 
+      d:DesignWidth="1000"
       Title="ColorModelsStudy">
-
     <Grid>
         <ScrollViewer>
             <StackPanel Margin="10,0,10,0">
                 <Label 
-                FontStyle ="Italic" 
-                Foreground="#99A2F1" 
-                FontWeight="Bold"
-                Content="Колірні моделі RGB та HSL" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Top"
-                FontSize="18"
-                Width="258" 
-                RenderTransformOrigin="0.5,0.516"/>
+                    FontStyle ="Italic" 
+                    Foreground="#99A2F1" 
+                    FontWeight="Bold"
+                    Content="Колірні моделі RGB та HSL" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top"
+                    FontSize="18"
+                    Width="258" 
+                    RenderTransformOrigin="0.5,0.516"/>
+                <StackPanel
+                    Name="RGBInterestingBlock"
+                    Visibility="Collapsed">
+                    <TextBlock
+                        Foreground="Black"
+                        FontSize="16"
+                        TextWrapping="Wrap"
+                        TextAlignment="Justify"
+                        Margin="10,0,0,10">
+                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="RGB"/><LineBreak/>
+                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Цікаві факти"/><LineBreak/>
+                        <Run Text="1) Адитивна  модель  кольору  найпростіша  для  розуміння."/>
+                        <Run Text="Це апаратно-орієнтована модель, в якій кольори описуються за допомогою складання трьох базових кольорів – червоного, зеленого, синього – в різних пропорціях."></Run>
+                        <Run Text="Саме тому її називають адитивною - від слова add."></Run><LineBreak/>
+                        <Run Text ="2) Модель названа за першими буквами англійських слів: R (RED) – червоний; G (GREEN) – зелений; B(BLUE) – синій."></Run>
+                        <Run Text="Кожен з базових кольорів може приймати насиченість у діапазоні від 0 до 255."></Run><LineBreak/>
+                        <Run Text="3) Дану модель використовують монітори, телевізори, сканери, слайд-проектори, кольорові лампи реклами і інші пристрої, в яких колір виходить шляхом змішування світлових пучків, тому модель є апаратно-орієнтована."></Run><LineBreak/>
+                        <Run Text="4) На сьогодні система RGB є офіційним стандартом. Змінюючи інтенсивність свічення кольорових крапок, можна створити велике різноманіття відтінків."></Run>
+                        <Run Text="Якщо інтенсивність кожного з них максимальна (255), то виходить білий колір."></Run>
+                        <Run Text="Відсутність всіх трьох кольорів дає чорний колір. Якщо змішуються всі кольори з однаковою інтенсивністю - отримуємо сірий колір."></Run>
+                        <Run Text="Для зображення адитивної моделі найчастіше застосовують одиничний куб з розподілом кольорів уздовж одиничних векторів."></Run><LineBreak/>
+                    </TextBlock>
+                    <Grid Height="200">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image 
+                            Grid.Column="0"
+                            Margin="10,0,0,2"
+                            Width="218"
+                            HorizontalAlignment="Center"
+                            Source="/UniGraphics;component/Resources/RGB1.png" />
+                        <Image 
+                            Grid.Column="1"
+                            Margin="0,0,0,2"
+                            Width="218"
+                            HorizontalAlignment="Center"
+                            Source="/UniGraphics;component/Resources/RGB2.png" />
+                    </Grid>
+                </StackPanel>
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="ConsBlock"
                     Foreground="Black"
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
                     Margin="10,0,0,10">
-                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="RGB"/><LineBreak/>
-                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Цікаві факти"/><LineBreak/>
-                    <Run Text="1) Адитивна  модель  кольору  найпростіша  для  розуміння."/>
-                    <Run Text="Це апаратно-орієнтована модель, в якій кольори описуються за допомогою складання трьох базових кольорів – червоного, зеленого, синього – в різних пропорціях."></Run>
-                    <Run Text="Саме тому її називають адитивною - від слова add."></Run><LineBreak/>
-                    <Run Text ="2) Модель названа за першими буквами англійських слів: R (RED) – червоний; G (GREEN) – зелений; B(BLUE) – синій."></Run>
-                    <Run Text="Кожен з базових кольорів може приймати насиченість у діапазоні від 0 до 255."></Run><LineBreak/>
-                    <Run Text="3) Дану модель використовують монітори, телевізори, сканери, слайд-проектори, кольорові лампи реклами і інші пристрої, в яких колір виходить шляхом змішування світлових пучків, тому модель є апаратно-орієнтована."></Run><LineBreak/>
-                    <Run Text="4) На сьогодні система RGB є офіційним стандартом. Змінюючи інтенсивність свічення кольорових крапок, можна створити велике різноманіття відтінків."></Run>
-                    <Run Text="Якщо інтенсивність кожного з них максимальна (255), то виходить білий колір."></Run>
-                    <Run Text="Відсутність всіх трьох кольорів дає чорний колір. Якщо змішуються всі кольори з однаковою інтенсивністю - отримуємо сірий колір."></Run>
-                    <Run Text="Для зображення адитивної моделі найчастіше застосовують одиничний куб з розподілом кольорів уздовж одиничних векторів."></Run><LineBreak/>
-                </TextBlock>
-                <Grid Height="200">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="232*"/>
-                        <ColumnDefinition Width="232*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image 
-                    Grid.Column="0"
-                    Margin="10,0,0,2"
-                    Width="218"
-                    HorizontalAlignment="Center"
-                    Source="/UniGraphics;component/Resources/RGB1.png" />
-                    <Image 
-                    Grid.Column="1"
-                    Margin="0,0,0,2"
-                    Width="218"
-                    HorizontalAlignment="Center"
-                    Source="/UniGraphics;component/Resources/RGB2.png" />
-                </Grid>
-                <TextBlock
-                    Foreground="Black"
-                    FontSize="16"
-                    TextWrapping="Wrap"
-                    TextAlignment="Justify"
-                    Margin="10,0,0,10">
+                <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="RGB"/><LineBreak/>
                 <Run 
                     FontStyle ="Italic"
                     Foreground="#99A2F1"
@@ -75,33 +82,40 @@
                     <Run Text="а не обумовленою низькою якістю принтера або монітора. Саме тому існують неапаратно-орієнтовані моделі, однією з яких є HSL. Про неї читайте нижче."></Run>
                 </TextBlock>
 
+                <StackPanel 
+                    Name="HSLInterestingBlock"
+                    Visibility="Collapsed">
+                    <TextBlock
+                        Foreground="Black"
+                        FontSize="16"
+                        TextWrapping="Wrap"
+                        TextAlignment="Justify"
+                        Margin="10,0,0,10">
+                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="HSL"/><LineBreak/>
+                        <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Цікаві факти"/><LineBreak/>
+                        <Run Text="1) Є розширенням моделі HSV. Основними параметрами є Hue, Saturation, Lightness: кольоровий тон, насиченість, освітленість."></Run><LineBreak/>
+                        <Run Text="Основна різниця між цими моделями полягає в заміні нелінійного компоненту «яскравість» на лінійний компонент «освітлення»."></Run><LineBreak/>
+                        <Run Text="2) В основі колірної моделі HLS лежить система Освальда. Ця модель утворює простір у формі подвійного конуса.  "></Run>
+                        <Run Text="Колірний тон задається кутом повороту навколо вертикальної осі конусів. За початок відліку прийнятий синій колір."></Run>
+                        <Run Text="Отже, по вертикальній осі відкладається L (освітленість), а інші два параметри задаються як і в HSV/HSB."></Run><LineBreak/>
+                        </TextBlock>
+                        <Grid Height="169">
+                            <Image 
+                        Margin="99,0,94,-15"
+                        Width="270"
+                        HorizontalAlignment="Center"
+                        Source="/UniGraphics;component/Resources/HSL.png" />
+                        </Grid>
+                </StackPanel>
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="SpecialInfoBlock"
                     Foreground="Black"
                     FontSize="16"
                     TextWrapping="Wrap"
                     TextAlignment="Justify"
                     Margin="10,0,0,10">
                     <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="HSL"/><LineBreak/>
-                    <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Цікаві факти"/><LineBreak/>
-                    <Run Text="1) Є розширенням моделі HSV. Основними параметрами є Hue, Saturation, Lightness: кольоровий тон, насиченість, освітленість."></Run><LineBreak/>
-                    <Run Text="Основна різниця між цими моделями полягає в заміні нелінійного компоненту «яскравість» на лінійний компонент «освітлення»."></Run><LineBreak/>
-                    <Run Text="2) В основі колірної моделі HLS лежить система Освальда. Ця модель утворює простір у формі подвійного конуса.  "></Run>
-                    <Run Text="Колірний тон задається кутом повороту навколо вертикальної осі конусів. За початок відліку прийнятий синій колір."></Run>
-                    <Run Text="Отже, по вертикальній осі відкладається L (освітленість), а інші два параметри задаються як і в HSV/HSB."></Run><LineBreak/>
-                </TextBlock>
-                <Grid Height="169">
-                    <Image 
-                    Margin="99,0,94,-15"
-                    Width="270"
-                    HorizontalAlignment="Center"
-                    Source="/UniGraphics;component/Resources/HSL.png" />
-                </Grid>
-                <TextBlock
-                    Foreground="Black"
-                    FontSize="16"
-                    TextWrapping="Wrap"
-                    TextAlignment="Justify"
-                    Margin="10,0,0,10">
                     <Run FontStyle ="Italic" Foreground="#99A2F1" FontWeight="Bold" Text="Особливості"/><LineBreak/>
                     <Run Text="HSL добре пристосована для опису кольорів таким чином, як це властиво людині."></Run>
                     <Run Text="Дивлячись на пофарбований об'єкт, людині простіше його описати за допомогою кольору, освітленості і насиченості, що і роблять дані колірні моделі."></Run>
@@ -109,6 +123,8 @@
                     <Run Text="оскільки в їхній основі лежить природній і інтуїтивно близький людині опис кольору, адже саме людина в кінцевому рахунку і є розробником та користувачем цих алгоритмів."></Run><LineBreak/>
                 </TextBlock>
                 <TextBlock
+                    Visibility="Collapsed"
+                    Name="LinksBlock"
                     Foreground="Black"
                     FontStyle="Italic"
                     FontSize="16"
@@ -116,17 +132,18 @@
                     TextAlignment="Justify"
                     Margin="10,0,0,10">
                     <Run Text="Більш детально ознайомитись з колірними моделями ви можете за посиланням:"></Run>
-                </TextBlock>
-                <TextBlock
-                    Foreground="Black"
-                    FontStyle="Italic"
-                    FontSize="16"
-                    TextWrapping="Wrap"
-                    TextAlignment="Justify"
-                    Margin="10,0,0,10">
-                    <Hyperlink NavigateUri=" http://ciframagazine.com/post.php?id=117" RequestNavigate="LinkRequested">
-                        <Run Text=" http://ciframagazine.com/post.php?id=117"/>
-                    </Hyperlink>
+                    <LineBreak/>
+                    <TextBlock
+                        Foreground="Black"
+                        FontStyle="Italic"
+                        FontSize="16"
+                        TextWrapping="Wrap"
+                        TextAlignment="Justify"
+                        Margin="10,0,0,10">
+                        <Hyperlink NavigateUri=" http://ciframagazine.com/post.php?id=117" RequestNavigate="LinkRequested">
+                            <Run Text=" http://ciframagazine.com/post.php?id=117"/>
+                        </Hyperlink>
+                    </TextBlock>
                 </TextBlock>
             </StackPanel>
         </ScrollViewer>

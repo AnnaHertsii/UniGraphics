@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using UniGraphics.Help;
 
@@ -11,28 +12,22 @@ namespace UniGraphics
             InitializeComponent();
         }
 
-        private void FractalHelpClicked(object sender, MouseButtonEventArgs e)
+        private void HelpTreeItemSelected(object sender, RoutedEventArgs e)
         {
-            HelpFrame.Content = new FractalsHelp();
-            FractalsSection.FontWeight = FontWeights.Bold;
-            ColorModelsSection.FontWeight = FontWeights.Normal;
-            AnimationsSection.FontWeight = FontWeights.Normal;
-        }
-
-        private void ColorModelHelpClicked(object sender, MouseButtonEventArgs e)
-        {
-            HelpFrame.Content = new ColorModelsHelp();
-            FractalsSection.FontWeight = FontWeights.Normal;
-            ColorModelsSection.FontWeight = FontWeights.Bold;
-            AnimationsSection.FontWeight = FontWeights.Normal;
-        }
-
-        private void TransformationHelpClicked(object sender, MouseButtonEventArgs e)
-        {
-            HelpFrame.Content = new AnimationsHelp();
-            FractalsSection.FontWeight = FontWeights.Normal;
-            ColorModelsSection.FontWeight = FontWeights.Normal;
-            AnimationsSection.FontWeight = FontWeights.Bold;
+            TreeViewItem item = (TreeViewItem)sender;
+            TreeViewItem parent = item.Parent as TreeViewItem;
+            if (parent == null)
+                return;
+            Page content;
+            if(parent.Name == "FractalsSection")
+                content = new FractalsHelp();
+            else if(parent.Name == "ColorModelsSection")
+                content = new ColorModelsHelp();
+            else
+                content = new AnimationsHelp();
+            HelpFrame.Content = content;
+            TextBlock block = (TextBlock)content.FindName((string)item.Tag);
+            block.Visibility = Visibility.Visible;
         }
     }
 }
