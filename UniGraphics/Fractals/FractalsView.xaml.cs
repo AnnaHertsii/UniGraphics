@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using UniGraphics.ViewModels;
 
 namespace UniGraphics.Fractals
 {
@@ -71,6 +72,29 @@ namespace UniGraphics.Fractals
         {
             CreditsWindow creditWindow = new CreditsWindow();
             creditWindow.ShowDialog();
+        }
+
+        private static readonly string badSymbolsError =
+            "Введенні вами дані є некоректними! :(\n" +
+            "Заборонено вводити символи. " +
+            "Ознайомтесь детальніше з розділом 'Вхідні дані' у вкладці " +
+            "'Афінні перетворення' довідки.";
+
+        private void VisualizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            FractalsDataViewModel viewModel = (FractalsDataViewModel)DataContext;
+            if (Validation.GetHasError(ConstantRealText))
+            {
+                ConstantRealText.Text = viewModel.ConstantReal.ToString();
+                ErrorWindow error = new ErrorWindow(badSymbolsError);
+                error.ShowDialog();
+            }
+            if (Validation.GetHasError(ConstantImaginaryText))
+            {
+                ConstantImaginaryText.Text = viewModel.ConstantImaginary.ToString();
+                ErrorWindow error = new ErrorWindow(badSymbolsError);
+                error.ShowDialog();
+            }
         }
     }
 }

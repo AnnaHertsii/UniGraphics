@@ -717,6 +717,7 @@
                     <TextBlock>Black&amp;Red</TextBlock>
                 </ComboBox>
                 <Button
+                    Click="VisualizeButton_Click"
                     Cursor="Hand"
                     Tag="Натисніть на кнопку, щоб зобразити фрактал з заданими параметрами. Зачекай деякий час."
                     Name="VisualizeButton"

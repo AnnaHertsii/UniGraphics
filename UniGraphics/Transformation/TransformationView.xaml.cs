@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using UniGraphics.ViewModels;
 
 namespace UniGraphics.Transformation
 {
@@ -36,8 +37,39 @@ namespace UniGraphics.Transformation
             creditWindow.ShowDialog();
         }
 
+        private static readonly string badSymbolsError =
+            "Введенні вами дані є некоректними! :(\n" +
+            "Заборонено вводити символи. " +
+            "Ознайомтесь детальніше з розділом 'Вхідні дані' у вкладці " +
+            "'Афінні перетворення' довідки.";
+
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            TransformationsViewModel viewModel = (TransformationsViewModel)DataContext;
+            if (Validation.GetHasError(InputSideLength))
+            {
+                InputSideLength.Text = viewModel.SideLength.ToString();
+                ErrorWindow error = new ErrorWindow(badSymbolsError);
+                error.ShowDialog();
+            }
+            if (Validation.GetHasError(InputX))
+            {
+                InputX.Text = viewModel.CoordX.ToString();
+                ErrorWindow error = new ErrorWindow(badSymbolsError);
+                error.ShowDialog();
+            }
+            if (Validation.GetHasError(InputY))
+            {
+                InputY.Text = viewModel.CoordY.ToString();
+                ErrorWindow error = new ErrorWindow(badSymbolsError);
+                error.ShowDialog();
+            }
+            if (Validation.GetHasError(InputMaxRotation))
+            {
+                InputMaxRotation.Text = viewModel.MaxRotation.ToString();
+                ErrorWindow error = new ErrorWindow(badSymbolsError);
+                error.ShowDialog();
+            }
             StartButtonText.Text = "Продовжити";
             StartButton.Visibility = Visibility.Collapsed;
             PauseButton.Visibility = Visibility.Visible;
